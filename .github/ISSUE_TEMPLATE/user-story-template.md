@@ -36,11 +36,11 @@ assignees: ''
 |   | User name and last name incorrect format    | Name and lastname fields are incorrect format (for example: including numbers and/or symbols) | press on register button | an error message will appear and the data won't save successfully                                                                    |
 |   | User name and last name incorrect dimension | Name and lastname fields are greather than 30 characters                                      | press on register button | an error message will appear and the data won't save successfully                                                                    |
 |   | Length of a password is shorter than 8      | User password is shorter than 8 characters                                                    | press on register button | an error message indicating the incorrect longer will appear and the data won't save successfully                                    |
-|   | Including a number and a symbol at least    | User password is not including numbers neither symbols                                        | press on register button | an error message indicating the incorrect because not including numbers and symbols will appear and the data won't save successfully |
-|   | Email fails for incorrect format            | User email is not following the standart for email structure                                  | press on register        | an error message indicating the incorrect because not including correct format will appear and the data won't save successfully      |
+| <ul><li>- [x] </li></ul>  | Including a number and a symbol at least    | User password is not including numbers neither symbols                                        | press on register button | an error message indicating the incorrect because not including numbers and symbols will appear and the data won't save successfully |
+|  <ul><li>- [ ] </li></ul>  | Email fails for incorrect format            | User email is not following the standart for email structure                                  | press on register        | an error message indicating the incorrect because not including correct format will appear and the data won't save successfully      |
 
 ### Definition of Done (DoD)
-1. Acceptance Criteria all finished.
+1. [x]Acceptance Criteria all finished.
 2. Deskcheck Ceremony.
 3. Keep minimum test coverage of 80%
 4. technical documentation published
