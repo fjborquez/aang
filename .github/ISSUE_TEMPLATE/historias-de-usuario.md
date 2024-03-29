@@ -1,5 +1,5 @@
 ---
-name: Historias de usuario
+name: User story
 about: Historias de usuario por defecto usadas por el proyecto
 title: Historias de usuario
 labels: ''
