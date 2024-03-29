@@ -40,7 +40,7 @@ assignees: ''
 |  <ul><li>- [ ] </li></ul>  | Email fails for incorrect format            | User email is not following the standart for email structure                                  | press on register        | an error message indicating the incorrect because not including correct format will appear and the data won't save successfully      |
 
 ### Definition of Done (DoD)
-1. [x]Acceptance Criteria all finished.
+1. <ul><li>- [ ] Acceptance Criteria all finished.</li></ul>
 2. Deskcheck Ceremony.
 3. Keep minimum test coverage of 80%
 4. technical documentation published
