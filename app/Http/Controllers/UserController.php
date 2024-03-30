@@ -16,7 +16,12 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $validated = $request->safe()->only(['name', 'lastname', 'password', 'email']);
-        $user = $this->userService->create($validated['name'], $validated['lastname'], $validated['email'], $validated['password']);
+        $user = $this->userService->create([
+            'name' => $validated['name'],
+            'lastname' => $validated['lastname'],
+            'email' => $validated['email'],
+            'password' => $validated['password']
+        ]);
         return response()->json('User added', 201);
     }
 }
