@@ -16,7 +16,7 @@ assignees: ''
 |---|----------------------------------------------|---|
 |  <ul><li>- [ ] </li></ul> | The story meet the INVEST and SMART criteria                                            |   |
 |  <ul><li>- [ ] </li></ul> | Dependencies identified and resolved                                                    |   |
-|  <ul><li>- [ ] </li></ul> | Written acceptance criteria with test scenarios, understood by the team and agreed upon |  |
+|  <ul><li>- [ ] </li></ul> | Written acceptance criteria with test scenarios, understood by the team and agreed upon |   |
 |  <ul><li>- [ ] </li></ul> | The user story was understood and agreed upon in a refinement session with the dev team |   |
 |  <ul><li>- [ ] </li></ul> | The team has an idea of how to make the demonstration of the finished story             |   |
 
@@ -33,11 +33,10 @@ assignees: ''
 |   | AC                                                  | GIVEN                                                      | WHEN                     | THEN                                                                                                              |
 |---|-----------------------------------------------------|------------------------------------------------------------|--------------------------|-------------------------------------------------------------------------------------------------------------------|
 |  <ul><li>- [ ] </li></ul>  | AC1 description               | initial context or preconditions for the scenario being described           | the action or event that triggers the behavior being tested | the expected outcomes or results that should occur as a consequence of the action described in the WHEN section                                                                        |
-|  <ul><li>- [ ] </li></ul>  |             | |                                             |
-|  <ul><li>- [ ] </li></ul>  |    | |  |
-|  <ul><li>- [ ] </li></ul>  |                          |                       |  | 
-|  <ul><li>- [ ] </li></ul>  |            |      |  |                    |
-
+|  <ul><li>- [ ] </li></ul>  |                                       |                                       |                                       |
+|  <ul><li>- [ ] </li></ul>  |                                       |                                       |                                       |
+|  <ul><li>- [ ] </li></ul>  |                                       |                                       |                                       |
+|  <ul><li>- [ ] </li></ul>  |                                       |                                       |                                       |
 ### Definition of Done (DoD)
 |   | **Definition**                                   |  **Result**  |
 |---|----------------------------------------------|---|
