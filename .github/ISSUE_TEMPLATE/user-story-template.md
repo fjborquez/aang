@@ -43,6 +43,6 @@ assignees: ''
 |  <ul><li>- [ ] </li></ul>  | All acceptance criteria have been met        | |
 |  <ul><li>- [ ] </li></ul>  | No significant or critical defects           | |
 |  <ul><li>- [ ] </li></ul>  | Deskcheck ceremony has been made             | |
-|  <ul><li>- [ ] </li></ul>  | Keep minimum test coverage of 80%            | |
+|  <ul><li>- [ ] </li></ul>  | Keep minimum test coverage of 80% over the necessary code and components            | |
 |  <ul><li>- [ ] </li></ul>  | Technical documentation published            | |
 |  <ul><li>- [ ] </li></ul>  | Spike, PoC or benchmarks findings documented | |
