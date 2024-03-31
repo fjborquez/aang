@@ -21,7 +21,7 @@ class UserProfileService implements UserProfileServiceInterface
         }
 
         $data['user_id'] = $userId;
-        $profile = $this->userProfile->create($data);
+        $profile = $this->userProfile->factory()->create($data);
 
         return $profile;
     }
