@@ -45,7 +45,7 @@ steps:
         "--image",
         "gcr.io/github.com/fjborquez/aang:$SHORT_SHA",
         "--region",
-        "europe-west1",
+        "southamerica-east1",
         "--platform",
         "managed",
         "--verbosity",
