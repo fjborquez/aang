@@ -19,22 +19,22 @@ steps:
       [
         "build",
         "-t",
-        "gcr.io/$PROJECT_ID/github.com/fjborquez/aang:$SHORT_SHA",
+        "gcr.io/avatar-419000/github.com/fjborquez/aang:$SHORT_SHA",
         "-t",
-        "gcr.io/$PROJECT_ID/github.com/fjborquez/aang:latest",
+        "gcr.io/avatar-419000/github.com/fjborquez/aang:latest",
         ".",
       ]
   - name: "gcr.io/cloud-builders/docker"
     args:
       [
         "push",
-        "gcr.io/$PROJECT_ID/github.com/fjborquez/aang:$SHORT_SHA",
+        "gcr.io/avatar-419000/github.com/fjborquez/aang:$SHORT_SHA",
       ]
   - name: "gcr.io/cloud-builders/docker"
     args:
       [
         "push",
-        "gcr.io/$PROJECT_ID/github.com/fjborquez/aang:latest",
+        "gcr.io/avatar-419000/github.com/fjborquez/aang:latest",
       ]
   - name: "gcr.io/cloud-builders/gcloud"
     args:
@@ -64,6 +64,6 @@ steps:
     env:
       - "PORT=8080"
 images:
-  - gcr.io/$PROJECT_ID/github.com/fjborquez/aang:$SHORT_SHA
-  - gcr.io/$PROJECT_ID/github.com/fjborquez/aang:latest
+  - gcr.io/avatar-419000/github.com/fjborquez/aang:$SHORT_SHA
+  - gcr.io/avatar-419000/github.com/fjborquez/aang:latest
 timeout: 2400s
