@@ -43,7 +43,7 @@ steps:
         "deploy",
         "aang",
         "--image",
-        "gcr.io/github.com/fjborquez/aang:$SHORT_SHA",
+        "gcr.io/avatar-419000/github.com/fjborquez/aang:$SHORT_SHA",
         "--region",
         "southamerica-east1",
         "--platform",
