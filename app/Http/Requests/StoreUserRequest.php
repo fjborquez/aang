@@ -23,8 +23,8 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'alpha:ascii', 'max:30'],
-            'lastname' => ['required', 'alpha:ascii', 'max:30'],
+            'name' => ['required', 'regex:/^[\pL\s]+$/u', 'max:30'],
+            'lastname' => ['required', 'regex:/^[\pL\s]+$/u', 'max:30'],
             'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()->uncompromised()],
             'email' => ['required', 'email:rfc,dns', 'unique:users,email']
         ];
