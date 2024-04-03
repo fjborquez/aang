@@ -30,13 +30,13 @@ assignees: ''
 1. Indicates all that is out of scope for this user story.
 
 ### Acceptance Criteria
-|   | AC                                                  | GIVEN                                                      | WHEN                     | THEN                                                                                                              |
-|---|-----------------------------------------------------|------------------------------------------------------------|--------------------------|-------------------------------------------------------------------------------------------------------------------|
-|  <ul><li>- [ ] </li></ul>  | AC1 description               | initial context or preconditions for the scenario being described           | the action or event that triggers the behavior being tested | the expected outcomes or results that should occur as a consequence of the action described in the WHEN section                                                                        |
-|  <ul><li>- [ ] </li></ul>  |                                       |                                       |                                       |
-|  <ul><li>- [ ] </li></ul>  |                                       |                                       |                                       |
-|  <ul><li>- [ ] </li></ul>  |                                       |                                       |                                       |
-|  <ul><li>- [ ] </li></ul>  |                                       |                                       |                                       |
+|   |   | AC                                                  | GIVEN                                                      | WHEN                     | THEN                                                                                                              |
+|---|---|-----------------------------------------------------|------------------------------------------------------------|--------------------------|-------------------------------------------------------------------------------------------------------------------|
+|  <ul><li>- [ ] </li></ul>  | 1 | AC1 description               | initial context or preconditions for the scenario being described           | the action or event that triggers the behavior being tested | the expected outcomes or results that should occur as a consequence of the action described in the WHEN section                                                                        |
+|  <ul><li>- [ ] </li></ul>  | 2 |                                      |                                       |                                       |
+|  <ul><li>- [ ] </li></ul>  | 3 |                                      |                                       |                                       |
+|  <ul><li>- [ ] </li></ul>  | 4 |                                      |                                       |                                       |
+|  <ul><li>- [ ] </li></ul>  | 5 |                                      |                                       |                                       |
 ### Definition of Done (DoD)
 |   | **Definition**                                   |  **Result**  |
 |---|----------------------------------------------|---|
