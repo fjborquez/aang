@@ -24,4 +24,9 @@ class UserService implements UserServiceInterface
 
         return $user;
     }
+
+    public function getList()
+    {
+        return $this->user->with('userProfile')->get();
+    }
 }

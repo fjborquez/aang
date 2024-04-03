@@ -17,4 +17,9 @@ class UserController extends Controller
         $user = $this->userService->create($validated);
         return response()->json('User added', 201);
     }
+
+    public function list()
+    {
+        return $this->userService->getList();
+    }
 }
