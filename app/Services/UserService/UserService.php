@@ -6,6 +6,7 @@ use App\Contracts\Services\UserService\UserServiceInterface;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Database\Factories\UserFactory;
+use Exception;
 
 class UserService implements UserServiceInterface
 {
@@ -30,7 +31,7 @@ class UserService implements UserServiceInterface
         return $this->user->with('userProfile')->get();
     }
 
-    public function delete($id)
+    public function delete(int $id): void
     {
         $user = $this->user->find($id);
         $userProfile = $user->userProfile;
@@ -40,5 +41,16 @@ class UserService implements UserServiceInterface
         }
 
         $user->delete();
+    }
+
+    public function update(int $id, array $data = []): void
+    {
+        $user = $this->user->find($id);
+
+        if ($user == null) {
+            throw new Exception('User not found');
+        }
+
+        $user->update($data);
     }
 }

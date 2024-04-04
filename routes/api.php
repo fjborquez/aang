@@ -7,5 +7,6 @@ use App\Http\Controllers\UserProfileController;
 Route::get('/user', [UserController::class, 'list']);
 Route::post('/user', [UserController::class, 'store']);
 Route::delete('/user/{userId}', [UserController::class, 'delete']);
+Route::put('/user/{userId}', [UserController::class, 'update']);
 
 Route::post('/user/{userId}/user-profile', [UserProfileController::class, 'store']);
