@@ -29,4 +29,16 @@ class UserService implements UserServiceInterface
     {
         return $this->user->with('userProfile')->get();
     }
+
+    public function delete($id)
+    {
+        $user = $this->user->find($id);
+        $userProfile = $user->userProfile;
+
+        if ($userProfile != null) {
+            $userProfile->delete();
+        }
+
+        $user->delete();
+    }
 }

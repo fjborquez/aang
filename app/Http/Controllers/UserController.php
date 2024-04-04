@@ -22,4 +22,9 @@ class UserController extends Controller
     {
         return $this->userService->getList();
     }
+
+    public function delete(int $id)
+    {
+        return $this->userService->delete($id);
+    }
 }
