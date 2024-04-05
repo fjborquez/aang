@@ -9,8 +9,9 @@ class UserProfileController extends Controller
 {
     private $fields = ['date_of_birth', 'is_vegetarian', 'is_vegan', 'is_celiac', 'is_keto', 'is_diabetic', 'is_lactose', 'is_gluten'];
 
-    public function __construct(private readonly UserProfileServiceInterface $userProfileService)
-    {
+    public function __construct(
+        private readonly UserProfileServiceInterface $userProfileService
+    ) {
     }
 
     public function store(int $userId, StoreUserProfileRequest $request)
@@ -25,5 +26,10 @@ class UserProfileController extends Controller
         $validated = $request->safe()->only($this->fields);
         $this->userProfileService->update($userId, $validated);
         return response()->json('User profile updated', 200);
+    }
+
+    public function get(int $userId)
+    {
+        return $this->userProfileService->get($userId);
     }
 }

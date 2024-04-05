@@ -8,8 +8,9 @@ use App\Contracts\Services\UserProfileService\UserProfileServiceInterface;
 
 class UserProfileService implements UserProfileServiceInterface
 {
-    public function __construct(private readonly UserProfile $userProfile)
-    {
+    public function __construct(
+        private readonly UserProfile $userProfile,
+    ) {
     }
 
     public function create(int $userId, array $data = []): UserProfile
@@ -37,5 +38,17 @@ class UserProfileService implements UserProfileServiceInterface
         $profile->update($data);
 
         return $profile;
+    }
+
+    public function get(int $userId)
+    {
+        $userProfile = $this->userProfile->where('user_id', $userId)->first();
+
+        if ($userProfile == null)
+        {
+            throw new Exception('The user does not have a profile');
+        }
+
+        return $userProfile;
     }
 }

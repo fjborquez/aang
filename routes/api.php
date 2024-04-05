@@ -12,3 +12,4 @@ Route::put('/user/{userId}', [UserController::class, 'update']);
 
 Route::post('/user/{userId}/user-profile', [UserProfileController::class, 'store']);
 Route::put('/user/{userId}/user-profile', [UserProfileController::class, 'update']);
+Route::get('/user/{userId}/user-profile', [UserProfileController::class, 'get']);
