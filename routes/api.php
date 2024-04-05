@@ -11,3 +11,4 @@ Route::delete('/user/{userId}', [UserController::class, 'delete']);
 Route::put('/user/{userId}', [UserController::class, 'update']);
 
 Route::post('/user/{userId}/user-profile', [UserProfileController::class, 'store']);
+Route::put('/user/{userId}/user-profile', [UserProfileController::class, 'update']);

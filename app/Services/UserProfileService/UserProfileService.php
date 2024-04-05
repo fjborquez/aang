@@ -25,4 +25,17 @@ class UserProfileService implements UserProfileServiceInterface
 
         return $profile;
     }
+
+    public function update(int $userId, array $data = [])
+    {
+        $profile = $this->userProfile->where('user_id', $userId)->first();
+
+        if (!$profile) {
+            throw new Exception('The user does not have a profile');
+        }
+
+        $profile->update($data);
+
+        return $profile;
+    }
 }
