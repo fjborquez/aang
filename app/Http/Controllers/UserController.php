@@ -36,4 +36,9 @@ class UserController extends Controller
         $user = $this->userService->update($id, $validated);
         return response()->json('User updated', 200);
     }
+
+    public function get(int $id)
+    {
+        return $this->userService->get($id);
+    }
 }

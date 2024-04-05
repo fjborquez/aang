@@ -53,4 +53,15 @@ class UserService implements UserServiceInterface
 
         $user->update($data);
     }
+
+    public function get(int $id): User
+    {
+        $user = $this->user->find($id);
+
+        if ($user == null) {
+            throw new Exception('User not found');
+        }
+
+        return $user;
+    }
 }
