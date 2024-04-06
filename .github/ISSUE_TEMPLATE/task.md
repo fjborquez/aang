@@ -1,7 +1,7 @@
 ---
 name: Task
 about: Template aimed at elaborating specific tasks.
-title: 'Task template'
+title: Task template
 labels: ''
 assignees: ''
 
