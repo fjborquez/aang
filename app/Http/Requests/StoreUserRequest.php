@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
 
 class StoreUserRequest extends FormRequest
@@ -22,11 +23,18 @@ class StoreUserRequest extends FormRequest
      */
     public function rules(): array
     {
+        $user_id = null;
+
+        if(count(Request::segments()) == 3)
+        {
+            $user_id = Request::segments()[2];
+        }
+
         return [
             'name' => ['required', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ]+(?:\s[a-zA-ZáéíóúÁÉÍÓÚüÜ]+)*$/', 'max:30'],
             'lastname' => ['required', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ]+(?:\s[a-zA-ZáéíóúÁÉÍÓÚüÜ]+)*$/', 'max:30'],
             'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()->uncompromised()],
-            'email' => ['required', 'email:rfc,dns', 'unique:users,email']
+            'email' => ['required', 'email:rfc,dns', 'unique:users,email,' . $user_id]
         ];
     }
 }
