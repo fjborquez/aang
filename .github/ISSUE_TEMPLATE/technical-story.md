@@ -15,7 +15,7 @@ assignees: ''
 |---|----------------------------------------------|---|
 |  <ul><li>- [ ] </li></ul> | The story meet the INVEST and SMART criteria                                            |   |
 |  <ul><li>- [ ] </li></ul> | Dependencies identified and resolved                                                    |   |
-|  <ul><li>- [ ] </li></ul> | Written acceptance criteria with test scenarios, understood by the team and agreed upon |  |
+|  <ul><li>- [ ] </li></ul> | Written acceptance criteria with test scenarios, understood by the team and agreed upon |   |
 |  <ul><li>- [ ] </li></ul> | The user story was understood and agreed upon in a refinement session with the dev team |   |
 |  <ul><li>- [ ] </li></ul> | The team has an idea of how to make the demonstration of the finished story             |   |
 
