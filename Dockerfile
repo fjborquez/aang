@@ -12,8 +12,7 @@ RUN php artisan config:cache && \
     php artisan cache:clear && \
     php artisan route:cache && \
     php artisan view:cache && \
-    echo "environment to apply: ${APP_ENV}" && \
-    if ["${APP_ENV}}" = "local"]; then php artisan migrate; fi && \
+    php artisan migrate && \
     chmod 777 -R /var/www/html/storage/ && \
     chown -R www-data:www-data /var/www/ && \
     a2enmod rewrite
