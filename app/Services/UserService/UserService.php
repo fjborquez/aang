@@ -30,12 +30,6 @@ class UserService implements UserServiceInterface
         return $this->user->with('person')->get();
     }
 
-    public function delete(int $id): void
-    {
-        $user = $this->user->find($id);
-        $user->delete();
-    }
-
     public function update(int $id, array $data = []): void
     {
         $user = $this->user->find($id);

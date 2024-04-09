@@ -27,18 +27,6 @@ class UserServiceTest extends TestCase
         ]);
     }
 
-    function test_should_delete_user(): void
-    {
-        $userId = 1;
-        $userMock = Mockery::mock(User::class);
-
-        $userMock->shouldReceive('delete')->once()->andReturnSelf();
-        $userMock->shouldReceive('find')->once()->andReturn($userMock);
-
-        $userService = new UserService($userMock);
-        $userService->delete($userId);
-    }
-
     function test_should_update_user_when_user_exists()
     {
         $userId = 1;

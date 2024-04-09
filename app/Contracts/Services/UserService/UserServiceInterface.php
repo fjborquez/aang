@@ -10,8 +10,6 @@ interface UserServiceInterface
 
     public function getList();
 
-    public function delete(int $id): void;
-
     public function update(int $id, array $data = []): void;
 
     public function get(int $id): User;

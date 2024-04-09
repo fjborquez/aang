@@ -25,11 +25,6 @@ class UserController extends Controller
         return $this->userService->getList();
     }
 
-    public function delete(int $id)
-    {
-        return $this->userService->delete($id);
-    }
-
     public function update(int $id, StoreUserRequest $request)
     {
         $validated = $request->safe()->only($this->fields);
