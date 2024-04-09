@@ -2,14 +2,11 @@
 
 namespace Tests\Unit\App\Services\UserService;
 
-use Tests\TestCase;
 use App\Models\User;
-use Mockery;
-use App\Contracts\Services\UserService\UserServiceInterface;
 use App\Services\UserService\UserService;
-use Illuminate\Support\Facades\App;
-use App\Contracts\Factories\UserFactory\UserFactoryInterface;
 use Exception;
+use Mockery;
+use Tests\TestCase;
 
 class UserServiceTest extends TestCase
 {
@@ -30,28 +27,12 @@ class UserServiceTest extends TestCase
         ]);
     }
 
-    function test_should_delete_user_with_user_profile(): void
-    {
-        $userId = 1;
-        $userMock = Mockery::mock(User::class);
-        $userProfileMock = Mockery::mock(UserProfile::class);
-
-        $userProfileMock->shouldReceive('delete')->once()->andReturnSelf();
-        $userMock->shouldReceive('delete')->once()->andReturnSelf();
-        $userMock->shouldReceive('getAttribute')->once()->andReturn($userProfileMock);
-        $userMock->shouldReceive('find')->once()->andReturn($userMock);
-
-        $userService = new UserService($userMock);
-        $userService->delete($userId);
-    }
-
-    function test_should_delete_user_without_user_profile(): void
+    function test_should_delete_user(): void
     {
         $userId = 1;
         $userMock = Mockery::mock(User::class);
 
         $userMock->shouldReceive('delete')->once()->andReturnSelf();
-        $userMock->shouldReceive('getAttribute')->once()->andReturn(null);
         $userMock->shouldReceive('find')->once()->andReturn($userMock);
 
         $userService = new UserService($userMock);

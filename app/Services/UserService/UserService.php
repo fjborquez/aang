@@ -3,10 +3,9 @@
 namespace App\Services\UserService;
 
 use App\Contracts\Services\UserService\UserServiceInterface;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Database\Factories\UserFactory;
 use Exception;
+use Illuminate\Support\Facades\Hash;
 
 class UserService implements UserServiceInterface
 {
@@ -28,18 +27,12 @@ class UserService implements UserServiceInterface
 
     public function getList()
     {
-        return $this->user->with('userProfile')->get();
+        return $this->user->get();
     }
 
     public function delete(int $id): void
     {
         $user = $this->user->find($id);
-        $userProfile = $user->userProfile;
-
-        if ($userProfile != null) {
-            $userProfile->delete();
-        }
-
         $user->delete();
     }
 
