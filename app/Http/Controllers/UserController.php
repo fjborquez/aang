@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
 use App\Contracts\Services\UserService\UserServiceInterface;
+use App\Http\Requests\StoreUserRequest;
 
 class UserController extends Controller
 {
@@ -33,12 +33,22 @@ class UserController extends Controller
     public function update(int $id, StoreUserRequest $request)
     {
         $validated = $request->safe()->only($this->fields);
-        $user = $this->userService->update($id, $validated);
+        $this->userService->update($id, $validated);
         return response()->json('User updated', 200);
     }
 
     public function get(int $id)
     {
         return $this->userService->get($id);
+    }
+
+    public function enable(int $id)
+    {
+        return $this->userService->enable($id);
+    }
+
+    public function disable(int $id)
+    {
+        return $this->userService->disable($id);
     }
 }

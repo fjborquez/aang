@@ -27,7 +27,7 @@ class UserService implements UserServiceInterface
 
     public function getList()
     {
-        return $this->user->get();
+        return $this->user->with('person')->get();
     }
 
     public function delete(int $id): void
@@ -49,12 +49,46 @@ class UserService implements UserServiceInterface
 
     public function get(int $id): User
     {
-        $user = $this->user->find($id);
+        $user = $this->user->with('person')->find($id);
 
         if ($user == null) {
             throw new Exception('User not found');
         }
 
         return $user;
+    }
+
+    public function enable(int $id): void
+    {
+        $user = $this->user->find($id);
+
+        if ($user == null) {
+            throw new Exception('User not found');
+        }
+
+        if ($user->is_active) {
+            throw new Exception('User already enabled');
+        }
+
+        $user->update([
+            'is_active' => true,
+        ]);
+    }
+
+    public function disable(int $id): void
+    {
+        $user = $this->user->find($id);
+
+        if ($user == null) {
+            throw new Exception('User not found');
+        }
+
+        if (!$user->is_active) {
+            throw new Exception('User already disabled');
+        }
+
+        $user->update([
+            'is_active' => false,
+        ]);
     }
 }

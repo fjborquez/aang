@@ -71,6 +71,7 @@ class UserServiceTest extends TestCase
         $userMock = Mockery::mock(User::class);
 
         $userMock->shouldReceive('find')->once()->andReturn($userMock);
+        $userMock->shouldReceive('with')->once()->andReturn($userMock);
 
         $userService = new UserService($userMock);
         $userService->get($userId);
@@ -82,9 +83,86 @@ class UserServiceTest extends TestCase
         $userMock = Mockery::mock(User::class);
         $this->expectException(Exception::class);
 
+        $userMock->shouldReceive('with')->once()->andReturn($userMock);
         $userMock->shouldReceive('find')->once()->andReturn(null);
 
         $userService = new UserService($userMock);
         $userService->get($userId);
+    }
+
+    function test_should_throw_an_exception_when_user_not_exists_when_enable()
+    {
+        $userId = 1;
+        $userMock = Mockery::mock(User::class);
+        $this->expectException(Exception::class);
+
+        $userMock->shouldReceive('find')->once()->andReturn(null);
+
+        $userService = new UserService($userMock);
+        $userService->enable($userId);
+    }
+
+    function test_should_throw_an_exception_when_user_is_active()
+    {
+        $userId = 1;
+        $userMock = Mockery::mock(User::class);
+        $this->expectException(Exception::class);
+
+        $userMock->is_active = true;
+        $userMock->shouldReceive('find')->once()->andReturn($userMock);
+
+        $userService = new UserService($userMock);
+        $userService->enable($userId);
+    }
+
+    function test_should_enable_user_when_user_is_disabled()
+    {
+        $userId = 1;
+        $userMock = Mockery::mock(User::class);
+
+        $userMock->shouldReceive('find')->once()->andReturn($userMock);
+        $userMock->shouldReceive('update')->once()->andReturnSelf();
+        $userMock->shouldReceive('getAttribute')->once()->andReturn(false);
+
+        $userService = new UserService($userMock);
+        $userService->enable($userId);
+    }
+
+    function test_should_throw_an_exception_when_user_not_exists_when_disable()
+    {
+        $userId = 1;
+        $userMock = Mockery::mock(User::class);
+        $this->expectException(Exception::class);
+
+        $userMock->shouldReceive('find')->once()->andReturn(null);
+
+        $userService = new UserService($userMock);
+        $userService->disable($userId);
+    }
+
+    function test_should_throw_an_exception_when_user_is_not_active()
+    {
+        $userId = 1;
+        $userMock = Mockery::mock(User::class);
+        $this->expectException(Exception::class);
+
+        $userMock->is_active = false;
+        $userMock->shouldReceive('find')->once()->andReturn($userMock);
+
+        $userService = new UserService($userMock);
+        $userService->disable($userId);
+    }
+
+    function test_should_disable_user_when_user_is_enabled()
+    {
+        $userId = 1;
+        $userMock = Mockery::mock(User::class);
+
+        $userMock->shouldReceive('find')->once()->andReturn($userMock);
+        $userMock->shouldReceive('update')->once()->andReturnSelf();
+        $userMock->shouldReceive('getAttribute')->once()->andReturn(true);
+
+        $userService = new UserService($userMock);
+        $userService->disable($userId);
     }
 }
