@@ -15,12 +15,7 @@ class UserService implements UserServiceInterface
 
     public function create(array $data = []): User
     {
-        $user = $this->user->factory()->create([
-            'name' => $data['name'],
-            'lastname' => $data['lastname'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $user = $this->user->factory()->create($data);
 
         return $user;
     }

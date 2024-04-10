@@ -31,10 +31,9 @@ class StoreUserRequest extends FormRequest
         }
 
         return [
-            'name' => ['required', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ]+(?:\s[a-zA-ZáéíóúÁÉÍÓÚüÜ]+)*$/', 'max:30'],
-            'lastname' => ['required', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ]+(?:\s[a-zA-ZáéíóúÁÉÍÓÚüÜ]+)*$/', 'max:30'],
             'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()->uncompromised()],
-            'email' => ['required', 'email:rfc,dns', 'unique:users,email,' . $user_id]
+            'email' => ['required', 'email:rfc,dns', 'unique:users,email,' . $user_id],
+            'person_id' => ['required', 'numeric','exists:persons,id'],
         ];
     }
 }

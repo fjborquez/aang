@@ -7,7 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 
 class UserController extends Controller
 {
-    private $fields = ['name', 'lastname', 'password', 'email'];
+    private $fields = ['password', 'email', 'person_id'];
 
     public function __construct(private readonly UserServiceInterface $userService)
     {
