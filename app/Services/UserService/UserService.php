@@ -5,7 +5,6 @@ namespace App\Services\UserService;
 use App\Contracts\Services\UserService\UserServiceInterface;
 use App\Models\User;
 use Exception;
-use Illuminate\Support\Facades\Hash;
 
 class UserService implements UserServiceInterface
 {
@@ -16,7 +15,6 @@ class UserService implements UserServiceInterface
     public function create(array $data = []): User
     {
         $user = $this->user->factory()->create($data);
-
         return $user;
     }
 
