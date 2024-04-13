@@ -53,5 +53,72 @@ class NutritionalRestrictionSeeder extends Seeder
                 'description' => 'hypertense'
             ]);
         }
+
+        if (DB::table('nutritional_restrictions')->count() == 8) {
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 9,
+                'description' => 'dairy-free'
+            ]);
+
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 10,
+                'description' => 'wheat-free'
+            ]);
+
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 11,
+                'description' => 'nut-free'
+            ]);
+
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 12,
+                'description' => 'soy-free'
+            ]);
+
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 13,
+                'description' => 'egg-free'
+            ]);
+
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 14,
+                'description' => 'shellfish-free'
+            ]);
+
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 15,
+                'description' => 'fish-free'
+            ]);
+
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 16,
+                'description' => 'pork-free'
+            ]);
+
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 17,
+                'description' => 'red meat-free'
+            ]);
+
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 18,
+                'description' => 'caffeine-free'
+            ]);
+
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 19,
+                'description' => 'alcohol-free'
+            ]);
+
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 20,
+                'description' => 'spicy food-free'
+            ]);
+
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 21,
+                'description' => 'peanut allergy'
+            ]);
+        }
     }
 }
