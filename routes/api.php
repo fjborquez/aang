@@ -12,4 +12,5 @@ Route::put('/user/{userId}', [UserController::class, 'update']);
 Route::put('/user/{userId}/enable', [UserController::class, 'enable']);
 Route::put('/user/{userId}/disable', [UserController::class, 'disable']);
 
+Route::get('/person', [PersonController::class, 'list']);
 Route::post('/person', [PersonController::class, 'store']);

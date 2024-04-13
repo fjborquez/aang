@@ -6,4 +6,6 @@ use App\Models\Person;
 
 interface PersonServiceInterface {
     function create(array $data = []): Person;
+
+    function getList();
 }

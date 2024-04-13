@@ -16,4 +16,9 @@ class PersonService implements PersonServiceInterface
         $person = $this->person->factory()->create($data);
         return $person;
     }
+
+    public function getList()
+    {
+        return $this->person->all();
+    }
 }

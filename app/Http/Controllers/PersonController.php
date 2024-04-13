@@ -19,4 +19,9 @@ class PersonController extends Controller
         $this->personService->create($validated);
         return response()->json('Person added', 201);
     }
+
+    public function list()
+    {
+        return $this->personService->getList();
+    }
 }
