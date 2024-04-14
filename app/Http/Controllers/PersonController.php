@@ -24,4 +24,9 @@ class PersonController extends Controller
     {
         return $this->personService->getList();
     }
+
+    public function get(int $personId)
+    {
+        return $this->personService->get($personId);
+    }
 }

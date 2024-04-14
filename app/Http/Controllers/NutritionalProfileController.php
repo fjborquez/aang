@@ -12,14 +12,19 @@ class NutritionalProfileController extends Controller
     {
     }
 
-    public function store(int $userId, Request $request)
+    public function store(int $personId, Request $request)
     {
         $nutritionalProfile = $request->get('nutritionalProfile');
-        $this->nutritionalProfileService->create($userId, $nutritionalProfile);
+        $this->nutritionalProfileService->create($personId, $nutritionalProfile);
     }
 
-    public function update(int $userId, Request $request)
+    public function update(int $personId, Request $request)
     {
 
+    }
+
+    public function get(int $personId)
+    {
+        return $this->nutritionalProfileService->get($personId);
     }
 }

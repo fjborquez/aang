@@ -13,10 +13,12 @@ Route::delete('/user/{userId}', [UserController::class, 'delete']);
 Route::put('/user/{userId}', [UserController::class, 'update']);
 Route::put('/user/{userId}/enable', [UserController::class, 'enable']);
 Route::put('/user/{userId}/disable', [UserController::class, 'disable']);
-Route::post('/user/{userId}/nutritional-profile', [NutritionalProfileController::class, 'store']);
 
 
 Route::get('/person', [PersonController::class, 'list']);
+Route::get('/person/{personId}', [PersonController::class, 'get']);
 Route::post('/person', [PersonController::class, 'store']);
+Route::post('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'store']);
+Route::get('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'get']);
 
 Route::get('/nutritional-restriction', [NutritionalRestrictionController::class, 'list']);

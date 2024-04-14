@@ -12,9 +12,15 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
     ){
     }
 
-    public function create(int $userId, array $data = [])
+    public function create(int $personId, array $data = [])
     {
-        $person = $this->personService->get($userId);
+        $person = $this->personService->get($personId);
         $person->nutritionalProfile()->sync($data);
+    }
+
+    public function get(int $personId): array
+    {
+        $person = $this->personService->get($personId);
+        return $person->nutritionalProfile->toArray();
     }
 }
