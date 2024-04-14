@@ -19,11 +19,11 @@ class PersonService implements PersonServiceInterface
 
     public function getList()
     {
-        return $this->person->with('nutritionalProfile')->get();
+        return $this->person->with('nutritionalProfile')->with('user')->get();
     }
 
     public function get(int $id): Person
     {
-        return $this->person->with('nutritionalProfile')->find($id);
+        return $this->person->with('nutritionalProfile')->with('user')->find($id);
     }
 }
