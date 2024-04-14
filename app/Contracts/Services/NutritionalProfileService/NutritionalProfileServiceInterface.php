@@ -7,4 +7,6 @@ interface NutritionalProfileServiceInterface
     public function create(int $userId, array $data = []);
 
     public function get(int $id): array;
+
+    public function update(int $personId, array $data = []);
 }

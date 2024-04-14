@@ -23,4 +23,10 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
         $person = $this->personService->get($personId);
         return $person->nutritionalProfile->toArray();
     }
+
+    public function update(int $personId, array $data = [])
+    {
+        $person = $this->personService->get($personId);
+        $person->nutritionalProfile()->sync($data);
+    }
 }

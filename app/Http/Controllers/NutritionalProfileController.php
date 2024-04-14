@@ -20,6 +20,8 @@ class NutritionalProfileController extends Controller
 
     public function update(int $personId, Request $request)
     {
+        $nutritionalProfile = $request->get('nutritionalProfile');
+        $this->nutritionalProfileService->update($personId, $nutritionalProfile);
 
     }
 
