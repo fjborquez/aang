@@ -15,4 +15,9 @@ class NutritionalRestrictionService implements NutritionalRestrictionServiceInte
     {
         return $this->nutritionalRestriction->all();
     }
+
+    public function get(int $id): NutritionalRestriction
+    {
+        return $this->nutritionalRestriction->find($id);
+    }
 }

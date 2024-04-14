@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NutritionalProfileController;
 use App\Http\Controllers\NutritionalRestrictionController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\UserController;
@@ -12,6 +13,8 @@ Route::delete('/user/{userId}', [UserController::class, 'delete']);
 Route::put('/user/{userId}', [UserController::class, 'update']);
 Route::put('/user/{userId}/enable', [UserController::class, 'enable']);
 Route::put('/user/{userId}/disable', [UserController::class, 'disable']);
+Route::post('/user/{userId}/nutritional-profile/add', [NutritionalProfileController::class, 'store']);
+
 
 Route::get('/person', [PersonController::class, 'list']);
 Route::post('/person', [PersonController::class, 'store']);

@@ -21,4 +21,9 @@ class PersonService implements PersonServiceInterface
     {
         return $this->person->all();
     }
+
+    public function get(int $id): Person
+    {
+        return $this->person->find($id);
+    }
 }

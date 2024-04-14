@@ -8,4 +8,6 @@ interface PersonServiceInterface {
     function create(array $data = []): Person;
 
     function getList();
+
+    function get(int $id): Person;
 }

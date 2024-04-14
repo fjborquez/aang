@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Person extends Model
@@ -21,5 +22,10 @@ class Person extends Model
     public function user(): HasOne
     {
         return $this->hasOne(User::class);
+    }
+
+    public function nutritionalProfile(): BelongsToMany
+    {
+        return $this->belongsToMany(NutritionalRestriction::class, 'nutritional_profiles', 'person_id', 'nutritional_restriction_id');
     }
 }
