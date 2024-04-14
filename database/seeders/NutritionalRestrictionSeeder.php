@@ -120,5 +120,12 @@ class NutritionalRestrictionSeeder extends Seeder
                 'description' => 'peanut allergy'
             ]);
         }
+
+        if (DB::table('nutritional_restrictions')->count() == 21) {
+            DB::table('nutritional_restrictions')->insert([
+                'id' => 22,
+                'description' => 'pescetarian'
+            ]);
+        }
     }
 }
