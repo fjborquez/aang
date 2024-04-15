@@ -26,4 +26,15 @@ class PersonService implements PersonServiceInterface
     {
         return $this->person->with('nutritionalProfile')->with('user')->find($id);
     }
+
+    public function update(int $id, array $data = []): void
+    {
+        $person = $this->person->find($id);
+
+        if ($person == null) {
+            throw new Exception('Person not found');
+        }
+
+        $person->update($data);
+    }
 }

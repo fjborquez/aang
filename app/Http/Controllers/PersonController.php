@@ -20,6 +20,13 @@ class PersonController extends Controller
         return response()->json('Person added', 201);
     }
 
+    public function update(int $id, PersonRequest $request)
+    {
+        $validated = $request->safe()->only($this->fields);
+        $this->personService->update($id, $validated);
+        return response()->json('Person updated', 200);
+    }
+
     public function list()
     {
         return $this->personService->getList();
