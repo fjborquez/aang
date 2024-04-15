@@ -20,8 +20,6 @@ class UserServiceTest extends TestCase
 
         $userService = new UserService($userMock);
         $userService->create([
-            'name' => '',
-            'lastname' => '',
             'email' => '',
             'password' => '',
         ]);

@@ -4,6 +4,7 @@ namespace App\Services\PersonService;
 
 use App\Contracts\Services\PersonService\PersonServiceInterface;
 use App\Models\Person;
+use Exception;
 
 class PersonService implements PersonServiceInterface
 {
@@ -24,7 +25,13 @@ class PersonService implements PersonServiceInterface
 
     public function get(int $id): Person
     {
-        return $this->person->with('nutritionalProfile')->with('user')->find($id);
+        $person = $this->person->with('nutritionalProfile')->with('user')->find($id);
+
+        if ($person == null) {
+            throw new Exception('Person not found');
+        }
+
+        return $person;
     }
 
     public function update(int $id, array $data = []): void
