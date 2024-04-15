@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HouseController;
 use App\Http\Controllers\NutritionalProfileController;
 use App\Http\Controllers\NutritionalRestrictionController;
 use App\Http\Controllers\PersonController;
@@ -24,3 +25,5 @@ Route::get('/person/{userId}/nutritional-profile', [NutritionalProfileController
 Route::put('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'update']);
 
 Route::get('/nutritional-restriction', [NutritionalRestrictionController::class, 'list']);
+
+Route::post('/house', [HouseController::class, 'store']);
