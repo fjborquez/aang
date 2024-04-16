@@ -28,4 +28,9 @@ class Person extends Model
     {
         return $this->belongsToMany(NutritionalRestriction::class, 'nutritional_profiles', 'person_id', 'nutritional_restriction_id');
     }
+
+    public function houses(): BelongsToMany
+    {
+        return $this->belongsToMany(House::class, 'persons_houses', 'person_id', 'house_id');
+    }
 }

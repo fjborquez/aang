@@ -6,4 +6,5 @@ return [
     App\Providers\PersonServiceProvider::class,
     App\Providers\UserServiceProvider::class,
     App\Providers\HouseServiceProvider::class,
+    App\Providers\HousePersonServiceProvider::class,
 ];

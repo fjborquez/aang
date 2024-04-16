@@ -27,3 +27,4 @@ Route::put('/person/{userId}/nutritional-profile', [NutritionalProfileController
 Route::get('/nutritional-restriction', [NutritionalRestrictionController::class, 'list']);
 
 Route::post('/house', [HouseController::class, 'store']);
+Route::post('/house/{houseId}/persons', [HouseController::class, 'storePersons']);
