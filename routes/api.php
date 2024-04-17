@@ -23,6 +23,7 @@ Route::put('/person/{personId}', [PersonController::class, 'update']);
 Route::post('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'store']);
 Route::get('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'get']);
 Route::put('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'update']);
+Route::post('/person/{userId}/house', [PersonController::class, 'storeHouses']);
 
 Route::get('/nutritional-restriction', [NutritionalRestrictionController::class, 'list']);
 

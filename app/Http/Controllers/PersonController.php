@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Services\HousePersonService\HousePersonServiceInterface;
 use App\Contracts\Services\PersonService\PersonServiceInterface;
+use App\Http\Requests\PersonHouseRequest;
 use App\Http\Requests\PersonRequest;
 
 class PersonController extends Controller
 {
     private array $fields = ['name', 'lastname', 'date_of_birth'];
 
-    public function __construct(private readonly PersonServiceInterface $personService)
-    {
+    public function __construct(
+        private readonly PersonServiceInterface $personService,
+        private readonly HousePersonServiceInterface $housePersonService
+    ){
     }
 
     public function store(PersonRequest $request)
@@ -35,5 +39,12 @@ class PersonController extends Controller
     public function get(int $personId)
     {
         return $this->personService->get($personId);
+    }
+
+    public function storeHouses(int $personId, PersonHouseRequest $request)
+    {
+        $validated = $request->safe()->only(['houses']);
+        $houses = $validated['houses'];
+        $this->housePersonService->createFromPerson($personId, $houses);
     }
 }

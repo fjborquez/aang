@@ -41,6 +41,50 @@ class HousePersonService implements HousePersonServiceInterface
         $house->persons()->sync($persons);
     }
 
+    public function createFromPerson(int $personId, array $houses): void
+    {
+        $person = $this->personService->get($personId);
+        $index = 0;
+
+        foreach ($houses as $x => $valuesX)
+        {
+            $houseX = $this->houseService->get($x);
+            foreach($houses as $y => $valuesY) {
+                $houseY = $this->houseService->get($y);
+
+                if ($houseX->id == $houseY->id) {
+                    continue;
+                }
+
+                if ($houseX->city_id == $houseY->city_id && $houseX->description == $houseY->description)
+                {
+                    throw new Exception("The user already has a house with description in city");
+                }
+            }
+        }
+
+        foreach ($houses as $id => $values)
+        {
+            $house = $this->houseService->get($id);
+
+            if ($person->houses()->count() == 0 && $index == 0) {
+                $houses[$id]['is_default'] = true;
+            } else {
+                if ($values['is_default'] == true) {
+                    $this->validateDuplicatedHouseForPerson($person, $house);
+                    $this->changeHouseByDefault($person);
+                } else {
+                    $this->validateDuplicatedHouseForPerson($person, $house);
+                }
+            }
+
+            $index++;
+        }
+
+
+        $person->houses()->sync($houses);
+    }
+
     public function validateDuplicatedHouseForPerson(Person $person, House $house)
     {
         foreach ($person->houses()->get() as $housePivot)
