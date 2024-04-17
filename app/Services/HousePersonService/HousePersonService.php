@@ -19,17 +19,17 @@ class HousePersonService implements HousePersonServiceInterface
 
     public function createFromHouse(int $houseId, array $persons): void
     {
+        $house = $this->houseService->get($houseId);
+
         foreach ($persons as $id => $values)
         {
             $person = $this->personService->get($id);
 
-            if ($person->houses()->count() <= 1)
-            {
+            if ($person->houses()->count() == 0) {
                 $persons[$id]['is_default'] = true;
             }
         }
 
-        $house = $this->houseService->get($houseId);
         $house->persons()->sync($persons);
     }
 }
