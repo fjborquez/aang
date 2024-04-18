@@ -5,6 +5,7 @@ namespace App\Services\HouseService;
 use App\Contracts\Services\HouseService\HouseServiceInterface;
 use App\Models\House;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 
 class HouseService implements HouseServiceInterface
 {
@@ -26,5 +27,10 @@ class HouseService implements HouseServiceInterface
         }
 
         return $house;
+    }
+
+    public function getList(): Collection
+    {
+        return $this->house->with('city')->get();
     }
 }

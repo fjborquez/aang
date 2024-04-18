@@ -20,4 +20,9 @@ class House extends Model
     {
         return $this->belongsToMany(House::class, 'persons_houses', 'house_id', 'person_id');
     }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
 }
