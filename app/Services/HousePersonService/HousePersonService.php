@@ -8,6 +8,7 @@ use App\Models\Person;
 use App\Services\HouseService\HouseService;
 use App\Services\PersonService\PersonService;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 
 class HousePersonService implements HousePersonServiceInterface
 {
@@ -102,5 +103,12 @@ class HousePersonService implements HousePersonServiceInterface
         {
             $person->houses()->updateExistingPivot($housePivot->id, ['is_default' => false]);
         }
+    }
+
+    public function getHousesByPerson(int $personId): Collection
+    {
+        $person = $this->personService->get($personId);
+
+        return $person->houses()->get();
     }
 }

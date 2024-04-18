@@ -47,4 +47,9 @@ class PersonController extends Controller
         $houses = $validated['houses'];
         $this->housePersonService->createFromPerson($personId, $houses);
     }
+
+    public function getHouses(int $personId)
+    {
+        return $this->housePersonService->getHousesByPerson($personId);
+    }
 }
