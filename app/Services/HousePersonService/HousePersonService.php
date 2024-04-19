@@ -109,6 +109,6 @@ class HousePersonService implements HousePersonServiceInterface
     {
         $person = $this->personService->get($personId);
 
-        return $person->houses()->get();
+        return $person->houses()->withPivot('is_default')->get();
     }
 }
