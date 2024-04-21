@@ -23,6 +23,11 @@ class HousePersonService implements HousePersonServiceInterface
     {
         $house = $this->houseService->get($houseId);
 
+        if ($house->persons()->count() > 0)
+        {
+            throw new Exception("The house already has persons");
+        }
+
         foreach ($persons as $id => $values)
         {
             $person = $this->personService->get($id);
@@ -47,6 +52,11 @@ class HousePersonService implements HousePersonServiceInterface
         $person = $this->personService->get($personId);
         $index = 0;
 
+        if ($person->houses()->count() > 0)
+        {
+            throw new Exception("The person already has houses");
+        }
+
         foreach ($houses as $x => $valuesX)
         {
             $houseX = $this->houseService->get($x);
@@ -59,7 +69,7 @@ class HousePersonService implements HousePersonServiceInterface
 
                 if ($houseX->city_id == $houseY->city_id && $houseX->description == $houseY->description)
                 {
-                    throw new Exception("The user already has a house with description in city");
+                    throw new Exception("The person already has a house with description in city");
                 }
             }
         }
@@ -92,7 +102,7 @@ class HousePersonService implements HousePersonServiceInterface
         {
             if ($house->description == $housePivot->description && $house->city_id == $housePivot->city_id)
             {
-                throw new Exception("The user already has a house with description in city");
+                throw new Exception("The person already has a house with description in city");
             }
         }
     }
@@ -110,5 +120,63 @@ class HousePersonService implements HousePersonServiceInterface
         $person = $this->personService->get($personId);
 
         return $person->houses()->withPivot('is_default')->get();
+    }
+
+    public function updateFromHouse(int $houseId, array $persons): void
+    {
+        $house = $this->houseService->get($houseId);
+
+        foreach ($persons as $id => $values)
+        {
+            $person = $this->personService->get($id);
+
+            if ($values['is_default'] == true) {
+                $this->changeHouseByDefault($person);
+            } else {
+                $this->validateDuplicatedHouseForPerson($person, $house);
+            }
+        }
+
+        $house->persons()->sync($persons);
+    }
+
+    public function updateFromPerson(int $personId, array $houses): void
+    {
+        $person = $this->personService->get($personId);
+        $index = 0;
+
+        foreach ($houses as $x => $valuesX)
+        {
+            $houseX = $this->houseService->get($x);
+            foreach($houses as $y => $valuesY) {
+                $houseY = $this->houseService->get($y);
+
+                if ($houseX->id == $houseY->id) {
+                    continue;
+                }
+
+                if ($houseX->city_id == $houseY->city_id && $houseX->description == $houseY->description)
+                {
+                    throw new Exception("The person already has a house with description in city");
+                }
+            }
+        }
+
+        foreach ($houses as $id => $values)
+        {
+            $house = $this->houseService->get($id);
+
+            if ($values['is_default'] == true) {
+                $this->validateDuplicatedHouseForPerson($person, $house);
+                $this->changeHouseByDefault($person);
+            } else {
+                $this->validateDuplicatedHouseForPerson($person, $house);
+            }
+
+            $index++;
+        }
+
+
+        $person->houses()->sync($houses);
     }
 }

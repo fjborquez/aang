@@ -15,20 +15,23 @@ Route::put('/user/{userId}', [UserController::class, 'update']);
 Route::put('/user/{userId}/enable', [UserController::class, 'enable']);
 Route::put('/user/{userId}/disable', [UserController::class, 'disable']);
 
-
 Route::get('/person', [PersonController::class, 'list']);
 Route::get('/person/{personId}', [PersonController::class, 'get']);
 Route::post('/person', [PersonController::class, 'store']);
 Route::put('/person/{personId}', [PersonController::class, 'update']);
+
 Route::post('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'store']);
 Route::get('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'get']);
 Route::put('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'update']);
+
 Route::post('/person/{userId}/house', [PersonController::class, 'storeHouses']);
 Route::get('/person/{userId}/house', [PersonController::class, 'getHouses']);
+Route::put('/person/{userId}/house', [PersonController::class, 'updateHouses']);
 
 Route::get('/nutritional-restriction', [NutritionalRestrictionController::class, 'list']);
 
 Route::get('/house', [HouseController::class, 'list']);
 Route::post('/house', [HouseController::class, 'store']);
 Route::put('/house/{houseId}', [HouseController::class, 'update']);
-Route::post('/house/{houseId}/persons', [HouseController::class, 'storePersons']);
+Route::post('/house/{houseId}/person', [HouseController::class, 'storePersons']);
+Route::put('/house/{houseId}/person', [HouseController::class, 'updatePersons']);

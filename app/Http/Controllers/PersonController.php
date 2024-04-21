@@ -6,6 +6,7 @@ use App\Contracts\Services\HousePersonService\HousePersonServiceInterface;
 use App\Contracts\Services\PersonService\PersonServiceInterface;
 use App\Http\Requests\PersonHouseRequest;
 use App\Http\Requests\PersonRequest;
+use Exception;
 
 class PersonController extends Controller
 {
@@ -46,6 +47,18 @@ class PersonController extends Controller
         $validated = $request->safe()->only(['houses']);
         $houses = $validated['houses'];
         $this->housePersonService->createFromPerson($personId, $houses);
+    }
+
+    public function updateHouses(int $personId, PersonHouseRequest $request)
+    {
+        $validated = $request->safe()->only(['houses']);
+        $houses = $validated['houses'];
+
+        try {
+            $this->housePersonService->updateFromPerson($personId, $houses);
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), 400);
+        }
     }
 
     public function getHouses(int $personId)
