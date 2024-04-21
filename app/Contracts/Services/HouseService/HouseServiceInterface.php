@@ -12,4 +12,6 @@ interface HouseServiceInterface
     public function getList(): Collection;
 
     public function update(int $houseId, array $data = []): void;
+
+    public function get(int $houseId): House;
 }

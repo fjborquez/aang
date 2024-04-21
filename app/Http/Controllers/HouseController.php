@@ -43,6 +43,15 @@ class HouseController extends Controller
         return $this->houseService->getList();
     }
 
+    public function get(int $houseId)
+    {
+        try {
+            return $this->houseService->get($houseId);
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), 404);
+        }
+    }
+
     public function storePersons(int $houseId, HousePersonRequest $request)
     {
         $validated = $request->safe()->only(['persons']);
