@@ -52,11 +52,6 @@ class HousePersonService implements HousePersonServiceInterface
         $person = $this->personService->get($personId);
         $index = 0;
 
-        if ($person->houses()->count() > 0)
-        {
-            throw new Exception("The person already has houses");
-        }
-
         foreach ($houses as $x => $valuesX)
         {
             $houseX = $this->houseService->get($x);
@@ -100,7 +95,7 @@ class HousePersonService implements HousePersonServiceInterface
     {
         foreach ($person->houses()->get() as $housePivot)
         {
-            if ($house->description == $housePivot->description && $house->city_id == $housePivot->city_id)
+            if ($housePivot->id != $house->id && $house->description == $housePivot->description && $house->city_id == $housePivot->city_id)
             {
                 throw new Exception("The person already has a house with description in city");
             }
@@ -148,6 +143,11 @@ class HousePersonService implements HousePersonServiceInterface
         foreach ($houses as $x => $valuesX)
         {
             $houseX = $this->houseService->get($x);
+
+            if ($person->houses()->get()->contains($houseX)) {
+                continue;
+            }
+
             foreach($houses as $y => $valuesY) {
                 $houseY = $this->houseService->get($y);
 
