@@ -33,4 +33,15 @@ class HouseService implements HouseServiceInterface
     {
         return $this->house->with('city')->get();
     }
+
+    public function update(int $houseId, array $data = []): void
+    {
+        $house = $this->house->find($houseId);
+
+        if ($house == null) {
+            throw new Exception('House not found');
+        }
+
+        $house->update($data);
+    }
 }

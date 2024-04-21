@@ -10,4 +10,6 @@ interface HouseServiceInterface
     public function create(array $data = []): House;
 
     public function getList(): Collection;
+
+    public function update(int $houseId, array $data = []): void;
 }

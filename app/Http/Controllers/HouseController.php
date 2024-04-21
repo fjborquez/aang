@@ -6,6 +6,7 @@ use App\Contracts\Services\HousePersonService\HousePersonServiceInterface;
 use App\Contracts\Services\HouseService\HouseServiceInterface;
 use App\Http\Requests\HousePersonRequest;
 use App\Http\Requests\HouseRequest;
+use Exception;
 
 class HouseController extends Controller
 {
@@ -22,6 +23,19 @@ class HouseController extends Controller
         $validated = $request->safe()->only($this->fields);
         $this->houseService->create($validated);
         return response()->json('House added', 201);
+    }
+
+    public function update(int $houseId, HouseRequest $request)
+    {
+        $validated = $request->safe()->only($this->fields);
+
+        try {
+            $this->houseService->update($houseId, $validated);
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), 404);
+        }
+
+        return response()->json('House updated', 200);
     }
 
     public function list()

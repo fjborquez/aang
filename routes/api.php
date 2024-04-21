@@ -30,4 +30,5 @@ Route::get('/nutritional-restriction', [NutritionalRestrictionController::class,
 
 Route::get('/house', [HouseController::class, 'list']);
 Route::post('/house', [HouseController::class, 'store']);
+Route::put('/house/{houseId}', [HouseController::class, 'update']);
 Route::post('/house/{houseId}/persons', [HouseController::class, 'storePersons']);
