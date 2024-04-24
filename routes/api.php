@@ -19,6 +19,7 @@ Route::get('/person', [PersonController::class, 'list']);
 Route::get('/person/{personId}', [PersonController::class, 'get']);
 Route::post('/person', [PersonController::class, 'store']);
 Route::put('/person/{personId}', [PersonController::class, 'update']);
+Route::delete('/person/{personId}', [PersonController::class, 'delete']);
 
 Route::post('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'store']);
 Route::get('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'get']);

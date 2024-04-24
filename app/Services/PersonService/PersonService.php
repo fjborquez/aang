@@ -46,4 +46,15 @@ class PersonService implements PersonServiceInterface
 
         $person->update($data);
     }
+
+    public function delete(int $id): void
+    {
+        $person = $this->person->find($id);
+
+        if ($person == null) {
+            throw new Exception('Person not found');
+        }
+
+        $person->delete();
+    }
 }

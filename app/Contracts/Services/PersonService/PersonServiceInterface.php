@@ -12,4 +12,6 @@ interface PersonServiceInterface {
     function get(int $id): Person;
 
     function update(int $id, array $data = []): void;
+
+    function delete(int $id): void;
 }

@@ -21,8 +21,11 @@ class PersonController extends Controller
     public function store(PersonRequest $request)
     {
         $validated = $request->safe()->only($this->fields);
-        $this->personService->create($validated);
-        return response()->json('Person added', 201);
+        $person = $this->personService->create($validated);
+        return response()->json([
+            'message' => 'Person added',
+            'person' => $person
+        ], 201);
     }
 
     public function update(int $id, PersonRequest $request)
@@ -40,6 +43,21 @@ class PersonController extends Controller
     public function get(int $personId)
     {
         return $this->personService->get($personId);
+    }
+
+    public function delete(int $personId)
+    {
+        try {
+            $this->personService->delete($personId);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 400);
+        }
+
+        return response()->json([
+            'message' => 'Person deleted'
+        ], 200);
     }
 
     public function storeHouses(int $personId, PersonHouseRequest $request)

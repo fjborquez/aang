@@ -16,8 +16,11 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $validated = $request->safe()->only($this->fields);
-        $this->userService->create($validated);
-        return response()->json('User added', 201);
+        $user = $this->userService->create($validated);
+        return response()->json([
+            'message' => 'User added',
+            'user' => $user
+        ], 201);
     }
 
     public function list()
