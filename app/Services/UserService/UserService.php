@@ -20,7 +20,7 @@ class UserService implements UserServiceInterface
 
     public function getList()
     {
-        return $this->user->with('person')->get();
+        return $this->user->with('person')->with('person.nutritionalProfile')->with('person.houses')->get();
     }
 
     public function update(int $id, array $data = []): void
