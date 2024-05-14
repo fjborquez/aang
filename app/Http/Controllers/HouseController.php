@@ -21,8 +21,12 @@ class HouseController extends Controller
     public function store(HouseRequest $request)
     {
         $validated = $request->safe()->only($this->fields);
-        $this->houseService->create($validated);
-        return response()->json('House added', 201);
+        $house = $this->houseService->create($validated);
+
+        return response()->json([
+            'message' => 'House added',
+            'house' => $house
+        ], 201);
     }
 
     public function update(int $houseId, HouseRequest $request)
