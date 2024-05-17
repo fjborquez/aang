@@ -139,6 +139,7 @@ class HousePersonService implements HousePersonServiceInterface
     {
         $person = $this->personService->get($personId);
         $index = 0;
+        $existDefault = false;
 
         foreach ($houses as $x => $valuesX)
         {
@@ -151,6 +152,11 @@ class HousePersonService implements HousePersonServiceInterface
             foreach($houses as $y => $valuesY) {
                 $houseY = $this->houseService->get($y);
 
+                if ($houseY->is_default)
+                {
+                    $existDefault = true;
+                }
+
                 if ($houseX->id == $houseY->id) {
                     continue;
                 }
@@ -160,6 +166,18 @@ class HousePersonService implements HousePersonServiceInterface
                     throw new Exception("The person already has a house with description in city");
                 }
             }
+        }
+
+        foreach ($houses as $id => $values)
+        {
+            if ($values['is_default'] == true) {
+                $existDefault = true;
+            }
+        }
+
+        if (!$existDefault)
+        {
+            throw new Exception("At least one house by default must be checked");
         }
 
         foreach ($houses as $id => $values)
