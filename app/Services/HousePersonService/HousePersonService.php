@@ -97,7 +97,7 @@ class HousePersonService implements HousePersonServiceInterface
         {
             if ($housePivot->id != $house->id && $house->description == $housePivot->description && $house->city_id == $housePivot->city_id)
             {
-                throw new Exception("The person already has a house with description in city");
+                throw new Exception("The user already has a house named " . $house->description . " in " . $house->city->description);
             }
         }
     }
@@ -149,7 +149,8 @@ class HousePersonService implements HousePersonServiceInterface
                 continue;
             }
 
-            foreach($houses as $y => $valuesY) {
+            foreach($houses as $y => $valuesY)
+            {
                 $houseY = $this->houseService->get($y);
 
                 if ($houseY->is_default)
@@ -157,7 +158,8 @@ class HousePersonService implements HousePersonServiceInterface
                     $existDefault = true;
                 }
 
-                if ($houseX->id == $houseY->id) {
+                if ($houseX->id == $houseY->id)
+                {
                     continue;
                 }
 
@@ -170,7 +172,8 @@ class HousePersonService implements HousePersonServiceInterface
 
         foreach ($houses as $id => $values)
         {
-            if ($values['is_default'] == true) {
+            if ($values['is_default'])
+            {
                 $existDefault = true;
             }
         }
