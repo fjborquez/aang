@@ -165,7 +165,7 @@ class HousePersonService implements HousePersonServiceInterface
 
                 if ($houseX->city_id == $houseY->city_id && $houseX->description == $houseY->description)
                 {
-                    throw new Exception("The person already has a house with description in city");
+                    throw new Exception("The user already has a house named " . $houseX->description . " in " . $houseX->city->description);
                 }
             }
         }
