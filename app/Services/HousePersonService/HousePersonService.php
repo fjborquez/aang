@@ -187,12 +187,7 @@ class HousePersonService implements HousePersonServiceInterface
         {
             $house = $this->houseService->get($id);
 
-            if ($values['is_default'] == true) {
-                $this->validateDuplicatedHouseForPerson($person, $house);
-                $this->changeHouseByDefault($person);
-            } else {
-                $this->validateDuplicatedHouseForPerson($person, $house);
-            }
+            $this->validateDuplicatedHouseForPerson($person, $house);
 
             $index++;
         }
