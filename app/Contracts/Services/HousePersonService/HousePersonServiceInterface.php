@@ -14,5 +14,5 @@ interface HousePersonServiceInterface
 
     public function updateFromHouse(int $houseId, array $persons): void;
 
-    public function updateFromPerson(int $personId, array $houses): void;
+    public function updateFromPerson(int $personId, array $personHousesRelations): void;
 }

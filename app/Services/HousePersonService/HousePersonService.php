@@ -135,46 +135,47 @@ class HousePersonService implements HousePersonServiceInterface
         $house->persons()->sync($persons);
     }
 
-    public function updateFromPerson(int $personId, array $houses): void
+    public function updateFromPerson(int $personId, array $personHousesRelations): void
     {
         $person = $this->personService->get($personId);
-        $index = 0;
         $existDefault = false;
 
-        foreach ($houses as $x => $valuesX)
+        foreach ($personHousesRelations as $houseId => $relationData)
         {
-            $houseX = $this->houseService->get($x);
+            $relatedHouse = $this->houseService->get($houseId);
 
-            if ($person->houses()->get()->contains($houseX)) {
+            if ($person->houses()->get()->contains($relatedHouse)) {
                 continue;
             }
 
-            foreach($houses as $y => $valuesY)
+            // Searching for houses with the same description and city in the same request
+            foreach($personHousesRelations as $toCompareHouseId => $toCompareRelationData)
             {
-                $houseY = $this->houseService->get($y);
+                $toCompareHouse = $this->houseService->get($toCompareHouseId);
 
-                if ($houseY->is_default)
+                if ($toCompareHouse->pivot->is_default)
                 {
                     $existDefault = true;
                 }
 
-                if ($houseX->id == $houseY->id)
+                if ($relatedHouse->id == $toCompareHouse->id)
                 {
                     continue;
                 }
 
-                if ($houseX->city_id == $houseY->city_id && $houseX->description == $houseY->description)
+                if ($relatedHouse->city_id == $toCompareHouse->city_id && $relatedHouse->description == $toCompareHouse->description)
                 {
-                    throw new Exception("The user already has a house named " . $houseX->description . " in " . $houseX->city->description);
+                    throw new Exception("The user already has a house named " . $relatedHouse->description . " in " . $relatedHouse->city->description);
                 }
             }
         }
 
-        foreach ($houses as $id => $values)
+        foreach ($personHousesRelations as $houseId => $relationData)
         {
-            if ($values['is_default'])
+            if ($relationData['is_default'])
             {
                 $existDefault = true;
+                break;
             }
         }
 
@@ -183,16 +184,13 @@ class HousePersonService implements HousePersonServiceInterface
             throw new Exception("At least one house by default must be checked");
         }
 
-        foreach ($houses as $id => $values)
+        foreach ($personHousesRelations as $houseId => $relationData)
         {
-            $house = $this->houseService->get($id);
+            $house = $this->houseService->get($houseId);
 
             $this->validateDuplicatedHouseForPerson($person, $house);
-
-            $index++;
         }
 
-
-        $person->houses()->sync($houses);
+        $person->houses()->sync($personHousesRelations);
     }
 }
