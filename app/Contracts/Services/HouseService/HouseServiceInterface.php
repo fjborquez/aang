@@ -14,4 +14,8 @@ interface HouseServiceInterface
     public function update(int $houseId, array $data = []): void;
 
     public function get(int $houseId): House;
+
+    public function enable(int $houseId): void;
+
+    public function disable(int $houseId): void;
 }

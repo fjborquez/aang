@@ -37,3 +37,5 @@ Route::get('/house/{houseId}', [HouseController::class, 'get']);
 Route::put('/house/{houseId}', [HouseController::class, 'update']);
 Route::post('/house/{houseId}/person', [HouseController::class, 'storePersons']);
 Route::put('/house/{houseId}/person', [HouseController::class, 'updatePersons']);
+Route::put('/house/{houseId}/enable', [HouseController::class, 'enable']);
+Route::put('/house/{houseId}/disable', [HouseController::class, 'disable']);

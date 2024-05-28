@@ -74,4 +74,26 @@ class HouseController extends Controller
             return response()->json($e->getMessage(), 404);
         }
     }
+
+    public function enable(int $houseId)
+    {
+        try {
+            $this->houseService->enable($houseId);
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), 404);
+        }
+
+        return response()->json('House enabled', 200);
+    }
+
+    public function disable(int $houseId)
+    {
+        try {
+            $this->houseService->disable($houseId);
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), 404);
+        }
+
+        return response()->json('House disabled', 200);
+    }
 }

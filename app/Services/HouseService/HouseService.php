@@ -44,4 +44,34 @@ class HouseService implements HouseServiceInterface
 
         $house->update($data);
     }
+
+    public function enable(int $houseId): void
+    {
+        $house = $this->house->find($houseId);
+
+        if ($house == null) {
+            throw new Exception('House not found');
+        }
+
+        if ($house->is_active) {
+            throw new Exception('House already enabled');
+        }
+
+        $house->update(['is_active' => true]);
+    }
+
+    public function disable(int $houseId): void
+    {
+        $house = $this->house->find($houseId);
+
+        if ($house == null) {
+            throw new Exception('House not found');
+        }
+
+        if (!$house->is_active) {
+            throw new Exception('House already disabled');
+        }
+
+        $house->update(['is_active' => false]);
+    }
 }
