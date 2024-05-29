@@ -57,7 +57,7 @@ class UserServiceTest extends TestCase
         $userMock = Mockery::mock(User::class);
 
         $userMock->shouldReceive('find')->once()->andReturn($userMock);
-        $userMock->shouldReceive('with')->once()->andReturn($userMock);
+        $userMock->shouldReceive('with')->andReturn($userMock);
 
         $userService = new UserService($userMock);
         $userService->get($userId);
@@ -69,7 +69,7 @@ class UserServiceTest extends TestCase
         $userMock = Mockery::mock(User::class);
         $this->expectException(Exception::class);
 
-        $userMock->shouldReceive('with')->once()->andReturn($userMock);
+        $userMock->shouldReceive('with')->andReturn($userMock);
         $userMock->shouldReceive('find')->once()->andReturn(null);
 
         $userService = new UserService($userMock);

@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\App\Services\PersonService;
 
-use App\Services\PersonService\PersonService;
-use Tests\TestCase;
 use App\Models\Person;
+use App\Services\PersonService\PersonService;
 use Database\Factories\PersonFactory;
-use Mockery;
 use Exception;
+use Mockery;
+use Tests\TestCase;
 
 class PersonServiceTest extends TestCase
 {
@@ -59,7 +59,7 @@ class PersonServiceTest extends TestCase
         $personMock = Mockery::mock(Person::class);
 
         $personMock->shouldReceive('find')->once()->andReturn($personMock);
-        $personMock->shouldReceive('with')->twice()->andReturn($personMock);
+        $personMock->shouldReceive('with')->andReturn($personMock);
 
         $personService = new PersonService($personMock);
         $personService->get($personId);
@@ -71,7 +71,7 @@ class PersonServiceTest extends TestCase
         $personMock = Mockery::mock(Person::class);
         $this->expectException(Exception::class);
 
-        $personMock->shouldReceive('with')->twice()->andReturn($personMock);
+        $personMock->shouldReceive('with')->andReturn($personMock);
         $personMock->shouldReceive('find')->once()->andReturn(null);
 
         $personService = new PersonService($personMock);

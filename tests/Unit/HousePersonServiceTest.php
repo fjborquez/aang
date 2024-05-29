@@ -89,6 +89,7 @@ class HousePersonServiceTest extends TestCase
         $this->fakePerson->shouldReceive('houses')->andReturn($this->fakeBelongsToMany);
         $this->fakeBelongsToMany->shouldReceive('sync')->once()->andReturnSelf();
         $this->fakeBelongsToMany->shouldReceive('get')->andReturn($this->fakePersonHouses);
+        $this->fakeBelongsToMany->shouldReceive('updateExistingPivot')->once()->andReturn();
 
         $this->mockedHousePersonService->updateFromPerson($this->personIdPayload, $this->housesPayload);
 
@@ -105,6 +106,7 @@ class HousePersonServiceTest extends TestCase
         $this->fakePerson->shouldReceive('houses')->andReturn($this->fakeBelongsToMany);
         $this->fakeBelongsToMany->shouldReceive('sync')->once()->andReturnSelf();
         $this->fakeBelongsToMany->shouldReceive('get')->andReturn($this->fakePersonHouses);
+        $this->fakeBelongsToMany->shouldReceive('updateExistingPivot')->andReturn();
 
         $this->mockedHousePersonService->updateFromPerson($this->personIdPayload, $this->housesPayload);
 
