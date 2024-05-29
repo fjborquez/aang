@@ -6,6 +6,7 @@ use App\Models\House;
 use App\Services\HouseService\HouseService;
 use Exception;
 use Mockery;
+use stdClass;
 use Tests\TestCase;
 
 class HouseServiceTest extends TestCase
@@ -47,6 +48,8 @@ class HouseServiceTest extends TestCase
 
     public function test_should_disable_the_house_when_is_active_is_true()
     {
+        $this->fakeHouse->pivot = new stdClass();
+        $this->fakeHouse->pivot->is_default = false;
         $this->fakeHouse->is_active = true;
         $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->fakeHouse);
         $this->fakeHouseService->disable($this->fakeHouseId);
@@ -62,6 +65,15 @@ class HouseServiceTest extends TestCase
     public function test_should_throw_exception_when_house_is_already_disabled()
     {
         $this->fakeHouse->is_active = false;
+        $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->fakeHouse);
+        $this->expectException(Exception::class);
+        $this->fakeHouseService->disable($this->fakeHouseId);
+    }
+
+    public function test_should_throw_exception_when_disable_house_by_default()
+    {
+        $this->fakeHouse->pivot = new stdClass();
+        $this->fakeHouse->pivot->is_default = true;
         $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->fakeHouse);
         $this->expectException(Exception::class);
         $this->fakeHouseService->disable($this->fakeHouseId);
