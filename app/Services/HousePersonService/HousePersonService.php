@@ -191,6 +191,7 @@ class HousePersonService implements HousePersonServiceInterface
             $this->validateDuplicatedHouseForPerson($person, $house);
         }
 
+        $this->changeHouseByDefault($person);
         $person->houses()->sync($personHousesRelations);
     }
 }
