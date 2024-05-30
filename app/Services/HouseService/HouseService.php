@@ -72,8 +72,10 @@ class HouseService implements HouseServiceInterface
             throw new Exception('House already disabled');
         }
 
-        if ($house->pivot->is_default) {
-            throw new Exception('House is default, cannot be disabled');
+        foreach ($house->persons as $person) {
+            if ($person->pivot->is_default) {
+                throw new Exception('Default house, can not be disabled');
+            }
         }
 
         $house->update(['is_active' => false]);
