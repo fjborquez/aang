@@ -14,6 +14,7 @@ class PersonService implements PersonServiceInterface
 
     public function create(array $data = []): Person
     {
+        $data['date_of_birth'] = date(implode('-', array_reverse(explode('/', $data['date_of_birth']))));
         $person = $this->person->factory()->create($data);
         return $person;
     }

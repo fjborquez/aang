@@ -24,7 +24,7 @@ class PersonRequest extends FormRequest
         return [
             'name' => ['required', 'max:30', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ]+(?:\s[a-zA-ZáéíóúÁÉÍÓÚüÜ]+)*$/'],
             'lastname' => ['required', 'max:30', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ]+(?:\s[a-zA-ZáéíóúÁÉÍÓÚüÜ]+)*$/'],
-            'date_of_birth' => ['required', 'date_format:Y-m-d', 'before:tomorrow'],
+            'date_of_birth' => ['required', 'date_format:d/m/Y', 'before:tomorrow'],
         ];
     }
 }
