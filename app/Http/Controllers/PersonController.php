@@ -64,7 +64,12 @@ class PersonController extends Controller
     {
         $validated = $request->safe()->only(['houses']);
         $houses = $validated['houses'];
-        $this->housePersonService->createFromPerson($personId, $houses);
+
+        try {
+            $this->housePersonService->createFromPerson($personId, $houses);
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), 400);
+        }
     }
 
     public function updateHouses(int $personId, PersonHouseRequest $request)
