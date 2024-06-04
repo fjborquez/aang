@@ -31,6 +31,6 @@ class Person extends Model
 
     public function houses(): BelongsToMany
     {
-        return $this->belongsToMany(House::class, 'persons_houses', 'person_id', 'house_id')->withPivot('is_default');
+        return $this->belongsToMany(House::class, 'persons_houses', 'person_id', 'house_id')->withPivot('is_default', 'house_role_id');
     }
 }
