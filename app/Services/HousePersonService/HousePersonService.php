@@ -3,6 +3,7 @@
 namespace App\Services\HousePersonService;
 
 use App\Contracts\Services\HousePersonService\HousePersonServiceInterface;
+use App\HouseRole;
 use App\Models\House;
 use App\Models\Person;
 use App\Services\HouseService\HouseService;
@@ -62,9 +63,10 @@ class HousePersonService implements HousePersonServiceInterface
                     continue;
                 }
 
-                if ($houseX->city_id == $houseY->city_id && $houseX->description == $houseY->description)
-                {
-                    throw new Exception("The person already has a house with description in city");
+                if ($valuesY['house_role_id'] == HouseRole::HOST->value) {
+                    if ($houseX->city_id == $houseY->city_id && $houseX->description == $houseY->description) {
+                        throw new Exception("The person already has a house with description in city");
+                    }
                 }
             }
         }
@@ -76,11 +78,13 @@ class HousePersonService implements HousePersonServiceInterface
             if ($person->houses()->count() == 0 && $index == 0) {
                 $houses[$id]['is_default'] = true;
             } else {
-                if ($values['is_default'] == true) {
-                    $this->validateDuplicatedHouseForPerson($person, $house);
-                    $this->changeHouseByDefault($person);
-                } else {
-                    $this->validateDuplicatedHouseForPerson($person, $house);
+                if ($values['house_role_id'] == HouseRole::HOST->value) {
+                    if ($values['is_default'] == true) {
+                        $this->validateDuplicatedHouseForPerson($person, $house);
+                        $this->changeHouseByDefault($person);
+                    } else {
+                        $this->validateDuplicatedHouseForPerson($person, $house);
+                    }
                 }
             }
 
@@ -125,10 +129,12 @@ class HousePersonService implements HousePersonServiceInterface
         {
             $person = $this->personService->get($id);
 
-            if ($values['is_default'] == true) {
-                $this->changeHouseByDefault($person);
-            } else {
-                $this->validateDuplicatedHouseForPerson($person, $house);
+            if ($values['house_role_id'] == HouseRole::HOST) {
+                if ($values['is_default'] == true) {
+                    $this->changeHouseByDefault($person);
+                } else {
+                    $this->validateDuplicatedHouseForPerson($person, $house);
+                }
             }
         }
 
@@ -144,8 +150,10 @@ class HousePersonService implements HousePersonServiceInterface
         {
             $relatedHouse = $this->houseService->get($houseId);
 
-            if ($person->houses()->get()->contains($relatedHouse)) {
-                continue;
+            if ($relationData['house_role_id'] == HouseRole::HOST->value) {
+                if ($person->houses()->get()->contains($relatedHouse)) {
+                    continue;
+                }
             }
 
             // Searching for houses with the same description and city in the same request
@@ -163,19 +171,23 @@ class HousePersonService implements HousePersonServiceInterface
                     continue;
                 }
 
-                if ($relatedHouse->city_id == $toCompareHouse->city_id && $relatedHouse->description == $toCompareHouse->description)
-                {
-                    throw new Exception("The user already has a house named " . $relatedHouse->description . " in " . $relatedHouse->city->description);
+                if ($toCompareRelationData['house_role_id'] == HouseRole::HOST->value) {
+                    if ($relatedHouse->city_id == $toCompareHouse->city_id && $relatedHouse->description == $toCompareHouse->description)
+                    {
+                        throw new Exception("The user already has a house named " . $relatedHouse->description . " in " . $relatedHouse->city->description);
+                    }
                 }
             }
         }
 
         foreach ($personHousesRelations as $houseId => $relationData)
         {
-            if ($relationData['is_default'])
-            {
-                $existDefault = true;
-                break;
+            if ($relationData['house_role_id'] == HouseRole::HOST->value) {
+                if ($relationData['is_default'])
+                {
+                    $existDefault = true;
+                    break;
+                }
             }
         }
 
@@ -186,9 +198,11 @@ class HousePersonService implements HousePersonServiceInterface
 
         foreach ($personHousesRelations as $houseId => $relationData)
         {
-            $house = $this->houseService->get($houseId);
+            if ($relationData['house_role_id'] == HouseRole::HOST->value) {
+                $house = $this->houseService->get($houseId);
 
-            $this->validateDuplicatedHouseForPerson($person, $house);
+                $this->validateDuplicatedHouseForPerson($person, $house);
+            }
         }
 
         $this->changeHouseByDefault($person);
