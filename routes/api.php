@@ -4,6 +4,7 @@ use App\Http\Controllers\HouseController;
 use App\Http\Controllers\NutritionalProfileController;
 use App\Http\Controllers\NutritionalRestrictionController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,7 @@ Route::get('/house', [HouseController::class, 'list']);
 Route::post('/house', [HouseController::class, 'store']);
 Route::get('/house/{houseId}', [HouseController::class, 'get']);
 Route::put('/house/{houseId}', [HouseController::class, 'update']);
+Route::get('/house/{houseId}/person', [ResidentController::class, 'list']);
 Route::post('/house/{houseId}/person', [HouseController::class, 'storePersons']);
 Route::put('/house/{houseId}/person', [HouseController::class, 'updatePersons']);
 Route::put('/house/{houseId}/enable', [HouseController::class, 'enable']);
