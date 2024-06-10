@@ -39,6 +39,7 @@ class PersonService implements PersonServiceInterface
 
     public function update(int $id, array $data = []): void
     {
+        $data['date_of_birth'] = date(implode('-', array_reverse(explode('/', $data['date_of_birth']))));
         $person = $this->person->find($id);
 
         if ($person == null) {
