@@ -14,6 +14,7 @@ jobs:
       with:
         php-version: '8.2'
         extensions: soap, intl, gd, xdebug
+        tools: phpunit
     - uses: actions/checkout@v4
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
@@ -28,8 +29,6 @@ jobs:
     - name: PHPUnit Coverage
       uses: php-actions/phpunit@v3
       with:
-        php-version: '8.2'
-        extensions: soap, intl, gd, xdebug
         configuration: "phpunit.xml"
         memory_limit: "256M"
         args: --coverage-text
