@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -17,17 +16,17 @@ class HouseRoleSeeder extends Seeder
             DB::table('house_roles')->insert([
                 'id' => 1,
                 'name' => 'Host',
-                'description' => ''
+                'description' => '',
             ]);
             DB::table('house_roles')->insert([
                 'id' => 2,
                 'name' => 'Resident',
-                'description' => ''
+                'description' => '',
             ]);
             DB::table('house_roles')->insert([
                 'id' => 3,
                 'name' => 'Guest',
-                'description' => ''
+                'description' => '',
             ]);
         }
     }

@@ -17,9 +17,10 @@ class UserController extends Controller
     {
         $validated = $request->safe()->only($this->fields);
         $user = $this->userService->create($validated);
+
         return response()->json([
             'message' => 'User added',
-            'user' => $user
+            'user' => $user,
         ], 201);
     }
 
@@ -32,6 +33,7 @@ class UserController extends Controller
     {
         $validated = $request->safe()->only($this->fields);
         $this->userService->update($id, $validated);
+
         return response()->json('User updated', 200);
     }
 

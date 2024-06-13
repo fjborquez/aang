@@ -15,116 +15,116 @@ class NutritionalRestrictionSeeder extends Seeder
         if (DB::table('nutritional_restrictions')->count() == 0) {
             DB::table('nutritional_restrictions')->insert([
                 'id' => 1,
-                'description' => 'vegetarian'
+                'description' => 'vegetarian',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 2,
-                'description' => 'vegan'
+                'description' => 'vegan',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 3,
-                'description' => 'celiac'
+                'description' => 'celiac',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 4,
-                'description' => 'keto'
+                'description' => 'keto',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 5,
-                'description' => 'diabetic'
+                'description' => 'diabetic',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 6,
-                'description' => 'lactose intolerant'
+                'description' => 'lactose intolerant',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 7,
-                'description' => 'gluten intolerant'
+                'description' => 'gluten intolerant',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 8,
-                'description' => 'hypertense'
+                'description' => 'hypertense',
             ]);
         }
 
         if (DB::table('nutritional_restrictions')->count() == 8) {
             DB::table('nutritional_restrictions')->insert([
                 'id' => 9,
-                'description' => 'dairy-free'
+                'description' => 'dairy-free',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 10,
-                'description' => 'wheat-free'
+                'description' => 'wheat-free',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 11,
-                'description' => 'nut-free'
+                'description' => 'nut-free',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 12,
-                'description' => 'soy-free'
+                'description' => 'soy-free',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 13,
-                'description' => 'egg-free'
+                'description' => 'egg-free',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 14,
-                'description' => 'shellfish-free'
+                'description' => 'shellfish-free',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 15,
-                'description' => 'fish-free'
+                'description' => 'fish-free',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 16,
-                'description' => 'pork-free'
+                'description' => 'pork-free',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 17,
-                'description' => 'red meat-free'
+                'description' => 'red meat-free',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 18,
-                'description' => 'caffeine-free'
+                'description' => 'caffeine-free',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 19,
-                'description' => 'alcohol-free'
+                'description' => 'alcohol-free',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 20,
-                'description' => 'spicy food-free'
+                'description' => 'spicy food-free',
             ]);
 
             DB::table('nutritional_restrictions')->insert([
                 'id' => 21,
-                'description' => 'peanut allergy'
+                'description' => 'peanut allergy',
             ]);
         }
 
         if (DB::table('nutritional_restrictions')->count() == 21) {
             DB::table('nutritional_restrictions')->insert([
                 'id' => 22,
-                'description' => 'pescetarian'
+                'description' => 'pescetarian',
             ]);
         }
     }

@@ -15,16 +15,17 @@ class PersonController extends Controller
     public function __construct(
         private readonly PersonServiceInterface $personService,
         private readonly HousePersonServiceInterface $housePersonService
-    ){
+    ) {
     }
 
     public function store(PersonRequest $request)
     {
         $validated = $request->safe()->only($this->fields);
         $person = $this->personService->create($validated);
+
         return response()->json([
             'message' => 'Person added',
-            'person' => $person
+            'person' => $person,
         ], 201);
     }
 
@@ -32,6 +33,7 @@ class PersonController extends Controller
     {
         $validated = $request->safe()->only($this->fields);
         $this->personService->update($id, $validated);
+
         return response()->json('Person updated', 200);
     }
 
@@ -51,12 +53,12 @@ class PersonController extends Controller
             $this->personService->delete($personId);
         } catch (Exception $e) {
             return response()->json([
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ], 400);
         }
 
         return response()->json([
-            'message' => 'Person deleted'
+            'message' => 'Person deleted',
         ], 200);
     }
 

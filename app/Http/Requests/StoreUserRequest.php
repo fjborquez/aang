@@ -25,15 +25,14 @@ class StoreUserRequest extends FormRequest
     {
         $user_id = null;
 
-        if(count(Request::segments()) == 3)
-        {
+        if (count(Request::segments()) == 3) {
             $user_id = Request::segments()[2];
         }
 
         return [
             'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()->uncompromised()],
-            'email' => ['required', 'email:rfc,dns', 'unique:users,email,' . $user_id],
-            'person_id' => ['required', 'numeric','exists:persons,id'],
+            'email' => ['required', 'email:rfc,dns', 'unique:users,email,'.$user_id],
+            'person_id' => ['required', 'numeric', 'exists:persons,id'],
         ];
     }
 }

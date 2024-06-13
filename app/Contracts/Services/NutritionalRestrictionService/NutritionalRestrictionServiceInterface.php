@@ -6,7 +6,7 @@ use App\Models\NutritionalRestriction;
 
 interface NutritionalRestrictionServiceInterface
 {
-    function getList();
+    public function getList();
 
-    function get(int $id): NutritionalRestriction;
+    public function get(int $id): NutritionalRestriction;
 }

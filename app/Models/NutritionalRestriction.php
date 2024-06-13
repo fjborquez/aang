@@ -11,7 +11,7 @@ class NutritionalRestriction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'description'
+        'description',
     ];
 
     public function persons(): BelongsToMany
