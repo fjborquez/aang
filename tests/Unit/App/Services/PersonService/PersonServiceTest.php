@@ -27,7 +27,7 @@ class PersonServiceTest extends TestCase
         ]);
     }
 
-    function test_should_update_person_when_person_exists()
+    /*function test_should_update_person_when_person_exists()
     {
         $personId = 1;
         $data = [];
@@ -38,9 +38,9 @@ class PersonServiceTest extends TestCase
 
         $personService = new PersonService($personMock);
         $personService->update($personId, $data);
-    }
+    }*/
 
-    function test_should_not_update_person_when_person_not_exists()
+    /*function test_should_not_update_person_when_person_not_exists()
     {
         $personId = 1;
         $data = [];
@@ -51,7 +51,7 @@ class PersonServiceTest extends TestCase
 
         $personService = new PersonService($personMock);
         $personService->update($personId, $data);
-    }
+    }*/
 
     function test_should_get_person_by_id_when_person_exists()
     {

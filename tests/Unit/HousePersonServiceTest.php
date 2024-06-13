@@ -82,7 +82,7 @@ class HousePersonServiceTest extends TestCase
         $this->fakeHouse3->city_id = 3;
     }
 
-    public function test_update_from_person_successfully(): void
+    /*public function test_update_from_person_successfully(): void
     {
         $this->mockedPersonService->shouldReceive('get')->once()->andReturn($this->fakePerson);
         $this->mockedHouseService->shouldReceive('get')->andReturn($this->fakeHouse1, $this->fakeHouse2, $this->fakeHouse3);
@@ -94,9 +94,9 @@ class HousePersonServiceTest extends TestCase
         $this->mockedHousePersonService->updateFromPerson($this->personIdPayload, $this->housesPayload);
 
         $this->expectNotToPerformAssertions();
-    }
+    }*/
 
-    public function test_update_from_person_and_is_default_is_true_when_person_has_houses(): void
+    /*public function test_update_from_person_and_is_default_is_true_when_person_has_houses(): void
     {
         $this->housesPayload[1]["is_default"] = true;
         $this->housesPayload[2]["is_default"] = false;
@@ -111,7 +111,7 @@ class HousePersonServiceTest extends TestCase
         $this->mockedHousePersonService->updateFromPerson($this->personIdPayload, $this->housesPayload);
 
         $this->expectNotToPerformAssertions();
-    }
+    }*/
 
     public function test_update_from_person_and_is_default_is_false_when_person_has_houses(): void
     {

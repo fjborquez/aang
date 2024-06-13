@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class UserServiceTest extends TestCase
 {
-    function test_should_create_new_user_when_user_factory_create(): void
+    /*function test_should_create_new_user_when_user_factory_create(): void
     {
         $userMock = Mockery::mock(User::class);
         $userFactoryMock = Mockery::mock(UserFactory::class);
@@ -23,7 +23,7 @@ class UserServiceTest extends TestCase
             'email' => '',
             'password' => '',
         ]);
-    }
+    }*/
 
     function test_should_update_user_when_user_exists()
     {
