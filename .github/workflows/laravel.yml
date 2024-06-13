@@ -15,6 +15,7 @@ jobs:
         php-version: '8.2'
         extensions: soap, intl, gd, xdebug
         tools: phpunit
+        coverage: xdebug
     - uses: actions/checkout@v4
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
