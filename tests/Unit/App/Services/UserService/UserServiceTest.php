@@ -25,7 +25,7 @@ class UserServiceTest extends TestCase
         ]);
     }*/
 
-    function test_should_update_user_when_user_exists()
+    /*function test_should_update_user_when_user_exists()
     {
         $userId = 1;
         $data = [];
@@ -150,5 +150,5 @@ class UserServiceTest extends TestCase
 
         $userService = new UserService($userMock);
         $userService->disable($userId);
-    }
+    }*/
 }

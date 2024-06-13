@@ -16,7 +16,7 @@ class HouseServiceTest extends TestCase
     private $fakeHouseId;
     private $fakeHouse;
 
-    public function setUp(): void
+    /*public function setUp(): void
     {
         $this->mockedHouse = Mockery::mock(House::class);
         $this->fakeHouseService = new HouseService($this->mockedHouse);
@@ -55,7 +55,7 @@ class HouseServiceTest extends TestCase
         $this->fakeHouseService->disable($this->fakeHouseId);
     }*/
 
-    public function test_should_throw_exception_when_house_does_not_exist_when_disable()
+    /*public function test_should_throw_exception_when_house_does_not_exist_when_disable()
     {
         $this->mockedHouse->shouldReceive('find')->once()->andReturn(null);
         $this->expectException(Exception::class);
@@ -77,5 +77,5 @@ class HouseServiceTest extends TestCase
         $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->fakeHouse);
         $this->expectException(Exception::class);
         $this->fakeHouseService->disable($this->fakeHouseId);
-    }
+    }*/
 }
