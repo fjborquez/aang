@@ -30,3 +30,7 @@ jobs:
       with:
         configuration: "phpunit.xml"
         memory_limit: "256M"
+        args: --coverage-text
+        bootstrap: vendor/autoload.php
+      env:
+        XDEBUG_MODE: coverage
