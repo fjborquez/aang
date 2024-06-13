@@ -29,4 +29,4 @@ jobs:
     - name: PHPUnit Coverage
       run: vendor/bin/phpunit --coverage-text
     - name: Pint
-      runt: vendor/bin/pint --test
+      run: vendor/bin/pint --test
