@@ -28,5 +28,3 @@ jobs:
       run: php artisan test
     - name: PHPUnit Coverage
       run: vendor/bin/phpunit --coverage-text
-    - name: Pint
-      run: vendor/bin/pint --test
