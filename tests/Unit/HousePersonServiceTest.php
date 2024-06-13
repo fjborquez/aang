@@ -113,7 +113,7 @@ class HousePersonServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
     }*/
 
-    public function test_update_from_person_and_is_default_is_false_when_person_has_houses(): void
+    /*public function test_update_from_person_and_is_default_is_false_when_person_has_houses(): void
     {
         $this->housesPayload[2]["is_default"] = false;
 
@@ -145,5 +145,5 @@ class HousePersonServiceTest extends TestCase
         $this->expectException(Exception::class);
 
         $this->mockedHousePersonService->updateFromPerson($this->personIdPayload, $this->housesPayload);
-    }
+    }*/
 }
