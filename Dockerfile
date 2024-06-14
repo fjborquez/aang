@@ -7,8 +7,7 @@ ENV PHP_MEMORY_LIMIT=512M
 COPY . /var/www/html
 
 RUN apt-get install wget -y
-RUN wget https://download.docker.com/linux/ubuntu/gpg
-RUN apt-key add gpg
+RUN sudo wget -O /usr/share/keyrings/docker-archive-keyring.gpg https://download.docker.com/linux/ubuntu/gpg
 RUN apt-get update
 RUN apt-get clean
 RUN apt-get install ca-certificates -y
