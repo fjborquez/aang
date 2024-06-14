@@ -6,21 +6,9 @@ ENV PHP_MEMORY_LIMIT=512M
 
 COPY . /var/www/html
 
-RUN apt-get install wget -y
-RUN wget -O /usr/share/keyrings/docker-archive-keyring.gpg https://download.docker.com/linux/ubuntu/gpg
-RUN apt-get update
-RUN apt-get clean
-RUN apt-get install ca-certificates -y
-RUN apt-get install software-properties-common -y
-RUN apt-get update
-RUN apt-get clean
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt update
-RUN apt install python3.12
-
 RUN composer install --optimize-autoloader
 
-RUN curl -sSL https://sdk.cloud.google.com > /tmp/gcl && bash /tmp/gcl --install-dir=~/gcloud
+RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - && apt-get update -y && apt-get install google-cloud-cli -y
 RUN gcloud kms decrypt --ciphertext-file=/workspace/envs/.env.prod.enc --plaintext-file=/workspace/.env --location=global --keyring=aang-envs --key=key-envs --verbosity=debug
 
 RUN php artisan config:cache
