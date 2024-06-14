@@ -6,9 +6,11 @@ ENV PHP_MEMORY_LIMIT=512M
 
 COPY . /var/www/html
 
-RUN apt update && apt install software-properties-common -y
-RUN add-apt-repository ppa:deadsnakes/ppa && install python3.8 -y
-RUN ln -s /usr/bin/pip3 /usr/bin/pip && ln -s /usr/bin/python3.8 /usr/bin/python
+RUN apt-get update -qq   && apt-get install -y -qq python3.8
+RUN rm /usr/bin/python && rm /usr/bin/python3 && ln -s /usr/bin/python3.8 /usr/bin/python &&  ln -s /usr/bin/python3.8 /usr/bin/python3 \
+    && rm /usr/local/bin/python && rm /usr/local/bin/python3 && ln -s /usr/bin/python3.8 /usr/local/bin/python &&  ln -s /usr/bin/python3.8 /usr/local/bin/python3 \
+    && apt-get install -y python3-pip python-dev python3.8-dev && python3 -m pip install pip --upgrade
+
 
 RUN composer install --optimize-autoloader
 
