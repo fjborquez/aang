@@ -8,7 +8,7 @@ COPY . /var/www/html
 
 RUN composer install --optimize-autoloader
 
-RUN curl -sSL https://sdk.cloud.google.com | bash
+RUN curl -sSL https://sdk.cloud.google.com > /tmp/gcl && bash /tmp/gcl --install-dir=~/gcloud --disable-prompts
 RUN gcloud kms decrypt --ciphertext-file=/workspace/envs/.env.prod.enc --plaintext-file=/workspace/.env --location=global --keyring=aang-envs --key=key-envs --verbosity=debug
 
 RUN php artisan config:cache
