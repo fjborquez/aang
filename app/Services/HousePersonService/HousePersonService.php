@@ -89,7 +89,7 @@ class HousePersonService implements HousePersonServiceInterface
         $person->houses()->sync($houses);
     }
 
-    public function validateDuplicatedHouseForPerson(Person $person, House $house): void
+    public function validateDuplicatedHouseForPerson(Person $person, House $house):
     {
         foreach ($person->houses()->get() as $housePivot) {
             if ($housePivot->id != $house->id && $house->description == $housePivot->description && $house->city_id == $housePivot->city_id) {
