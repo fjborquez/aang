@@ -7,9 +7,9 @@ ENV PHP_MEMORY_LIMIT=512M
 COPY . /var/www/html
 
 
-RUN sudo add-apt-repository ppa:deadsnakes/ppa
-RUN sudo apt update
-RUN sudo apt install python3.12
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt update
+RUN apt install python3.12
 
 RUN composer install --optimize-autoloader
 
