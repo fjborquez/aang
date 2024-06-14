@@ -6,10 +6,16 @@ ENV PHP_MEMORY_LIMIT=512M
 
 COPY . /var/www/html
 
-RUN apt install software-properties-common -y
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt-get update -y
-RUN apt install python3.11 python3-pip -y
+
+RUN apt update; \
+apt install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev; \
+wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz; \
+tar -zxvf Python-3.9.7.tgz; \
+cd Python-3.9.7; \
+./configure --prefix=/usr/local/python3; \
+make && make install; \
+ln -sf /usr/local/python3/bin/python3.9 /usr/bin/python3; \
+ln -sf /usr/local/python3/bin/pip3.9 /usr/bin/pip3
 
 RUN composer install --optimize-autoloader
 
