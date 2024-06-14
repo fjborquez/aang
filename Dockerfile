@@ -6,6 +6,7 @@ ENV PHP_MEMORY_LIMIT=512M
 
 COPY . /var/www/html
 
+RUN apt-get wget -y
 RUN wget https://download.docker.com/linux/ubuntu/gpg
 RUN apt-key add gpg
 RUN apt-get update
