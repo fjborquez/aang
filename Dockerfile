@@ -8,6 +8,7 @@ COPY . /var/www/html
 
 RUN apt-get update
 RUN apt-get clean
+RUN apt-get install ca-certificates -y
 RUN apt-get install software-properties-common -y
 RUN apt-get update
 RUN apt-get clean
