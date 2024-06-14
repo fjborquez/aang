@@ -7,5 +7,5 @@ return [
     App\Providers\UserServiceProvider::class,
     App\Providers\HouseServiceProvider::class,
     App\Providers\HousePersonServiceProvider::class,
-    App\Providers\ResidentServiceProvider::class
+    App\Providers\ResidentServiceProvider::class,
 ];

@@ -16,19 +16,20 @@ class PersonService implements PersonServiceInterface
     {
         $data['date_of_birth'] = date(implode('-', array_reverse(explode('/', $data['date_of_birth']))));
         $person = $this->person->factory()->create($data);
+
         return $person;
     }
 
     public function getList()
     {
         return $this->person->with('nutritionalProfile')->with('user')
-        ->with('houses')->get();
+            ->with('houses')->get();
     }
 
     public function get(int $id): Person
     {
         $person = $this->person->with('nutritionalProfile')
-        ->with('user')->with('houses')->find($id);
+            ->with('user')->with('houses')->find($id);
 
         if ($person == null) {
             throw new Exception('Person not found');

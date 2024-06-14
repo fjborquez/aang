@@ -12,7 +12,7 @@ class City extends Model
 
     protected $fillable = [
         'id',
-        'description'
+        'description',
     ];
 
     public function houses(): HasMany

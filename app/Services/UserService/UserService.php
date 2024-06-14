@@ -15,6 +15,7 @@ class UserService implements UserServiceInterface
     public function create(array $data = []): User
     {
         $user = $this->user->factory()->create($data);
+
         return $user;
     }
 
@@ -70,7 +71,7 @@ class UserService implements UserServiceInterface
             throw new Exception('User not found');
         }
 
-        if (!$user->is_active) {
+        if (! $user->is_active) {
             throw new Exception('User already disabled');
         }
 

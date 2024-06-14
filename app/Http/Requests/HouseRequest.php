@@ -23,7 +23,7 @@ class HouseRequest extends FormRequest
     {
         return [
             'description' => ['required', 'max:30'],
-            'city_id' => ['required', 'exists:cities,id']
+            'city_id' => ['required', 'exists:cities,id'],
         ];
     }
 }

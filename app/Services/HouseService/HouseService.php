@@ -68,7 +68,7 @@ class HouseService implements HouseServiceInterface
             throw new Exception('House not found');
         }
 
-        if (!$house->is_active) {
+        if (! $house->is_active) {
             throw new Exception('House already disabled');
         }
 

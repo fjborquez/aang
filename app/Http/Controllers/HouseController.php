@@ -25,7 +25,7 @@ class HouseController extends Controller
 
         return response()->json([
             'message' => 'House added',
-            'house' => $house
+            'house' => $house,
         ], 201);
     }
 
@@ -70,7 +70,7 @@ class HouseController extends Controller
 
         try {
             $this->housePersonService->updateFromHouse($houseId, $persons);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return response()->json($e->getMessage(), 404);
         }
     }

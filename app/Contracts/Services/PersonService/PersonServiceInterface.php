@@ -4,14 +4,15 @@ namespace App\Contracts\Services\PersonService;
 
 use App\Models\Person;
 
-interface PersonServiceInterface {
-    function create(array $data = []): Person;
+interface PersonServiceInterface
+{
+    public function create(array $data = []): Person;
 
-    function getList();
+    public function getList();
 
-    function get(int $id): Person;
+    public function get(int $id): Person;
 
-    function update(int $id, array $data = []): void;
+    public function update(int $id, array $data = []): void;
 
-    function delete(int $id): void;
+    public function delete(int $id): void;
 }

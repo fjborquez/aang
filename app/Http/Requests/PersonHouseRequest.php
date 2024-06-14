@@ -22,7 +22,7 @@ class PersonHouseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'houses' => ['required', 'array']
+            'houses' => ['required', 'array'],
         ];
     }
 }

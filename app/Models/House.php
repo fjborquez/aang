@@ -14,7 +14,7 @@ class House extends Model
     protected $fillable = [
         'description',
         'city_id',
-        'is_active'
+        'is_active',
     ];
 
     public function persons(): BelongsToMany
