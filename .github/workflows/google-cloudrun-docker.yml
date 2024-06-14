@@ -98,8 +98,8 @@ jobs:
         with:
           version: '>= 363.0.0'
     
-      - name: 'Use gcloud CLI'
-        run: 'gcloud info'
+      - name: 'Decrypt .env file'
+        run: 'gcloud kms decrypt --ciphertext-file=envs/.env.prod.enc --plaintext-file=.env --location=global --keyring=aang-envs --key=key-envs --verbosity=debug'
 
       - name: Build and Push Container
         run: |-
