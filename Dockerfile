@@ -6,7 +6,7 @@ ENV PHP_MEMORY_LIMIT=512M
 
 COPY . /var/www/html
 
-RUN apt-get install software-properties-common
+RUN apt-get install software-properties-common -y
 RUN apt update
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt update
