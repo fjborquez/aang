@@ -26,5 +26,12 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
     - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
       run: php artisan test
-    - name: PHPUnit Coverage
-      run: vendor/bin/phpunit --coverage-text
+    - name: PHPUnit Coverage Creation
+      run: vendor/bin/phpunit --coverage-clover coverage.xml
+    #- name: Coverage Report as Comment (Clover)
+    #  uses: lucassabreu/comment-coverage-clover@main
+    #  with:
+    #    file: coverage.xml
+    #    table-below-coverage: 80
+    - name: PHPUnit Coverage Check
+      run: vendor/bin/coverage-check coverage.xml 80
