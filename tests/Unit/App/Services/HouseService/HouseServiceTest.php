@@ -46,14 +46,17 @@ class HouseServiceTest extends TestCase
         $this->fakeHouseService->enable($this->fakeHouseId);
     }
 
-    /*public function test_should_disable_the_house_when_is_active_is_true()
+    public function test_should_disable_the_house_when_is_active_is_true()
     {
-        $this->fakeHouse->pivot = new stdClass();
-        $this->fakeHouse->pivot->is_default = false;
-        $this->fakeHouse->is_active = true;
-        $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->fakeHouse);
+        $fakeHouse = Mockery::mock("House")->makePartial();
+        $fakeHouse->pivot = new stdClass();
+        $fakeHouse->pivot->is_default = false;
+        $fakeHouse->is_active = true;
+        $fakeHouse->persons = [];
+        $fakeHouse->shouldReceive('update')->once()->andReturn(null);
+        $this->mockedHouse->shouldReceive('find')->once()->andReturn($fakeHouse);
         $this->fakeHouseService->disable($this->fakeHouseId);
-    }*/
+    }
 
     public function test_should_throw_exception_when_house_does_not_exist_when_disable()
     {
