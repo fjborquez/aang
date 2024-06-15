@@ -34,4 +34,4 @@ jobs:
     #    file: coverage.xml
     #    table-below-coverage: 80
     - name: PHPUnit Coverage Check
-      run: vendor/bin/coverage-check clover.xml 80
+      run: vendor/bin/coverage-check coverage.xml 80
