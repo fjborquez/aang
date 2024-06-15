@@ -27,4 +27,8 @@ jobs:
     - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
       run: php artisan test
     - name: PHPUnit Coverage
-      run: vendor/bin/phpunit --coverage-text
+      run: vendor/bin/phpunit --coverage-clover coverage.xml
+    - name: Coverage Report as Comment (Clover)
+      uses: lucassabreu/comment-coverage-clover@main
+      with:
+        file: coverage.xml
