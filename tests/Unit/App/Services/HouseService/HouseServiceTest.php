@@ -12,8 +12,11 @@ use Tests\TestCase;
 class HouseServiceTest extends TestCase
 {
     private $mockedHouse;
+
     private $fakeHouseService;
+
     private $fakeHouseId;
+
     private $fakeHouse;
 
     public function setUp(): void
@@ -48,7 +51,7 @@ class HouseServiceTest extends TestCase
 
     public function test_should_disable_the_house_when_is_active_is_true()
     {
-        $fakeHouse = Mockery::mock("House")->makePartial();
+        $fakeHouse = Mockery::mock('House')->makePartial();
         $fakeHouse->pivot = new stdClass();
         $fakeHouse->pivot->is_default = false;
         $fakeHouse->is_active = true;
