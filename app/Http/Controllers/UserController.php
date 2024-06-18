@@ -9,9 +9,7 @@ class UserController extends Controller
 {
     private $fields = ['password', 'email', 'person_id'];
 
-    public function __construct(private readonly UserServiceInterface $userService)
-    {
-    }
+    public function __construct(private readonly UserServiceInterface $userService) {}
 
     public function store(StoreUserRequest $request)
     {

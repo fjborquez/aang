@@ -9,8 +9,7 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
 {
     public function __construct(
         private readonly PersonServiceInterface $personService,
-    ) {
-    }
+    ) {}
 
     public function create(int $personId, array $data = [])
     {

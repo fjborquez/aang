@@ -16,8 +16,7 @@ class HousePersonService implements HousePersonServiceInterface
     public function __construct(
         private readonly HouseService $houseService,
         private readonly PersonService $personService
-    ) {
-    }
+    ) {}
 
     public function createFromHouse(int $houseId, array $persons): void
     {

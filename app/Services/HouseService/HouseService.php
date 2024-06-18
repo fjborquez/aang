@@ -9,9 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class HouseService implements HouseServiceInterface
 {
-    public function __construct(private readonly House $house)
-    {
-    }
+    public function __construct(private readonly House $house) {}
 
     public function create(array $data = []): House
     {

@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class NutritionalProfileController extends Controller
 {
-    public function __construct(private readonly NutritionalProfileService $nutritionalProfileService)
-    {
-    }
+    public function __construct(private readonly NutritionalProfileService $nutritionalProfileService) {}
 
     public function store(int $personId, Request $request)
     {

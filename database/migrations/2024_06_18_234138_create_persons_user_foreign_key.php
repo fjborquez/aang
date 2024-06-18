@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('house_roles', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 30)->unique();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('person_id')->on('persons')->references('id');
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('house_roles');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('users_person_id_foreign');
+        });
     }
 };

@@ -7,9 +7,7 @@ use App\Models\NutritionalRestriction;
 
 class NutritionalRestrictionService implements NutritionalRestrictionServiceInterface
 {
-    public function __construct(private readonly NutritionalRestriction $nutritionalRestriction)
-    {
-    }
+    public function __construct(private readonly NutritionalRestriction $nutritionalRestriction) {}
 
     public function getList()
     {
