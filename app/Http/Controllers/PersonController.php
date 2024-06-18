@@ -15,8 +15,7 @@ class PersonController extends Controller
     public function __construct(
         private readonly PersonServiceInterface $personService,
         private readonly HousePersonServiceInterface $housePersonService
-    ) {
-    }
+    ) {}
 
     public function store(PersonRequest $request)
     {

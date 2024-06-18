@@ -8,9 +8,7 @@ use Exception;
 
 class PersonService implements PersonServiceInterface
 {
-    public function __construct(private readonly Person $person)
-    {
-    }
+    public function __construct(private readonly Person $person) {}
 
     public function create(array $data = []): Person
     {

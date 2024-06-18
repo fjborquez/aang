@@ -14,9 +14,7 @@ class HouseController extends Controller
 
     public function __construct(
         private readonly HouseServiceInterface $houseService,
-        private readonly HousePersonServiceInterface $housePersonService)
-    {
-    }
+        private readonly HousePersonServiceInterface $housePersonService) {}
 
     public function store(HouseRequest $request)
     {

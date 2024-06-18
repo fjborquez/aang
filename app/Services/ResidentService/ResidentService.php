@@ -7,10 +7,7 @@ use App\Models\Person;
 
 class ResidentService implements ResidentServiceInterface
 {
-    public function __construct(private readonly Person $person)
-    {
-
-    }
+    public function __construct(private readonly Person $person) {}
 
     public function list(int $houseId)
     {
