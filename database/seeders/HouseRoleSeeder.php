@@ -16,17 +16,14 @@ class HouseRoleSeeder extends Seeder
             DB::table('house_roles')->insert([
                 'id' => 1,
                 'name' => 'Host',
-                'description' => '',
             ]);
             DB::table('house_roles')->insert([
                 'id' => 2,
                 'name' => 'Resident',
-                'description' => '',
             ]);
             DB::table('house_roles')->insert([
                 'id' => 3,
                 'name' => 'Guest',
-                'description' => '',
             ]);
         }
     }
