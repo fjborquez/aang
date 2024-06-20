@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class UserServiceTest extends TestCase
 {
-    function test_should_create_new_user_when_user_factory_create(): void
+    public function test_should_create_new_user_when_user_factory_create(): void
     {
         $userMock = Mockery::mock(User::class);
         $userFactoryMock = Mockery::mock(UserFactory::class);
@@ -25,7 +25,7 @@ class UserServiceTest extends TestCase
         ]);
     }
 
-    function test_should_update_user_when_user_exists()
+    public function test_should_update_user_when_user_exists()
     {
         $userId = 1;
         $data = [];
@@ -38,7 +38,7 @@ class UserServiceTest extends TestCase
         $userService->update($userId, $data);
     }
 
-    function test_should_not_update_user_when_user_not_exists()
+    public function test_should_not_update_user_when_user_not_exists()
     {
         $userId = 1;
         $data = [];
@@ -51,7 +51,7 @@ class UserServiceTest extends TestCase
         $userService->update($userId, $data);
     }
 
-    function test_should_get_user_by_id_when_user_exists()
+    public function test_should_get_user_by_id_when_user_exists()
     {
         $userId = 1;
         $userMock = Mockery::mock(User::class);
@@ -63,7 +63,7 @@ class UserServiceTest extends TestCase
         $userService->get($userId);
     }
 
-    function test_should_not_get_user_by_id_when_user_not_exists()
+    public function test_should_not_get_user_by_id_when_user_not_exists()
     {
         $userId = 1;
         $userMock = Mockery::mock(User::class);
@@ -76,7 +76,7 @@ class UserServiceTest extends TestCase
         $userService->get($userId);
     }
 
-    function test_should_throw_an_exception_when_user_not_exists_when_enable()
+    public function test_should_throw_an_exception_when_user_not_exists_when_enable()
     {
         $userId = 1;
         $userMock = Mockery::mock(User::class);
@@ -88,7 +88,7 @@ class UserServiceTest extends TestCase
         $userService->enable($userId);
     }
 
-    function test_should_throw_an_exception_when_user_is_active()
+    public function test_should_throw_an_exception_when_user_is_active()
     {
         $userId = 1;
         $userMock = Mockery::mock(User::class);
@@ -101,7 +101,7 @@ class UserServiceTest extends TestCase
         $userService->enable($userId);
     }
 
-    function test_should_enable_user_when_user_is_disabled()
+    public function test_should_enable_user_when_user_is_disabled()
     {
         $userId = 1;
         $userMock = Mockery::mock(User::class);
@@ -114,7 +114,7 @@ class UserServiceTest extends TestCase
         $userService->enable($userId);
     }
 
-    function test_should_throw_an_exception_when_user_not_exists_when_disable()
+    public function test_should_throw_an_exception_when_user_not_exists_when_disable()
     {
         $userId = 1;
         $userMock = Mockery::mock(User::class);
@@ -126,7 +126,7 @@ class UserServiceTest extends TestCase
         $userService->disable($userId);
     }
 
-    function test_should_throw_an_exception_when_user_is_not_active()
+    public function test_should_throw_an_exception_when_user_is_not_active()
     {
         $userId = 1;
         $userMock = Mockery::mock(User::class);
@@ -139,7 +139,7 @@ class UserServiceTest extends TestCase
         $userService->disable($userId);
     }
 
-    function test_should_disable_user_when_user_is_enabled()
+    public function test_should_disable_user_when_user_is_enabled()
     {
         $userId = 1;
         $userMock = Mockery::mock(User::class);

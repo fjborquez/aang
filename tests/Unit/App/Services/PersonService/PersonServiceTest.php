@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class PersonServiceTest extends TestCase
 {
-    function test_should_create_new_person_when_person_factory_create(): void
+    public function test_should_create_new_person_when_person_factory_create(): void
     {
         $personMock = Mockery::mock(Person::class);
         $personFactoryMock = Mockery::mock(PersonFactory::class);
@@ -27,7 +27,7 @@ class PersonServiceTest extends TestCase
         ]);
     }
 
-    function test_should_update_person_when_person_exists()
+    public function test_should_update_person_when_person_exists()
     {
         $personId = 1;
         $data = [];
@@ -41,7 +41,7 @@ class PersonServiceTest extends TestCase
         $personService->update($personId, $data);
     }
 
-    function test_should_not_update_person_when_person_not_exists()
+    public function test_should_not_update_person_when_person_not_exists()
     {
         $personId = 1;
         $data = [];
@@ -55,7 +55,7 @@ class PersonServiceTest extends TestCase
         $personService->update($personId, $data);
     }
 
-    function test_should_get_person_by_id_when_person_exists()
+    public function test_should_get_person_by_id_when_person_exists()
     {
         $personId = 1;
         $personMock = Mockery::mock(Person::class);
@@ -67,7 +67,7 @@ class PersonServiceTest extends TestCase
         $personService->get($personId);
     }
 
-    function test_should_not_get_person_by_id_when_person_not_exists()
+    public function test_should_not_get_person_by_id_when_person_not_exists()
     {
         $personId = 1;
         $personMock = Mockery::mock(Person::class);
