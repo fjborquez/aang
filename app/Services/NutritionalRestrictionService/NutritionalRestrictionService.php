@@ -4,12 +4,13 @@ namespace App\Services\NutritionalRestrictionService;
 
 use App\Contracts\Services\NutritionalRestrictionService\NutritionalRestrictionServiceInterface;
 use App\Models\NutritionalRestriction;
+use Illuminate\Database\Eloquent\Collection;
 
 class NutritionalRestrictionService implements NutritionalRestrictionServiceInterface
 {
     public function __construct(private readonly NutritionalRestriction $nutritionalRestriction) {}
 
-    public function getList()
+    public function getList(): Collection
     {
         return $this->nutritionalRestriction->all();
     }
