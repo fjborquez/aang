@@ -28,7 +28,7 @@ class ResidentServiceTest extends TestCase
         $this->residentService = new ResidentService($this->mockedPerson);
     }
 
-    function test_should_return_non_empty_list_when_house_exists()
+    public function test_should_return_non_empty_list_when_house_exists()
     {
         $this->mockedBuilder->shouldReceive('get')->once()->andReturn(new Collection([new stdClass()]));
         $this->mockedPerson->shouldReceive('whereHas')->once()->andReturn($this->mockedBuilder);
@@ -36,7 +36,7 @@ class ResidentServiceTest extends TestCase
         $this->assertFalse($list->isEmpty());
     }
 
-    function test_should_return_empty_list_when_house_does_not_exist()
+    public function test_should_return_empty_list_when_house_does_not_exist()
     {
         $this->mockedBuilder->shouldReceive('get')->once()->andReturn(new Collection);
         $this->mockedPerson->shouldReceive('whereHas')->once()->andReturn($this->mockedBuilder);

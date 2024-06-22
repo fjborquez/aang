@@ -4,7 +4,6 @@ namespace App\Services\NutritionalProfileService;
 
 use App\Contracts\Services\NutritionalProfileService\NutritionalProfileServiceInterface;
 use App\Contracts\Services\PersonService\PersonServiceInterface;
-use Exception;
 
 class NutritionalProfileService implements NutritionalProfileServiceInterface
 {
@@ -21,6 +20,7 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
     public function get(int $personId): array
     {
         $person = $this->personService->get($personId);
+
         return $person->nutritionalProfile->toArray();
     }
 
