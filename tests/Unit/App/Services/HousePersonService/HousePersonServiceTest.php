@@ -221,6 +221,33 @@ class HousePersonServiceTest extends TestCase
         $this->mockedHousePersonService->createFromPerson($fakePersonId, $fakeHouses);
     }
 
+    public function test_should_update_from_house_when_there_are_persons_to_be_updated(): void
+    {
+        $fakeHouseId = 1;
+        $fakePersons = [
+            '1' => [
+                'is_default' => false,
+                'house_role_id' => HouseRole::HOST->value,
+            ],
+            '2' => [
+                'is_default' => false,
+                'house_role_id' => HouseRole::HOST->value,
+            ],
+        ];
+
+        $this->fakeBelongsToMany->shouldReceive('count')->andReturn(1);
+        $this->fakeBelongsToMany->shouldReceive('sync')->once()->andReturn(null);
+        $this->fakeBelongsToMany->shouldReceive('get')->andReturn(new Collection());
+        $this->fakePerson->shouldReceive('houses')->andReturn($this->fakeBelongsToMany);
+        $fakeHouse = Mockery::mock(House::class)->makePartial();
+        $fakeHouse->shouldReceive('persons')->andReturn($this->fakeBelongsToMany);
+        $this->mockedPersonService->shouldReceive('get')->andReturn($this->fakePerson);
+        $this->mockedHouseService->shouldReceive('get')->once()->andReturn($fakeHouse);
+        $this->mockedHousePersonService->updateFromHouse($fakeHouseId, $fakePersons);
+
+        $this->expectNotToPerformAssertions();
+    }
+
     public function test_update_from_person_successfully(): void
     {
         $this->mockedPersonService->shouldReceive('get')->once()->andReturn($this->fakePerson);
