@@ -27,24 +27,39 @@ class HouseServiceTest extends TestCase
         $this->fakeHouse = new House();
     }
 
+    public function test_should_get_a_house_when_house_id_exists(): void
+    {
+        $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->mockedHouse);
+        $this->fakeHouseService->get(1);
+    }
+
+    public function test_should_throw_an_exception_when_get_a_house_and_house_id_not_exists(): void
+    {
+        $this->mockedHouse->shouldReceive('find')->once()->andReturn(null);
+        $this->expectException(Exception::class);
+        $this->fakeHouseService->get(1);
+    }
+
     public function test_should_enable_the_house_when_is_active_is_false()
     {
-        $this->fakeHouse->is_active = false;
-        $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->fakeHouse);
+        $this->mockedHouse->shouldReceive('getAttribute')->with('is_active')->andReturn(false);
+        $this->mockedHouse->shouldReceive('update')->andReturn(null);
+        $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->mockedHouse);
         $this->fakeHouseService->enable($this->fakeHouseId);
     }
 
     public function test_should_throw_exception_when_house_does_not_exist_when_enable()
     {
-        $this->mockedHouse->shouldReceive('find')->once()->andReturn(null);
+        $this->mockedHouse->shouldReceive('find')->andReturn(null);
         $this->expectException(Exception::class);
         $this->fakeHouseService->enable($this->fakeHouseId);
+        $this->assertFalse($this->mockedHouse->is_active);
     }
 
     public function test_should_throw_exception_when_house_is_already_enabled()
     {
         $this->fakeHouse->is_active = true;
-        $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->fakeHouse);
+        $this->mockedHouse->shouldReceive('find')->andReturn($this->fakeHouse);
         $this->expectException(Exception::class);
         $this->fakeHouseService->enable($this->fakeHouseId);
     }
@@ -63,7 +78,7 @@ class HouseServiceTest extends TestCase
 
     public function test_should_throw_exception_when_house_does_not_exist_when_disable()
     {
-        $this->mockedHouse->shouldReceive('find')->once()->andReturn(null);
+        $this->mockedHouse->shouldReceive('find')->andReturn(null);
         $this->expectException(Exception::class);
         $this->fakeHouseService->disable($this->fakeHouseId);
     }
@@ -71,7 +86,7 @@ class HouseServiceTest extends TestCase
     public function test_should_throw_exception_when_house_is_already_disabled()
     {
         $this->fakeHouse->is_active = false;
-        $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->fakeHouse);
+        $this->mockedHouse->shouldReceive('find')->andReturn($this->fakeHouse);
         $this->expectException(Exception::class);
         $this->fakeHouseService->disable($this->fakeHouseId);
     }
@@ -80,7 +95,7 @@ class HouseServiceTest extends TestCase
     {
         $this->fakeHouse->pivot = new stdClass();
         $this->fakeHouse->pivot->is_default = true;
-        $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->fakeHouse);
+        $this->mockedHouse->shouldReceive('find')->andReturn($this->fakeHouse);
         $this->expectException(Exception::class);
         $this->fakeHouseService->disable($this->fakeHouseId);
     }

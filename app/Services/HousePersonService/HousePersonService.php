@@ -3,6 +3,7 @@
 namespace App\Services\HousePersonService;
 
 use App\Contracts\Services\HousePersonService\HousePersonServiceInterface;
+use App\Exceptions\OperationNotAllowedException;
 use App\HouseRole;
 use App\Models\House;
 use App\Models\Person;
@@ -60,7 +61,7 @@ class HousePersonService implements HousePersonServiceInterface
 
                 if ($valuesY['house_role_id'] == HouseRole::HOST->value) {
                     if ($houseX->city_id == $houseY->city_id && $houseX->description == $houseY->description) {
-                        throw new Exception('The person already has a house with description in city');
+                        throw new OperationNotAllowedException('The person already has a house with description in city');
                     }
                 }
             }
@@ -92,7 +93,7 @@ class HousePersonService implements HousePersonServiceInterface
     {
         foreach ($person->houses()->get() as $housePivot) {
             if ($housePivot->id != $house->id && $house->description == $housePivot->description && $house->city_id == $housePivot->city_id) {
-                throw new Exception('The user already has a house named '.$house->description.' in '.$house->city->description);
+                throw new OperationNotAllowedException('The user already has a house named '.$house->description.' in '.$house->city->description);
             }
         }
     }
@@ -158,7 +159,7 @@ class HousePersonService implements HousePersonServiceInterface
 
                 if ($toCompareRelationData['house_role_id'] == HouseRole::HOST->value) {
                     if ($relatedHouse->city_id == $toCompareHouse->city_id && $relatedHouse->description == $toCompareHouse->description) {
-                        throw new Exception('The user already has a house named '.$relatedHouse->description.' in '.$relatedHouse->city->description);
+                        throw new OperationNotAllowedException('The user already has a house named '.$relatedHouse->description.' in '.$relatedHouse->city->description);
                     }
                 }
             }
@@ -174,7 +175,7 @@ class HousePersonService implements HousePersonServiceInterface
         }
 
         if (! $existDefault) {
-            throw new Exception('At least one house by default must be checked');
+            throw new OperationNotAllowedException('At least one house by default must be checked');
         }
 
         foreach ($personHousesRelations as $houseId => $relationData) {

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Services\UserService\UserServiceInterface;
-use App\Http\Requests\StoreUserRequest;
+use App\Exceptions\OperationNotAllowedException;
+use App\Exceptions\ResourceNotFoundException;
+use App\Http\Requests\UserRequest;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -11,15 +14,13 @@ class UserController extends Controller
 
     public function __construct(private readonly UserServiceInterface $userService) {}
 
-    public function store(StoreUserRequest $request)
+    public function store(UserRequest $request)
     {
         $validated = $request->safe()->only($this->fields);
         $user = $this->userService->create($validated);
 
-        return response()->json([
-            'message' => 'User added',
-            'user' => $user,
-        ], 201);
+        return response()->noContent(Response::HTTP_CREATED)
+            ->header('Location', url('/api/user/'.$user->id));
     }
 
     public function list()
@@ -27,26 +28,51 @@ class UserController extends Controller
         return $this->userService->getList();
     }
 
-    public function update(int $id, StoreUserRequest $request)
+    public function update(int $id, UserRequest $request)
     {
         $validated = $request->safe()->only($this->fields);
-        $this->userService->update($id, $validated);
 
-        return response()->json('User updated', 200);
+        try {
+            $this->userService->update($id, $validated);
+
+            return response()->noContent(Response::HTTP_NO_CONTENT);
+        } catch (ResourceNotFoundException $exception) {
+            return response()->noContent(Response::HTTP_NOT_FOUND);
+        }
     }
 
     public function get(int $id)
     {
-        return $this->userService->get($id);
+        try {
+            return response()->json($this->userService->get($id), Response::HTTP_OK);
+        } catch (ResourceNotFoundException $exception) {
+            return response()->noContent(Response::HTTP_NOT_FOUND);
+        }
     }
 
     public function enable(int $id)
     {
-        return $this->userService->enable($id);
+        try {
+            $this->userService->enable($id);
+
+            return response()->noContent(Response::HTTP_NO_CONTENT);
+        } catch (ResourceNotFoundException $exception) {
+            return response()->noContent(Response::HTTP_NOT_FOUND);
+        } catch (OperationNotAllowedException $exception) {
+            return response()->noContent(Response::HTTP_BAD_REQUEST);
+        }
     }
 
     public function disable(int $id)
     {
-        return $this->userService->disable($id);
+        try {
+            $this->userService->disable($id);
+
+            return response()->noContent(Response::HTTP_NO_CONTENT);
+        } catch (ResourceNotFoundException $exception) {
+            return response()->noContent(Response::HTTP_NOT_FOUND);
+        } catch (OperationNotAllowedException $exception) {
+            return response()->noContent(Response::HTTP_BAD_REQUEST);
+        }
     }
 }

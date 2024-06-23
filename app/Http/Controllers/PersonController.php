@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Services\HousePersonService\HousePersonServiceInterface;
 use App\Contracts\Services\PersonService\PersonServiceInterface;
+use App\Exceptions\OperationNotAllowedException;
+use App\Exceptions\ResourceNotFoundException;
 use App\Http\Requests\PersonHouseRequest;
 use App\Http\Requests\PersonRequest;
-use Exception;
+use Symfony\Component\HttpFoundation\Response;
 
 class PersonController extends Controller
 {
@@ -22,18 +24,21 @@ class PersonController extends Controller
         $validated = $request->safe()->only($this->fields);
         $person = $this->personService->create($validated);
 
-        return response()->json([
-            'message' => 'Person added',
-            'person' => $person,
-        ], 201);
+        return response()->noContent(Response::HTTP_CREATED)
+            ->header('Location', url('/api/person/'.$person->id));
     }
 
     public function update(int $id, PersonRequest $request)
     {
         $validated = $request->safe()->only($this->fields);
-        $this->personService->update($id, $validated);
 
-        return response()->json('Person updated', 200);
+        try {
+            $this->personService->update($id, $validated);
+
+            return response()->noContent(Response::HTTP_NO_CONTENT);
+        } catch (ResourceNotFoundException $exception) {
+            return response()->noContent(Response::HTTP_NOT_FOUND);
+        }
     }
 
     public function list()
@@ -43,22 +48,23 @@ class PersonController extends Controller
 
     public function get(int $personId)
     {
-        return $this->personService->get($personId);
+        try {
+            return response()->json($this->personService->get($personId), 200);
+        } catch (ResourceNotFoundException $exception) {
+            return response()->noContent(Response::HTTP_NOT_FOUND);
+        }
+
     }
 
     public function delete(int $personId)
     {
         try {
             $this->personService->delete($personId);
-        } catch (Exception $e) {
-            return response()->json([
-                'message' => $e->getMessage(),
-            ], 400);
-        }
 
-        return response()->json([
-            'message' => 'Person deleted',
-        ], 200);
+            return response()->noContent(Response::HTTP_NO_CONTENT);
+        } catch (ResourceNotFoundException $exception) {
+            return response()->noContent(Response::HTTP_NOT_FOUND);
+        }
     }
 
     public function storeHouses(int $personId, PersonHouseRequest $request)
@@ -68,8 +74,12 @@ class PersonController extends Controller
 
         try {
             $this->housePersonService->createFromPerson($personId, $houses);
-        } catch (Exception $e) {
-            return response()->json($e->getMessage(), 400);
+
+            return response()->noContent(Response::HTTP_NO_CONTENT);
+        } catch (OperationNotAllowedException $exception) {
+            return response()->noContent(Response::HTTP_BAD_REQUEST);
+        } catch (ResourceNotFoundException $exception) {
+            return response()->noContent(Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -80,13 +90,21 @@ class PersonController extends Controller
 
         try {
             $this->housePersonService->updateFromPerson($personId, $houses);
-        } catch (Exception $e) {
-            return response()->json($e->getMessage(), 400);
+
+            return response()->noContent(Response::HTTP_NO_CONTENT);
+        } catch (OperationNotAllowedException $exception) {
+            return response()->noContent(Response::HTTP_BAD_REQUEST);
+        } catch (ResourceNotFoundException $exception) {
+            return response()->noContent(Response::HTTP_NOT_FOUND);
         }
     }
 
     public function getHouses(int $personId)
     {
-        return $this->housePersonService->getHousesByPerson($personId);
+        try {
+            return response()->json($this->housePersonService->getHousesByPerson($personId), 200);
+        } catch (ResourceNotFoundException $exception) {
+            return response()->noContent(Response::HTTP_NOT_FOUND);
+        }
     }
 }
