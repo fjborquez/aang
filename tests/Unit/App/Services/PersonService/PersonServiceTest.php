@@ -79,4 +79,22 @@ class PersonServiceTest extends TestCase
         $personService = new PersonService($personMock);
         $personService->get($personId);
     }
+
+    public function test_should_delete_when_person_exists(): void
+    {
+        $personMock = Mockery::mock(Person::class);
+        $personService = new PersonService($personMock);
+        $personMock->shouldReceive('find')->once()->andReturn($personMock);
+        $personMock->shouldReceive('delete')->once();
+        $personService->delete(1);
+    }
+
+    public function test_should_throw_an_exception_when_delete_and_person_not_exists(): void
+    {
+        $personMock = Mockery::mock(Person::class);
+        $personService = new PersonService($personMock);
+        $personMock->shouldReceive('find')->once()->andReturn(null);
+        $this->expectException(Exception::class);
+        $personService->delete(1);
+    }
 }
