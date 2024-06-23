@@ -6,7 +6,6 @@ use App\Contracts\Services\HouseService\HouseServiceInterface;
 use App\Exceptions\OperationNotAllowedException;
 use App\Exceptions\ResourceNotFoundException;
 use App\Models\House;
-use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
 class HouseService implements HouseServiceInterface

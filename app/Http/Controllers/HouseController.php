@@ -24,7 +24,7 @@ class HouseController extends Controller
         $house = $this->houseService->create($validated);
 
         return response()->noContent(Response::HTTP_CREATED)
-                    ->header('Location', url('/api/house/'.$house->id));
+            ->header('Location', url('/api/house/'.$house->id));
     }
 
     public function update(int $houseId, HouseRequest $request)
@@ -33,6 +33,7 @@ class HouseController extends Controller
 
         try {
             $this->houseService->update($houseId, $validated);
+
             return response()->noContent(Response::HTTP_NO_CONTENT);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);
@@ -60,6 +61,7 @@ class HouseController extends Controller
 
         try {
             $this->housePersonService->createFromHouse($houseId, $persons);
+
             return response()->noContent(Response::HTTP_CREATED);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);
@@ -73,6 +75,7 @@ class HouseController extends Controller
 
         try {
             $this->housePersonService->updateFromHouse($houseId, $persons);
+
             return response()->noContent(Response::HTTP_NO_CONTENT);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);
@@ -83,6 +86,7 @@ class HouseController extends Controller
     {
         try {
             $this->houseService->enable($houseId);
+
             return response()->noContent(Response::HTTP_NO_CONTENT);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);
@@ -95,6 +99,7 @@ class HouseController extends Controller
     {
         try {
             $this->houseService->disable($houseId);
+
             return response()->noContent(Response::HTTP_NO_CONTENT);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);

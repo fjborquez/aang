@@ -20,6 +20,7 @@ class NutritionalProfileController extends Controller
 
         try {
             $this->nutritionalProfileService->create($personId, $nutritionalProfile);
+
             return response()->noContent(Response::HTTP_CREATED);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);
@@ -34,11 +35,11 @@ class NutritionalProfileController extends Controller
 
         try {
             $this->nutritionalProfileService->update($personId, $nutritionalProfile);
+
             return response()->noContent(Response::HTTP_OK);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);
         }
-
 
     }
 

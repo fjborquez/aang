@@ -20,7 +20,7 @@ class UserController extends Controller
         $user = $this->userService->create($validated);
 
         return response()->noContent(Response::HTTP_CREATED)
-                    ->header('Location', url('/api/user/'.$user->id));
+            ->header('Location', url('/api/user/'.$user->id));
     }
 
     public function list()
@@ -34,6 +34,7 @@ class UserController extends Controller
 
         try {
             $this->userService->update($id, $validated);
+
             return response()->noContent(Response::HTTP_NO_CONTENT);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);
@@ -53,6 +54,7 @@ class UserController extends Controller
     {
         try {
             $this->userService->enable($id);
+
             return response()->noContent(Response::HTTP_NO_CONTENT);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);
@@ -65,6 +67,7 @@ class UserController extends Controller
     {
         try {
             $this->userService->disable($id);
+
             return response()->noContent(Response::HTTP_NO_CONTENT);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);

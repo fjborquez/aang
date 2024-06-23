@@ -22,7 +22,7 @@ class NutritionalProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nutritionalProfile' => ['required', 'array']
+            'nutritionalProfile' => ['required', 'array'],
         ];
     }
 }

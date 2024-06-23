@@ -6,7 +6,6 @@ use App\Contracts\Services\UserService\UserServiceInterface;
 use App\Exceptions\OperationNotAllowedException;
 use App\Exceptions\ResourceNotFoundException;
 use App\Models\User;
-use Exception;
 
 class UserService implements UserServiceInterface
 {

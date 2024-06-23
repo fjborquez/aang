@@ -5,7 +5,6 @@ namespace App\Services\PersonService;
 use App\Contracts\Services\PersonService\PersonServiceInterface;
 use App\Exceptions\ResourceNotFoundException;
 use App\Models\Person;
-use Exception;
 
 class PersonService implements PersonServiceInterface
 {

@@ -8,7 +8,6 @@ use App\Exceptions\OperationNotAllowedException;
 use App\Exceptions\ResourceNotFoundException;
 use App\Http\Requests\PersonHouseRequest;
 use App\Http\Requests\PersonRequest;
-use Exception;
 use Symfony\Component\HttpFoundation\Response;
 
 class PersonController extends Controller
@@ -26,7 +25,7 @@ class PersonController extends Controller
         $person = $this->personService->create($validated);
 
         return response()->noContent(Response::HTTP_CREATED)
-                    ->header('Location', url('/api/person/'.$person->id));
+            ->header('Location', url('/api/person/'.$person->id));
     }
 
     public function update(int $id, PersonRequest $request)
@@ -35,6 +34,7 @@ class PersonController extends Controller
 
         try {
             $this->personService->update($id, $validated);
+
             return response()->noContent(Response::HTTP_NO_CONTENT);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);
@@ -60,6 +60,7 @@ class PersonController extends Controller
     {
         try {
             $this->personService->delete($personId);
+
             return response()->noContent(Response::HTTP_NO_CONTENT);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);
@@ -73,6 +74,7 @@ class PersonController extends Controller
 
         try {
             $this->housePersonService->createFromPerson($personId, $houses);
+
             return response()->noContent(Response::HTTP_NO_CONTENT);
         } catch (OperationNotAllowedException $exception) {
             return response()->noContent(Response::HTTP_BAD_REQUEST);
@@ -88,6 +90,7 @@ class PersonController extends Controller
 
         try {
             $this->housePersonService->updateFromPerson($personId, $houses);
+
             return response()->noContent(Response::HTTP_NO_CONTENT);
         } catch (OperationNotAllowedException $exception) {
             return response()->noContent(Response::HTTP_BAD_REQUEST);
