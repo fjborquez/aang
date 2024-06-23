@@ -19,15 +19,25 @@ use stdClass;
 class HousePersonServiceTest extends TestCase
 {
     private $mockedHousePersonService;
+
     private $mockedHouseService;
+
     private $mockedPersonService;
+
     private $personIdPayload;
+
     private $housesPayload;
+
     private $fakePerson;
+
     private $fakePersonHouses;
+
     private $fakeBelongsToMany;
+
     private $fakeHouse1;
+
     private $fakeHouse2;
+
     private $fakeHouse3;
 
     public function setUp(): void
@@ -41,16 +51,16 @@ class HousePersonServiceTest extends TestCase
         $this->personIdPayload = 1;
         $this->housesPayload = [
             1 => [
-                "is_default" => false,
-                "house_role_id" => HouseRole::HOST->value
+                'is_default' => false,
+                'house_role_id' => HouseRole::HOST->value,
             ],
             2 => [
-                "is_default" => true,
-                "house_role_id" => HouseRole::HOST->value
+                'is_default' => true,
+                'house_role_id' => HouseRole::HOST->value,
             ],
             3 => [
-                "is_default" => false,
-                "house_role_id" => HouseRole::HOST->value
+                'is_default' => false,
+                'house_role_id' => HouseRole::HOST->value,
             ],
         ];
 
@@ -58,15 +68,15 @@ class HousePersonServiceTest extends TestCase
         $this->fakeBelongsToMany = Mockery::mock(BelongsToMany::class);
         $fakeHouse1 = new House();
         $fakeHouse1->id = 1;
-        $fakeHouse1->description = "House 11";
+        $fakeHouse1->description = 'House 11';
         $fakeHouse1->city_id = 1;
         $fakeHouse2 = new House();
         $fakeHouse2->id = 2;
-        $fakeHouse2->description = "House 12";
+        $fakeHouse2->description = 'House 12';
         $fakeHouse2->city_id = 2;
         $fakeHouse3 = new House();
         $fakeHouse3->id = 3;
-        $fakeHouse3->description = "House 13";
+        $fakeHouse3->description = 'House 13';
         $fakeHouse3->city_id = 3;
         $this->fakePersonHouses = new Collection([
             $fakeHouse1,
@@ -76,15 +86,15 @@ class HousePersonServiceTest extends TestCase
 
         $this->fakeHouse1 = new House();
         $this->fakeHouse1->id = 1;
-        $this->fakeHouse1->description = "House 21";
+        $this->fakeHouse1->description = 'House 21';
         $this->fakeHouse1->city_id = 1;
         $this->fakeHouse2 = new House();
         $this->fakeHouse2->id = 2;
-        $this->fakeHouse2->description = "House 22";
+        $this->fakeHouse2->description = 'House 22';
         $this->fakeHouse2->city_id = 2;
         $this->fakeHouse3 = new House();
         $this->fakeHouse3->id = 3;
-        $this->fakeHouse3->description = "House 23";
+        $this->fakeHouse3->description = 'House 23';
         $this->fakeHouse3->city_id = 3;
     }
 
@@ -104,8 +114,8 @@ class HousePersonServiceTest extends TestCase
 
     public function test_update_from_person_and_is_default_is_true_when_person_has_houses(): void
     {
-        $this->housesPayload[1]["is_default"] = true;
-        $this->housesPayload[2]["is_default"] = false;
+        $this->housesPayload[1]['is_default'] = true;
+        $this->housesPayload[2]['is_default'] = false;
 
         $this->mockedPersonService->shouldReceive('get')->once()->andReturn($this->fakePerson);
         $this->mockedHouseService->shouldReceive('get')->andReturn($this->fakeHouse1, $this->fakeHouse2, $this->fakeHouse3);
@@ -121,7 +131,7 @@ class HousePersonServiceTest extends TestCase
 
     public function test_update_from_person_and_is_default_is_false_when_person_has_houses(): void
     {
-        $this->housesPayload[2]["is_default"] = false;
+        $this->housesPayload[2]['is_default'] = false;
 
         $this->mockedPersonService->shouldReceive('get')->once()->andReturn($this->fakePerson);
         $this->mockedHouseService->shouldReceive('get')->andReturn($this->fakeHouse1, $this->fakeHouse2, $this->fakeHouse3);
@@ -138,11 +148,11 @@ class HousePersonServiceTest extends TestCase
     {
         $this->fakeHouse1 = Mockery::mock(House::class)->makePartial();
         $this->fakeHouse1->city_id = 1;
-        $this->fakeHouse1->description = "House 30";
+        $this->fakeHouse1->description = 'House 30';
 
         $this->fakeHouse2 = Mockery::mock(House::class)->makePartial();
         $this->fakeHouse2->city_id = 1;
-        $this->fakeHouse2->description = "House 31";
+        $this->fakeHouse2->description = 'House 31';
 
         $pivot = new stdClass();
         $pivot->is_default = true;
