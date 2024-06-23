@@ -173,11 +173,11 @@ class HousePersonServiceTest extends TestCase
         $fakeHouses = [
             '1' => [
                 'house_role_id' => HouseRole::HOST->value,
-                'is_default' => true
+                'is_default' => true,
             ],
             '2' => [
                 'house_role_id' => HouseRole::HOST->value,
-                'is_default' => false
+                'is_default' => false,
             ],
         ];
         $fakePerson = Mockery::mock(Person::class);
@@ -202,7 +202,7 @@ class HousePersonServiceTest extends TestCase
                 'house_role_id' => HouseRole::HOST->value,
             ],
             '2' => [
-                'house_role_id' => HouseRole::HOST->value
+                'house_role_id' => HouseRole::HOST->value,
             ],
         ];
         $fakePerson = Mockery::mock(Person::class);
