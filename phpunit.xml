@@ -15,7 +15,6 @@
     <source>
         <include>
             <directory>app/Services</directory>
-            <directory>app/Controllers</directory>
         </include>
     </source>
     <php>
