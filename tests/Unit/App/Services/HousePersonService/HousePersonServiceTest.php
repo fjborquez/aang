@@ -103,10 +103,10 @@ class HousePersonServiceTest extends TestCase
         $fakeHouseId = 1;
         $fakePersons = [
             '1' => [
-                'is_default' => false
+                'is_default' => false,
             ],
             '2' => [
-                'is_default' => false
+                'is_default' => false,
             ],
         ];
 
@@ -127,10 +127,10 @@ class HousePersonServiceTest extends TestCase
         $fakeHouseId = 1;
         $fakePersons = [
             '1' => [
-                'is_default' => true
+                'is_default' => true,
             ],
             '2' => [
-                'is_default' => false
+                'is_default' => false,
             ],
         ];
 
@@ -152,10 +152,10 @@ class HousePersonServiceTest extends TestCase
         $fakeHouseId = 1;
         $fakePersons = [
             '1' => [
-                'is_default' => false
+                'is_default' => false,
             ],
             '2' => [
-                'is_default' => false
+                'is_default' => false,
             ],
         ];
 
