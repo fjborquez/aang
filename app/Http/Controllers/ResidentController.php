@@ -10,6 +10,6 @@ class ResidentController extends Controller
 
     public function list(int $houseId)
     {
-        return $this->residentService->list($houseId);
+        return $this->residentService->getList($houseId);
     }
 }

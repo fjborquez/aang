@@ -3,6 +3,7 @@
 namespace App\Services\PersonService;
 
 use App\Contracts\Services\PersonService\PersonServiceInterface;
+use App\Exceptions\ResourceNotFoundException;
 use App\Models\Person;
 use Exception;
 
@@ -30,7 +31,7 @@ class PersonService implements PersonServiceInterface
             ->with('user')->with('houses')->find($id);
 
         if ($person == null) {
-            throw new Exception('Person not found');
+            throw new ResourceNotFoundException('Person not found');
         }
 
         return $person;
@@ -42,7 +43,7 @@ class PersonService implements PersonServiceInterface
         $person = $this->person->find($id);
 
         if ($person == null) {
-            throw new Exception('Person not found');
+            throw new ResourceNotFoundException('Person not found');
         }
 
         $person->update($data);
@@ -53,7 +54,7 @@ class PersonService implements PersonServiceInterface
         $person = $this->person->find($id);
 
         if ($person == null) {
-            throw new Exception('Person not found');
+            throw new ResourceNotFoundException('Person not found');
         }
 
         $person->delete();

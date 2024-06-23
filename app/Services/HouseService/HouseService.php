@@ -3,6 +3,8 @@
 namespace App\Services\HouseService;
 
 use App\Contracts\Services\HouseService\HouseServiceInterface;
+use App\Exceptions\OperationNotAllowedException;
+use App\Exceptions\ResourceNotFoundException;
 use App\Models\House;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -21,7 +23,7 @@ class HouseService implements HouseServiceInterface
         $house = $this->house->find($id);
 
         if ($house == null) {
-            throw new Exception('House not found');
+            throw new ResourceNotFoundException('House not found');
         }
 
         return $house;
@@ -37,7 +39,7 @@ class HouseService implements HouseServiceInterface
         $house = $this->house->find($houseId);
 
         if ($house == null) {
-            throw new Exception('House not found');
+            throw new ResourceNotFoundException('House not found');
         }
 
         $house->update($data);
@@ -48,11 +50,11 @@ class HouseService implements HouseServiceInterface
         $house = $this->house->find($houseId);
 
         if ($house == null) {
-            throw new Exception('House not found');
+            throw new ResourceNotFoundException('House not found');
         }
 
         if ($house->is_active) {
-            throw new Exception('House already enabled');
+            throw new OperationNotAllowedException('House already enabled');
         }
 
         $house->update(['is_active' => true]);
@@ -63,16 +65,16 @@ class HouseService implements HouseServiceInterface
         $house = $this->house->find($houseId);
 
         if ($house == null) {
-            throw new Exception('House not found');
+            throw new ResourceNotFoundException('House not found');
         }
 
         if (! $house->is_active) {
-            throw new Exception('House already disabled');
+            throw new OperationNotAllowedException('House already disabled');
         }
 
         foreach ($house->persons as $person) {
             if ($person->pivot->is_default) {
-                throw new Exception('Default house, can not be disabled');
+                throw new OperationNotAllowedException('Default house, can not be disabled');
             }
         }
 

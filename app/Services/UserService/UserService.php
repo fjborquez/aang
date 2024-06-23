@@ -3,6 +3,8 @@
 namespace App\Services\UserService;
 
 use App\Contracts\Services\UserService\UserServiceInterface;
+use App\Exceptions\OperationNotAllowedException;
+use App\Exceptions\ResourceNotFoundException;
 use App\Models\User;
 use Exception;
 
@@ -27,7 +29,7 @@ class UserService implements UserServiceInterface
         $user = $this->user->find($id);
 
         if ($user == null) {
-            throw new Exception('User not found');
+            throw new ResourceNotFoundException('User not found');
         }
 
         $user->update($data);
@@ -38,7 +40,7 @@ class UserService implements UserServiceInterface
         $user = $this->user->with('person')->with('person.houses')->with('person.houses.city')->with('person.houses.persons')->find($id);
 
         if ($user == null) {
-            throw new Exception('User not found');
+            throw new ResourceNotFoundException('User not found');
         }
 
         return $user;
@@ -49,11 +51,11 @@ class UserService implements UserServiceInterface
         $user = $this->user->find($id);
 
         if ($user == null) {
-            throw new Exception('User not found');
+            throw new ResourceNotFoundException('User not found');
         }
 
         if ($user->is_active) {
-            throw new Exception('User already enabled');
+            throw new OperationNotAllowedException('User already enabled');
         }
 
         $user->update([
@@ -66,11 +68,11 @@ class UserService implements UserServiceInterface
         $user = $this->user->find($id);
 
         if ($user == null) {
-            throw new Exception('User not found');
+            throw new ResourceNotFoundException('User not found');
         }
 
         if (! $user->is_active) {
-            throw new Exception('User already disabled');
+            throw new OperationNotAllowedException('User already disabled');
         }
 
         $user->update([

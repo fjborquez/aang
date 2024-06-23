@@ -10,6 +10,6 @@ class NutritionalRestrictionController extends Controller
 
     public function list()
     {
-        return $this->nutritionalRestrictionService->getList();
+        return response()->json($this->nutritionalRestrictionService->getList(), 200);
     }
 }
