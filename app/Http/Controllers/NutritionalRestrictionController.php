@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Services\NutritionalRestrictionService\NutritionalRestrictionServiceInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 class NutritionalRestrictionController extends Controller
 {
@@ -10,6 +11,6 @@ class NutritionalRestrictionController extends Controller
 
     public function list()
     {
-        return response()->json($this->nutritionalRestrictionService->getList(), 200);
+        return response()->json($this->nutritionalRestrictionService->getList(), Response::HTTP_OK);
     }
 }
