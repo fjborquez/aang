@@ -1,4 +1,4 @@
-FROM trafex/php-nginx
+FROM ghcr.io/devgine/composer-php:latest
 
 ENV APP_ENV=local
 ENV APP_DEBUG=true
