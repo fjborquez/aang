@@ -1,5 +1,7 @@
 FROM jkaninda/laravel-php-fpm:8.3
 
+EXPOSE 8080
+
 ENV HOST 0.0.0.0
 ENV APP_ENV=local
 ENV APP_DEBUG=true
