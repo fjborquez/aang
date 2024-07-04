@@ -54,8 +54,6 @@ steps:
         "512Mi",
         "--cpu",
         "2000m",
-        "--port",
-        "8080",
         "--timeout",
         "3600",
         "--min-instances",
