@@ -1,4 +1,4 @@
-FROM serversideup/php:8.3-fpm-apache
+FROM jkaninda/laravel-php-fpm:8.3
 
 USER root
 
