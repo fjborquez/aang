@@ -19,4 +19,4 @@ RUN php artisan db:seed
 RUN chmod 777 -R /var/www/html/storage/
 RUN chown -R www-data:www-data /var/www/
 
-EXPOSE 8080
+EXPOSE 80
