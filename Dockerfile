@@ -4,10 +4,10 @@ ENV APP_ENV=local
 ENV APP_DEBUG=true
 ENV PHP_MEMORY_LIMIT=512M
 
-COPY . /var/www/html
-
-RUN chmod 777 -R /var/www/html/storage/
 RUN chown -R www-data:www-data /var/www/
+RUN chmod 777 -R /var/www/html/storage/
+
+COPY . /var/www/html
 
 RUN composer install --optimize-autoloader
 
