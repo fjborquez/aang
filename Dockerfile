@@ -1,4 +1,4 @@
-FROM serversideup/php:8.3-fpm-alpine
+FROM trafex/php-nginx
 
 ENV APP_ENV=local
 ENV APP_DEBUG=true
