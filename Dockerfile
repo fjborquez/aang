@@ -1,4 +1,4 @@
-FROM laratips/laravel10:latest
+FROM serversideup/php:8.3-fpm-alpine
 
 ENV APP_ENV=local
 ENV APP_DEBUG=true
