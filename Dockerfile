@@ -19,6 +19,4 @@ RUN php artisan route:cache
 RUN php artisan view:cache
 RUN php artisan migrate
 RUN php artisan db:seed
-RUN chmod 777 -R /var/www/html/storage/
-RUN chown -R www-data:www-data /var/www/
 RUN a2enmod rewrite
