@@ -1,8 +1,12 @@
 FROM serversideup/php:8.3-fpm-nginx
 
+USER root
+
 ENV APP_ENV=local
 ENV APP_DEBUG=true
 ENV PHP_MEMORY_LIMIT=512M
+
+USER www-data
 
 COPY . /var/www/html
 
