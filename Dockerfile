@@ -1,7 +1,5 @@
 FROM jkaninda/laravel-php-fpm:8.3
 
-EXPOSE 8080
-
 ENV HOST 0.0.0.0
 ENV APP_ENV=local
 ENV APP_DEBUG=true
@@ -21,4 +19,4 @@ RUN php artisan db:seed
 RUN chmod 777 -R /var/www/html/storage/
 RUN chown -R www-data:www-data /var/www/
 
-USER www-data
+EXPOSE 8080
