@@ -4,6 +4,8 @@ USER root
 ENV APP_ENV=local
 ENV APP_DEBUG=true
 ENV PHP_MEMORY_LIMIT=512M
+ENV HOST 0.0.0.0
+EXPOSE 8080
 
 COPY --chown=www-data:www-data . /var/www/html
 USER www-data
