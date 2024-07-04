@@ -1,7 +1,6 @@
 FROM jkaninda/laravel-php-fpm:8.3
 
-USER root
-
+ENV HOST 0.0.0.0
 ENV APP_ENV=local
 ENV APP_DEBUG=true
 ENV PHP_MEMORY_LIMIT=512M
