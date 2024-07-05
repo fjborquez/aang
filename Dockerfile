@@ -6,7 +6,8 @@ ENV APP_DEBUG=true
 ENV PHP_MEMORY_LIMIT=512M
 ENV HOST 0.0.0.0
 EXPOSE 8080
-
+RUN chown -R www-data:www-data /run
+RUN chmod -R 755 /run
 USER www-data
 
 COPY --chown=www-data:www-data . /var/www/html
