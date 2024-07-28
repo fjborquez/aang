@@ -19,6 +19,7 @@ class ResidentController extends Controller
     {
         try {
             $this->residentService->delete($houseId, $residentId);
+
             return response()->noContent(Response::HTTP_NO_CONTENT);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);

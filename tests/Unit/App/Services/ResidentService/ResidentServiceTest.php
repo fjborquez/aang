@@ -10,7 +10,6 @@ use App\Services\ResidentService\ResidentService;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Mockery;
 use stdClass;
 use Tests\TestCase;
@@ -38,7 +37,7 @@ class ResidentServiceTest extends TestCase
 
     public function test_should_return_non_empty_list_when_house_exists()
     {
-        $this->mockedBuilder->shouldReceive('get')->once()->andReturn(new Collection([new stdClass()]));
+        $this->mockedBuilder->shouldReceive('get')->once()->andReturn(new Collection([new stdClass]));
         $this->mockedPerson->shouldReceive('whereHas')->once()->andReturn($this->mockedBuilder);
         $list = $this->residentService->getList($this->fakePersonId);
         $this->assertFalse($list->isEmpty());
@@ -55,7 +54,7 @@ class ResidentServiceTest extends TestCase
     public function test_should_delete_a_resident_when_resident_is_an_user()
     {
         $belongsToMany = Mockery::mock(BelongsToMany::class);
-        $belongsToMany->shouldReceive('get')->twice()->andReturn(new Collection(new House()));
+        $belongsToMany->shouldReceive('get')->twice()->andReturn(new Collection(new House));
         $belongsToMany->shouldReceive('sync')->once()->andReturnSelf();
         $belongsToManyPersons = Mockery::mock(BelongsToMany::class)->makePartial();
         $belongsToManyPersons->shouldReceive('contains')->andReturn(true);
@@ -66,15 +65,15 @@ class ResidentServiceTest extends TestCase
         $this->mockedPerson->shouldReceive('with')->with('user')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('find')->once()->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('houses')->times(3)->andReturn($belongsToMany);
-        $this->mockedPerson->shouldReceive('getAttribute')->once()->with('user')->andReturn(new User());
+        $this->mockedPerson->shouldReceive('getAttribute')->once()->with('user')->andReturn(new User);
         $this->residentService->delete(1, 1);
         $this->assertEquals(0, $this->mockedPerson->houses()->get()->count());
     }
 
     public function test_should_delete_a_resident_when_resident_belongs_to_other_house()
     {
-        $house1 = new House();
-        $house2 = new House();
+        $house1 = new House;
+        $house2 = new House;
         $house1->id = 1;
         $house2->id = 2;
         $belongsToMany = Mockery::mock(BelongsToMany::class);
@@ -89,7 +88,7 @@ class ResidentServiceTest extends TestCase
         $this->mockedPerson->shouldReceive('with')->with('user')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('find')->once()->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('houses')->times(3)->andReturn($belongsToMany);
-        $this->mockedPerson->shouldReceive('getAttribute')->once()->with('user')->andReturn(new User());
+        $this->mockedPerson->shouldReceive('getAttribute')->once()->with('user')->andReturn(new User);
         $this->residentService->delete(1, 1);
         $this->assertEquals(1, $this->mockedPerson->houses()->get()->count());
     }
@@ -105,7 +104,7 @@ class ResidentServiceTest extends TestCase
         $this->mockedPerson->shouldReceive('with')->with('user')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('find')->once()->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('getAttribute')->once()->with('user')->andReturn(null);
-        $this->mockedPerson->shouldReceive('getAttribute')->twice()->with('houses')->andReturn(new Collection(new House()));
+        $this->mockedPerson->shouldReceive('getAttribute')->twice()->with('houses')->andReturn(new Collection(new House));
         $this->mockedPerson->shouldReceive('delete')->once()->andReturnSelf();
         $this->residentService->delete(1, 1);
         $this->assertEquals(0, $this->mockedPerson->houses->count());
@@ -113,8 +112,8 @@ class ResidentServiceTest extends TestCase
 
     public function test_should_not_delete_a_resident_when_resident_does_not_belong_to_house()
     {
-        $house1 = new House();
-        $house2 = new House();
+        $house1 = new House;
+        $house2 = new House;
         $house1->id = 1;
         $house2->id = 2;
         $belongsToManyPersons = Mockery::mock(BelongsToMany::class)->makePartial();
@@ -128,7 +127,7 @@ class ResidentServiceTest extends TestCase
         $this->mockedPerson->shouldReceive('with')->with('houses')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('with')->with('user')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('find')->once()->andReturn($this->mockedPerson);
-        $this->mockedPerson->shouldReceive('getAttribute')->once()->with('user')->andReturn(new User());
+        $this->mockedPerson->shouldReceive('getAttribute')->once()->with('user')->andReturn(new User);
         $this->mockedPerson->shouldReceive('houses')->andReturn($belongsToMany);
         $this->mockedPerson->shouldReceive('getAttribute')->with('houses')->andReturn(new Collection($house1, $house2));
         $this->residentService->delete(1, 1);

@@ -26,20 +26,17 @@ class ResidentService implements ResidentServiceInterface
     {
         $house = $this->house->with('persons')->find($houseId);
 
-        if ($house == null)
-        {
+        if ($house == null) {
             throw new ResourceNotFoundException('House not found');
         }
 
         $resident = $this->person->with('houses')->with('user')->find($residentId);
 
-        if ($resident == null)
-        {
+        if ($resident == null) {
             throw new ResourceNotFoundException('Resident not found');
         }
 
-        if (! $house->persons()->contains($resident))
-        {
+        if (! $house->persons()->contains($resident)) {
             throw new ResourceNotFoundException('Resident does not belong to house');
         }
 

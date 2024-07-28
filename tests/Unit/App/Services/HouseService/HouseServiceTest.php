@@ -24,7 +24,7 @@ class HouseServiceTest extends TestCase
         $this->mockedHouse = Mockery::mock(House::class);
         $this->fakeHouseService = new HouseService($this->mockedHouse);
         $this->fakeHouseId = 1;
-        $this->fakeHouse = new House();
+        $this->fakeHouse = new House;
     }
 
     public function test_should_get_a_house_when_house_id_exists(): void
@@ -67,7 +67,7 @@ class HouseServiceTest extends TestCase
     public function test_should_disable_the_house_when_is_active_is_true()
     {
         $fakeHouse = Mockery::mock('House')->makePartial();
-        $fakeHouse->pivot = new stdClass();
+        $fakeHouse->pivot = new stdClass;
         $fakeHouse->pivot->is_default = false;
         $fakeHouse->is_active = true;
         $fakeHouse->persons = [];
@@ -93,7 +93,7 @@ class HouseServiceTest extends TestCase
 
     public function test_should_throw_exception_when_disable_house_by_default()
     {
-        $this->fakeHouse->pivot = new stdClass();
+        $this->fakeHouse->pivot = new stdClass;
         $this->fakeHouse->pivot->is_default = true;
         $this->mockedHouse->shouldReceive('find')->andReturn($this->fakeHouse);
         $this->expectException(Exception::class);
