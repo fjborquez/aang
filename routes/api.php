@@ -41,3 +41,4 @@ Route::post('/house/{houseId}/person', [HouseController::class, 'storePersons'])
 Route::put('/house/{houseId}/person', [HouseController::class, 'updatePersons']);
 Route::put('/house/{houseId}/enable', [HouseController::class, 'enable']);
 Route::put('/house/{houseId}/disable', [HouseController::class, 'disable']);
+Route::delete('/house/{houseId}/person/{residentId}', [ResidentController::class, 'delete']);

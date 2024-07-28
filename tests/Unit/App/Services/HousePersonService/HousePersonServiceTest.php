@@ -66,15 +66,15 @@ class HousePersonServiceTest extends TestCase
 
         $this->fakePerson = Mockery::mock(Person::class);
         $this->fakeBelongsToMany = Mockery::mock(BelongsToMany::class);
-        $fakeHouse1 = new House();
+        $fakeHouse1 = new House;
         $fakeHouse1->id = 1;
         $fakeHouse1->description = 'House 11';
         $fakeHouse1->city_id = 1;
-        $fakeHouse2 = new House();
+        $fakeHouse2 = new House;
         $fakeHouse2->id = 2;
         $fakeHouse2->description = 'House 12';
         $fakeHouse2->city_id = 2;
-        $fakeHouse3 = new House();
+        $fakeHouse3 = new House;
         $fakeHouse3->id = 3;
         $fakeHouse3->description = 'House 13';
         $fakeHouse3->city_id = 3;
@@ -84,15 +84,15 @@ class HousePersonServiceTest extends TestCase
             $fakeHouse3,
         ]);
 
-        $this->fakeHouse1 = new House();
+        $this->fakeHouse1 = new House;
         $this->fakeHouse1->id = 1;
         $this->fakeHouse1->description = 'House 21';
         $this->fakeHouse1->city_id = 1;
-        $this->fakeHouse2 = new House();
+        $this->fakeHouse2 = new House;
         $this->fakeHouse2->id = 2;
         $this->fakeHouse2->description = 'House 22';
         $this->fakeHouse2->city_id = 2;
-        $this->fakeHouse3 = new House();
+        $this->fakeHouse3 = new House;
         $this->fakeHouse3->id = 3;
         $this->fakeHouse3->description = 'House 23';
         $this->fakeHouse3->city_id = 3;
@@ -136,7 +136,7 @@ class HousePersonServiceTest extends TestCase
 
         $this->fakeBelongsToMany->shouldReceive('count')->andReturn(0, 1);
         $this->fakeBelongsToMany->shouldReceive('sync')->once()->andReturn(null);
-        $this->fakeBelongsToMany->shouldReceive('get')->andReturn(new Collection());
+        $this->fakeBelongsToMany->shouldReceive('get')->andReturn(new Collection);
         $this->fakePerson->shouldReceive('houses')->andReturn($this->fakeBelongsToMany);
         $fakeHouse = Mockery::mock(House::class)->makePartial();
         $fakeHouse->shouldReceive('persons')->andReturn($this->fakeBelongsToMany);
@@ -183,7 +183,7 @@ class HousePersonServiceTest extends TestCase
         $fakePerson = Mockery::mock(Person::class);
 
         $this->fakeBelongsToMany->shouldReceive('sync')->once()->andReturn(null);
-        $this->fakeBelongsToMany->shouldReceive('get')->andReturn(new Collection());
+        $this->fakeBelongsToMany->shouldReceive('get')->andReturn(new Collection);
         $this->fakeBelongsToMany->shouldReceive('count')->andReturn(0);
         $fakePerson->shouldReceive('houses')->andReturn($this->fakeBelongsToMany);
         $this->mockedHouseService->shouldReceive('get')->andReturn($this->fakeHouse1, $this->fakeHouse2, $this->fakeHouse3);
@@ -211,7 +211,7 @@ class HousePersonServiceTest extends TestCase
         $this->fakeHouse2->description = 'House 21';
 
         $this->fakeBelongsToMany->shouldReceive('sync')->andReturn(null);
-        $this->fakeBelongsToMany->shouldReceive('get')->andReturn(new Collection());
+        $this->fakeBelongsToMany->shouldReceive('get')->andReturn(new Collection);
         $this->fakeBelongsToMany->shouldReceive('count')->andReturn(0);
         $fakePerson->shouldReceive('houses')->andReturn($this->fakeBelongsToMany);
         $this->mockedHouseService->shouldReceive('get')->andReturn($this->fakeHouse1, $this->fakeHouse2, $this->fakeHouse3);
@@ -237,7 +237,7 @@ class HousePersonServiceTest extends TestCase
 
         $this->fakeBelongsToMany->shouldReceive('count')->andReturn(1);
         $this->fakeBelongsToMany->shouldReceive('sync')->once()->andReturn(null);
-        $this->fakeBelongsToMany->shouldReceive('get')->andReturn(new Collection());
+        $this->fakeBelongsToMany->shouldReceive('get')->andReturn(new Collection);
         $this->fakePerson->shouldReceive('houses')->andReturn($this->fakeBelongsToMany);
         $fakeHouse = Mockery::mock(House::class)->makePartial();
         $fakeHouse->shouldReceive('persons')->andReturn($this->fakeBelongsToMany);
@@ -304,12 +304,12 @@ class HousePersonServiceTest extends TestCase
         $this->fakeHouse2->city_id = 1;
         $this->fakeHouse2->description = 'House 31';
 
-        $pivot = new stdClass();
+        $pivot = new stdClass;
         $pivot->is_default = true;
 
-        $this->fakeHouse1->shouldReceive('getAttribute')->with('city')->andReturn(new City());
+        $this->fakeHouse1->shouldReceive('getAttribute')->with('city')->andReturn(new City);
         $this->fakeHouse1->shouldReceive('getAttribute')->with('pivot')->andReturn($pivot);
-        $this->fakeHouse2->shouldReceive('getAttribute')->with('city')->andReturn(new City());
+        $this->fakeHouse2->shouldReceive('getAttribute')->with('city')->andReturn(new City);
         $this->fakeHouse2->shouldReceive('getAttribute')->with('pivot')->andReturn($pivot);
         $this->mockedPersonService->shouldReceive('get')->once()->andReturn($this->fakePerson);
         $this->mockedHouseService->shouldReceive('get')->andReturn($this->fakeHouse1, $this->fakeHouse1, $this->fakeHouse1, $this->fakeHouse2, $this->fakeHouse3);

@@ -21,8 +21,8 @@ class NutritionalRestrictionServiceTest extends TestCase
 
     public function test_getList(): void
     {
-        $this->mockedNutritionalRestriction->shouldReceive('all')->andReturn(new Collection());
-        assertEquals(new Collection(), $this->nutritionalRestrictionService->getList());
+        $this->mockedNutritionalRestriction->shouldReceive('all')->andReturn(new Collection);
+        assertEquals(new Collection, $this->nutritionalRestrictionService->getList());
     }
 
     public function test_get(): void
