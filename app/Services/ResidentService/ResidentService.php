@@ -37,14 +37,14 @@ class ResidentService implements ResidentServiceInterface
         }
 
         $contains = false;
-        foreach ($house->persons as $resident){
+        foreach ($house->persons as $resident) {
             if ($resident->id == $residentId) {
                 $contains = true;
                 break;
             }
         }
 
-        if (!$contains) {
+        if (! $contains) {
             throw new ResourceNotFoundException('Resident does not belong to house');
         }
 
