@@ -19,7 +19,7 @@ class House extends Model
 
     public function persons(): BelongsToMany
     {
-        return $this->belongsToMany(House::class, 'persons_houses', 'house_id', 'person_id');
+        return $this->belongsToMany(Person::class, 'persons_houses', 'house_id', 'person_id');
     }
 
     public function city(): BelongsTo

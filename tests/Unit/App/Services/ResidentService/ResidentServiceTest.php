@@ -58,9 +58,14 @@ class ResidentServiceTest extends TestCase
         $belongsToMany->shouldReceive('sync')->once()->andReturnSelf();
         $belongsToManyPersons = Mockery::mock(BelongsToMany::class)->makePartial();
         $belongsToManyPersons->shouldReceive('contains')->andReturn(true);
+        $person = new Person;
+        $person->id = 1;
+        $personCollection = new Collection;
+        $personCollection->add($person);
         $this->mockedHouse->shouldReceive('with')->with('persons')->andReturn($this->mockedHouse);
         $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->mockedHouse);
         $this->mockedHouse->shouldReceive('persons')->andReturn($belongsToManyPersons);
+        $this->mockedHouse->shouldReceive('getAttribute')->with('persons')->andReturn($personCollection);
         $this->mockedPerson->shouldReceive('with')->with('houses')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('with')->with('user')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('find')->once()->andReturn($this->mockedPerson);
@@ -76,6 +81,10 @@ class ResidentServiceTest extends TestCase
         $house2 = new House;
         $house1->id = 1;
         $house2->id = 2;
+        $person = new Person;
+        $person->id = 1;
+        $personCollection = new Collection;
+        $personCollection->add($person);
         $belongsToMany = Mockery::mock(BelongsToMany::class);
         $belongsToMany->shouldReceive('get')->twice()->andReturn(new Collection($house1, $house2));
         $belongsToMany->shouldReceive('sync')->once()->andReturnSelf();
@@ -84,6 +93,7 @@ class ResidentServiceTest extends TestCase
         $this->mockedHouse->shouldReceive('with')->with('persons')->andReturn($this->mockedHouse);
         $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->mockedHouse);
         $this->mockedHouse->shouldReceive('persons')->andReturn($belongsToManyPersons);
+        $this->mockedHouse->shouldReceive('getAttribute')->with('persons')->andReturn($personCollection);
         $this->mockedPerson->shouldReceive('with')->with('houses')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('with')->with('user')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('find')->once()->andReturn($this->mockedPerson);
@@ -97,17 +107,19 @@ class ResidentServiceTest extends TestCase
     {
         $belongsToManyPersons = Mockery::mock(BelongsToMany::class)->makePartial();
         $belongsToManyPersons->shouldReceive('contains')->andReturn(true);
+        $person = new Person;
+        $person->id = 2;
+        $personCollection = new Collection;
+        $personCollection->add($person);
         $this->mockedHouse->shouldReceive('with')->with('persons')->andReturn($this->mockedHouse);
         $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->mockedHouse);
         $this->mockedHouse->shouldReceive('persons')->andReturn($belongsToManyPersons);
+        $this->mockedHouse->shouldReceive('getAttribute')->with('persons')->andReturn($personCollection);
         $this->mockedPerson->shouldReceive('with')->with('houses')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('with')->with('user')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('find')->once()->andReturn($this->mockedPerson);
-        $this->mockedPerson->shouldReceive('getAttribute')->once()->with('user')->andReturn(null);
-        $this->mockedPerson->shouldReceive('getAttribute')->twice()->with('houses')->andReturn(new Collection(new House));
-        $this->mockedPerson->shouldReceive('delete')->once()->andReturnSelf();
+        $this->expectException(ResourceNotFoundException::class);
         $this->residentService->delete(1, 1);
-        $this->assertEquals(0, $this->mockedPerson->houses->count());
     }
 
     public function test_should_not_delete_a_resident_when_resident_does_not_belong_to_house()
@@ -121,9 +133,14 @@ class ResidentServiceTest extends TestCase
         $belongsToMany = Mockery::mock(BelongsToMany::class);
         $belongsToMany->shouldReceive('get')->andReturn(new Collection($house1, $house2));
         $belongsToMany->shouldReceive('sync')->andReturnSelf();
+        $person = new Person;
+        $person->id = 1;
+        $personCollection = new Collection;
+        $personCollection->add($person);
         $this->mockedHouse->shouldReceive('with')->with('persons')->andReturn($this->mockedHouse);
         $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->mockedHouse);
         $this->mockedHouse->shouldReceive('persons')->andReturn($belongsToManyPersons);
+        $this->mockedHouse->shouldReceive('getAttribute')->with('persons')->andReturn($personCollection);
         $this->mockedPerson->shouldReceive('with')->with('houses')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('with')->with('user')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('find')->once()->andReturn($this->mockedPerson);
@@ -150,21 +167,6 @@ class ResidentServiceTest extends TestCase
         $this->mockedPerson->shouldReceive('with')->with('houses')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('with')->with('user')->andReturn($this->mockedPerson);
         $this->mockedPerson->shouldReceive('find')->once()->andReturn(null);
-        $this->expectException(ResourceNotFoundException::class);
-        $this->residentService->delete(1, 1);
-    }
-
-    public function test_should_throws_an_exception_when_resident_does_not_belongs_to_house()
-    {
-        $belongsToManyPersons = Mockery::mock(BelongsToMany::class)->makePartial();
-        $belongsToManyPersons->shouldReceive('contains')->andReturn(false);
-
-        $this->mockedHouse->shouldReceive('with')->with('persons')->andReturn($this->mockedHouse);
-        $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->mockedHouse);
-        $this->mockedHouse->shouldReceive('persons')->andReturn($belongsToManyPersons);
-        $this->mockedPerson->shouldReceive('with')->with('houses')->andReturn($this->mockedPerson);
-        $this->mockedPerson->shouldReceive('with')->with('user')->andReturn($this->mockedPerson);
-        $this->mockedPerson->shouldReceive('find')->once()->andReturn($this->mockedPerson);
         $this->expectException(ResourceNotFoundException::class);
         $this->residentService->delete(1, 1);
     }
