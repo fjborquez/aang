@@ -30,9 +30,9 @@ class ResidentService implements ResidentServiceInterface
             throw new ResourceNotFoundException('House not found');
         }
 
-        $resident = $this->person->with('houses')->with('user')->find($residentId);
+        $currentResident = $this->person->with('houses')->with('user')->find($residentId);
 
-        if ($resident == null) {
+        if ($currentResident == null) {
             throw new ResourceNotFoundException('Resident not found');
         }
 
@@ -48,10 +48,10 @@ class ResidentService implements ResidentServiceInterface
             throw new ResourceNotFoundException('Resident does not belong to house');
         }
 
-        if ($resident->user) {
-            $this->syncHouses($houseId, $resident);
+        if ($currentResident->user) {
+            $this->syncHouses($houseId, $currentResident);
         } elseif ($resident->houses != null && $resident->houses->count() > 1) {
-            $this->syncHouses($houseId, $resident);
+            $this->syncHouses($houseId, $currentResident);
         } else {
             $resident->delete();
         }
