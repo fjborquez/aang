@@ -58,9 +58,9 @@ class ResidentServiceTest extends TestCase
         $belongsToMany->shouldReceive('sync')->once()->andReturnSelf();
         $belongsToManyPersons = Mockery::mock(BelongsToMany::class)->makePartial();
         $belongsToManyPersons->shouldReceive('contains')->andReturn(true);
-        $person = new Person();
+        $person = new Person;
         $person->id = 1;
-        $personCollection = new Collection();
+        $personCollection = new Collection;
         $personCollection->add($person);
         $this->mockedHouse->shouldReceive('with')->with('persons')->andReturn($this->mockedHouse);
         $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->mockedHouse);
@@ -81,9 +81,9 @@ class ResidentServiceTest extends TestCase
         $house2 = new House;
         $house1->id = 1;
         $house2->id = 2;
-        $person = new Person();
+        $person = new Person;
         $person->id = 1;
-        $personCollection = new Collection();
+        $personCollection = new Collection;
         $personCollection->add($person);
         $belongsToMany = Mockery::mock(BelongsToMany::class);
         $belongsToMany->shouldReceive('get')->twice()->andReturn(new Collection($house1, $house2));
@@ -107,9 +107,9 @@ class ResidentServiceTest extends TestCase
     {
         $belongsToManyPersons = Mockery::mock(BelongsToMany::class)->makePartial();
         $belongsToManyPersons->shouldReceive('contains')->andReturn(true);
-        $person = new Person();
+        $person = new Person;
         $person->id = 2;
-        $personCollection = new Collection();
+        $personCollection = new Collection;
         $personCollection->add($person);
         $this->mockedHouse->shouldReceive('with')->with('persons')->andReturn($this->mockedHouse);
         $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->mockedHouse);
@@ -133,9 +133,9 @@ class ResidentServiceTest extends TestCase
         $belongsToMany = Mockery::mock(BelongsToMany::class);
         $belongsToMany->shouldReceive('get')->andReturn(new Collection($house1, $house2));
         $belongsToMany->shouldReceive('sync')->andReturnSelf();
-        $person = new Person();
+        $person = new Person;
         $person->id = 1;
-        $personCollection = new Collection();
+        $personCollection = new Collection;
         $personCollection->add($person);
         $this->mockedHouse->shouldReceive('with')->with('persons')->andReturn($this->mockedHouse);
         $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->mockedHouse);
