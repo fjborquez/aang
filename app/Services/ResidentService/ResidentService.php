@@ -36,13 +36,21 @@ class ResidentService implements ResidentServiceInterface
             throw new ResourceNotFoundException('Resident not found');
         }
 
-        if (! $house->persons()->contains($resident)) {
+        $contains = false;
+        foreach ($house->persons as $resident){
+            if ($resident->id == $residentId) {
+                $contains = true;
+                break;
+            }
+        }
+
+        if (!$contains) {
             throw new ResourceNotFoundException('Resident does not belong to house');
         }
 
         if ($resident->user) {
             $this->syncHouses($houseId, $resident);
-        } elseif ($resident->houses->count() > 1) {
+        } elseif ($resident->houses != null && $resident->houses->count() > 1) {
             $this->syncHouses($houseId, $resident);
         } else {
             $resident->delete();
