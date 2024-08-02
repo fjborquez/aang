@@ -53,6 +53,8 @@ class ResidentService implements ResidentServiceInterface
         } elseif ($resident->houses != null && $resident->houses->count() > 1) {
             $this->syncHouses($houseId, $currentResident);
         } else {
+            $resident->nutritionalProfile()->sync([]);
+            $resident->houses()->sync([]);
             $resident->delete();
         }
     }
@@ -60,7 +62,7 @@ class ResidentService implements ResidentServiceInterface
     private function syncHouses(int $houseId, Person $resident): void
     {
         $houses = $resident->houses()->get()->filter(function ($house) use ($houseId) {
-            return $house != $houseId;
+            return $house->id != $houseId;
         });
         $resident->houses()->sync($houses->toArray());
     }

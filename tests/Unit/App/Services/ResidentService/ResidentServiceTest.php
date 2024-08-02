@@ -130,7 +130,7 @@ class ResidentServiceTest extends TestCase
         $house2->id = 2;
         $belongsToManyPersons = Mockery::mock(BelongsToMany::class)->makePartial();
         $belongsToManyPersons->shouldReceive('contains')->andReturn(true);
-        $belongsToMany = Mockery::mock(BelongsToMany::class);
+        $belongsToMany = Mockery::mock(BelongsToMany::class)->makePartial();
         $belongsToMany->shouldReceive('get')->andReturn(new Collection($house1, $house2));
         $belongsToMany->shouldReceive('sync')->andReturnSelf();
         $person = new Person;
