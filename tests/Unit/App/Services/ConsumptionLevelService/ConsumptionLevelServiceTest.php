@@ -77,7 +77,7 @@ class ConsumptionLevelServiceTest extends TestCase
     {
         $mockItem = ['id' => 1, 'value' => 0, 'name' => 'Null'];
 
-        $this->mockedConsumptionLevel->shouldReceive('find')->with(1)->andReturn((object)$mockItem);
+        $this->mockedConsumptionLevel->shouldReceive('find')->with(1)->andReturn((object) $mockItem);
 
         $result = $this->mockedConsumptionLevel->find(1);
 

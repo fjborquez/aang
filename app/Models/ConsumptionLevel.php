@@ -14,6 +14,4 @@ class ConsumptionLevel extends Model
         'name',
         'description',
     ];
-
-
 }
