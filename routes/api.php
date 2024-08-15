@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConsumptionLevelController;
 use App\Http\Controllers\HouseController;
 use App\Http\Controllers\NutritionalProfileController;
 use App\Http\Controllers\NutritionalRestrictionController;
@@ -42,3 +43,5 @@ Route::put('/house/{houseId}/person', [HouseController::class, 'updatePersons'])
 Route::put('/house/{houseId}/enable', [HouseController::class, 'enable']);
 Route::put('/house/{houseId}/disable', [HouseController::class, 'disable']);
 Route::delete('/house/{houseId}/person/{residentId}', [ResidentController::class, 'delete']);
+
+Route::get('/consumption-level', [ConsumptionLevelController::class, 'list']);
