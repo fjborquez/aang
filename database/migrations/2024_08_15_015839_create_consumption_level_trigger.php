@@ -21,6 +21,17 @@ return new class extends Migration
                     END IF;
                 END;
         ");
+
+        DB::unprepared("
+             create definer = aang@`%` trigger check_consumption_level_accepted_values_update
+                BEFORE UPDATE ON consumption_levels
+                FOR EACH ROW
+                BEGIN
+                    IF NEW.value < 0 OR NEW.value > 5 THEN
+                        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Value must be between 0 and 5';
+                    END IF;
+                END;
+        ");
     }
 
     /**
@@ -29,5 +40,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('consumption_level_trigger');
+        DB::unprepared('DROP TRIGGER `check_consumption_level_accepted_values`');
+        DB::unprepared('DROP TRIGGER `check_consumption_level_accepted_values_update`');
     }
 };

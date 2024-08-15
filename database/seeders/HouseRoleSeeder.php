@@ -13,18 +13,22 @@ class HouseRoleSeeder extends Seeder
     public function run(): void
     {
         if (DB::table('house_roles')->count() == 0) {
-            DB::table('house_roles')->insert([
-                'id' => 1,
-                'name' => 'Host',
-            ]);
-            DB::table('house_roles')->insert([
-                'id' => 2,
-                'name' => 'Resident',
-            ]);
-            DB::table('house_roles')->insert([
-                'id' => 3,
-                'name' => 'Guest',
-            ]);
+            $houseRoles = [
+                [
+                    'id' => 1,
+                    'name' => 'Host',
+                ],
+                [
+                    'id' => 2,
+                    'name' => 'Resident',
+                ],
+                [
+                    'id' => 3,
+                    'name' => 'Guest',
+                ],
+            ];
+
+            DB::table('house_roles')->insert($houseRoles);
         }
     }
 }
