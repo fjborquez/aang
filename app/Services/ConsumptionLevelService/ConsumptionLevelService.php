@@ -15,7 +15,7 @@ class ConsumptionLevelService implements ConsumptionLevelServiceInterface
         return $this->consumptionLevel->all();
     }
 
-    public function get(int $id): ConsumptionLevel
+    public function get(int $id): ?ConsumptionLevel
     {
         return $this->consumptionLevel->find($id);
     }

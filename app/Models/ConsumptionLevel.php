@@ -14,4 +14,10 @@ class ConsumptionLevel extends Model
         'name',
         'description',
     ];
+
+    protected $casts = [
+        'value' => 'integer',
+        'name' => 'string',
+        'description' => 'string',
+    ];
 }

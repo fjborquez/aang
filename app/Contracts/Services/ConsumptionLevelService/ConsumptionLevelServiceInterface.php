@@ -8,5 +8,5 @@ interface ConsumptionLevelServiceInterface
 {
     public function getList();
 
-    public function get(int $id): ConsumptionLevel;
+    public function get(int $id): ?ConsumptionLevel;
 }
