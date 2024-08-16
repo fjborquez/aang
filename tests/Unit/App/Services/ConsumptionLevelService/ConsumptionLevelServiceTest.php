@@ -67,27 +67,22 @@ class ConsumptionLevelServiceTest extends TestCase
         $mockData = $this->generateMockedConsumptionLevel();
 
         $this->mockedConsumptionLevel->shouldReceive('all')->andReturn($mockData);
-        $result = $this->mockedConsumptionLevel->all();
+        $result = $this->consumptionLevelService->getList();
 
         $this->assertCount(6, $result);
         $this->assertEquals($mockData, $result);
     }
 
-    public function test_get(): void
-    {
-        $this->mockedConsumptionLevel->shouldReceive('find')->andReturn(new ConsumptionLevel);
-        $this->assertEquals(new ConsumptionLevel, $this->mockedConsumptionLevel->find(1));
-    }
-
     public function testFindConsumptionLevelById()
     {
-        $mockItem = ['id' => 1, 'value' => 0, 'name' => 'Null'];
+        $mockItem = new ConsumptionLevel;
+        $mockItem->value = 0;
+        $mockItem->name = 'Null';
+        $mockItem->description = null;
 
-        $this->mockedConsumptionLevel->shouldReceive('find')->with(1)->andReturn((object) $mockItem);
+        $this->mockedConsumptionLevel->shouldReceive('find')->with(1)->andReturn($mockItem);
+        $result = $this->consumptionLevelService->get(1);
 
-        $result = $this->mockedConsumptionLevel->find(1);
-
-        // Assert
         $this->assertEquals('Null', $result->name);
         $this->assertEquals(0, $result->value);
     }
