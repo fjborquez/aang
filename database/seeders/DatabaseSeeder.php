@@ -14,5 +14,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(NutritionalRestrictionSeeder::class);
         $this->call(HouseRoleSeeder::class);
+        $this->call(ConsumptionLevelSeeder::class);
+        $this->call(PersonSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(CitySeeder::class);
+        $this->call(HouseSeeder::class);
+        $this->call(PersonHouseSeeder::class);
+        $this->call(NutritionalProfileSeeder::class);
     }
 }

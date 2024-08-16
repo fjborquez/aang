@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('persons_houses', function (Blueprint $table) {
-            $table->unsignedBigInteger('house_role_id');
-            $table->foreign('house_role_id')->references('id')->on('house_roles');
+        Schema::create('consumption_levels', function (Blueprint $table) {
+            $table->id();
+            $table->tinyInteger('value')->unique();
+            $table->string('name', 12)->unique();
+            $table->string('description', 150)->unique();
         });
     }
 
@@ -22,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('persons_houses', function (Blueprint $table) {
-            $table->dropForeign('persons_houses_house_role_id_foreign');
-        });
+        Schema::dropIfExists('consumption_levels');
     }
 };
