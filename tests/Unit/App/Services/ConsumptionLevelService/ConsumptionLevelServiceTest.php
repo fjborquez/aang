@@ -91,7 +91,7 @@ class ConsumptionLevelServiceTest extends TestCase
 
     public function testGetListReturnsEmptyCollectionWhenNoData(): void
     {
-        $this->mockedConsumptionLevel->shouldReceive('all')->andReturn(new Collection());
+        $this->mockedConsumptionLevel->shouldReceive('all')->andReturn(new Collection);
         $result = $this->consumptionLevelService->getList();
         $this->assertEmpty($result);
     }
@@ -106,10 +106,10 @@ class ConsumptionLevelServiceTest extends TestCase
     public function testGetListHandlesDatabaseException(): void
     {
         $this->mockedConsumptionLevel->shouldReceive('all')
-            ->andThrow(new ConnectException("Database Error Connection", new Request('GET', 'test')));
+            ->andThrow(new ConnectException('Database Error Connection', new Request('GET', 'test')));
 
         $this->expectException(ConnectException::class);
-        $this->expectExceptionMessage("Database Error Connection");
+        $this->expectExceptionMessage('Database Error Connection');
 
         $this->consumptionLevelService->getList();
     }
