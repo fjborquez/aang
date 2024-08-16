@@ -4,6 +4,8 @@ namespace Tests\Unit\App\Services\ConsumptionLevelService;
 
 use App\Models\ConsumptionLevel;
 use App\Services\ConsumptionLevelService\ConsumptionLevelService;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Collection;
 use Mockery;
 use Tests\TestCase;
@@ -62,18 +64,17 @@ class ConsumptionLevelServiceTest extends TestCase
         $this->consumptionLevelService = new ConsumptionLevelService($this->mockedConsumptionLevel);
     }
 
-    public function test_getList(): void
+    public function testGetListReturnsCorrectConsumptionLevelsList(): void
     {
         $mockData = $this->generateMockedConsumptionLevel();
 
         $this->mockedConsumptionLevel->shouldReceive('all')->andReturn($mockData);
         $result = $this->consumptionLevelService->getList();
 
-        $this->assertCount(6, $result);
         $this->assertEquals($mockData, $result);
     }
 
-    public function testFindConsumptionLevelById()
+    public function testGetByIdReturnsCorrectConsumptionLevel(): void
     {
         $mockItem = new ConsumptionLevel;
         $mockItem->value = 0;
@@ -85,5 +86,31 @@ class ConsumptionLevelServiceTest extends TestCase
 
         $this->assertEquals('Null', $result->name);
         $this->assertEquals(0, $result->value);
+        $this->assertEquals(null, $result->description);
+    }
+
+    public function testGetListReturnsEmptyCollectionWhenNoData(): void
+    {
+        $this->mockedConsumptionLevel->shouldReceive('all')->andReturn(new Collection);
+        $result = $this->consumptionLevelService->getList();
+        $this->assertEmpty($result);
+    }
+
+    public function testGetByIdReturnsNullForNonExistentId(): void
+    {
+        $this->mockedConsumptionLevel->shouldReceive('find')->with(-1)->andReturn(null);
+        $result = $this->consumptionLevelService->get(-1);
+        $this->assertNull($result);
+    }
+
+    public function testGetListHandlesDatabaseException(): void
+    {
+        $this->mockedConsumptionLevel->shouldReceive('all')
+            ->andThrow(new ConnectException('Database Error Connection', new Request('GET', 'test')));
+
+        $this->expectException(ConnectException::class);
+        $this->expectExceptionMessage('Database Error Connection');
+
+        $this->consumptionLevelService->getList();
     }
 }
