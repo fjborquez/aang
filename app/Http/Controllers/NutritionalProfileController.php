@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\IllegalArgumentException;
 use App\Exceptions\ResourceNotFoundException;
 use App\Http\Requests\NutritionalProfileRequest;
 use App\Services\NutritionalProfileService\NutritionalProfileService;
 use Exception;
 use Illuminate\Database\UniqueConstraintViolationException;
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response;
 
 class NutritionalProfileController extends Controller
@@ -25,7 +25,7 @@ class NutritionalProfileController extends Controller
             $this->nutritionalProfileService->create($personId, $nutritionalProfile);
 
             return response()->noContent(Response::HTTP_CREATED);
-        } catch (IllegalArgumentException $exception) {
+        } catch (InvalidArgumentException $exception) {
             return response()->noContent(Response::HTTP_BAD_REQUEST);
         } catch (UniqueConstraintViolationException $exception) {
             return response()->noContent(Response::HTTP_CONFLICT);
