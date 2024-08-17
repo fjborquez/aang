@@ -12,13 +12,15 @@ class NutritionalProfileSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('nutritional_profiles')->insert([
-            ['person_id' => 1, 'product_category_id' => 1, 'consumption_level_id' => 1, 'product_category_name' => ''],
-            ['person_id' => 1, 'product_category_id' => 2, 'consumption_level_id' => 2, 'product_category_name' => ''],
-            ['person_id' => 1, 'product_category_id' => 3, 'consumption_level_id' => 3, 'product_category_name' => ''],
-            ['person_id' => 2, 'product_category_id' => 4, 'consumption_level_id' => 4, 'product_category_name' => ''],
-            ['person_id' => 2, 'product_category_id' => 5, 'consumption_level_id' => 5, 'product_category_name' => ''],
-            ['person_id' => 2, 'product_category_id' => 6, 'consumption_level_id' => 1, 'product_category_name' => ''],
-        ]);
+        if (DB::table('nutritional_profiles')->count() == 0) {
+            DB::table('nutritional_profiles')->insert([
+                ['person_id' => 1, 'product_category_id' => 1, 'consumption_level_id' => 1, 'product_category_name' => ''],
+                ['person_id' => 1, 'product_category_id' => 2, 'consumption_level_id' => 2, 'product_category_name' => ''],
+                ['person_id' => 1, 'product_category_id' => 3, 'consumption_level_id' => 3, 'product_category_name' => ''],
+                ['person_id' => 2, 'product_category_id' => 4, 'consumption_level_id' => 4, 'product_category_name' => ''],
+                ['person_id' => 2, 'product_category_id' => 5, 'consumption_level_id' => 5, 'product_category_name' => ''],
+                ['person_id' => 2, 'product_category_id' => 6, 'consumption_level_id' => 1, 'product_category_name' => ''],
+            ]);
+        }
     }
 }
