@@ -25,7 +25,7 @@ class NutritionalProfileRequest extends FormRequest
             'nutritionalProfile' => ['required', 'array'],
             'nutritionalProfile.*.product_category_id' => ['required', 'numeric', 'gt:0'],
             'nutritionalProfile.*.product_category_name' => ['string'],
-            'nutritionalProfile.*.consumption_level_id' => ['required', 'exists:App\Models\ConsumptionLevel,id']
+            'nutritionalProfile.*.consumption_level_id' => ['required', 'exists:App\Models\ConsumptionLevel,id'],
         ];
     }
 
@@ -34,7 +34,7 @@ class NutritionalProfileRequest extends FormRequest
         return [
             'nutritionalProfile.*.product_category_id.required' => 'Product category information is required',
             'nutritionalProfile.*.consumption_level_id.required' => 'Consumption level information is required',
-            'nutritionalProfile.*.consumption_level_id.exists' => 'Consumption level information is incorrect or does not exist'
+            'nutritionalProfile.*.consumption_level_id.exists' => 'Consumption level information is incorrect or does not exist',
         ];
     }
 }

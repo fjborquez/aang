@@ -6,7 +6,6 @@ use App\Services\PersonService\PersonService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Tests\TestCase;
-use Illuminate\Database\QueryException;
 
 use function PHPUnit\Framework\assertEquals;
 
