@@ -5,7 +5,6 @@ namespace App\Services\NutritionalProfileService;
 use App\Contracts\Services\NutritionalProfileService\NutritionalProfileServiceInterface;
 use App\Contracts\Services\PersonService\PersonServiceInterface;
 use App\Models\NutritionalProfile;
-
 use InvalidArgumentException;
 
 class NutritionalProfileService implements NutritionalProfileServiceInterface
@@ -19,7 +18,7 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
         $this->validate($personId, $data);
 
         foreach ($data as $profileDetail) {
-            $nutritionalProfile = new NutritionalProfile();
+            $nutritionalProfile = new NutritionalProfile;
             $nutritionalProfile->product_category_id = $profileDetail['product_category_id'];
             $nutritionalProfile->product_category_name = $profileDetail['product_category_name'];
             $nutritionalProfile->consumption_level_id = $profileDetail['consumption_level_id'];
@@ -60,7 +59,7 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
 
     private function hasInvalidConsumptionLevel(array $data): bool
     {
-        return count(array_filter($data, function($item) {
+        return count(array_filter($data, function ($item) {
             return $item['consumption_level_id'] <= 0;
         })) > 0;
     }
