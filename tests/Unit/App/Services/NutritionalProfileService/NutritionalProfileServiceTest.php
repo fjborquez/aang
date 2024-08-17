@@ -4,7 +4,6 @@ use App\Models\Person;
 use App\Services\NutritionalProfileService\NutritionalProfileService;
 use App\Services\PersonService\PersonService;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Tests\TestCase;
 
 use function PHPUnit\Framework\assertEquals;
@@ -17,12 +16,9 @@ class NutritionalProfileServiceTest extends TestCase
 
     private $mockedPerson;
 
-    private $mockedNutritionalProfileRelationship;
-
     public function setUp(): void
     {
         parent::setUp();
-        $this->mockedNutritionalProfileRelationship = Mockery::mock(BelongsToMany::class);
         $this->mockedPerson = Mockery::mock(Person::class);
         $this->mockedPersonService = Mockery::mock(PersonService::class);
         $this->nutritionalProfileService = new NutritionalProfileService($this->mockedPersonService);
@@ -114,11 +110,8 @@ class NutritionalProfileServiceTest extends TestCase
 
         $personId = 1;
         $mock = Mockery::mock('overload:App\Models\NutritionalProfile');
-        $mock->shouldReceive('save')->andReturn(true);
-        $result = $this->nutritionalProfileService->create($personId, $data);
-
-        $this->assertTrue($result);
-        Mockery::close();
+        $mock->shouldReceive('save')->once()->andReturn(true);
+        $this->nutritionalProfileService->create($personId, $data);
     }
 
     public function test_should_get_a_profile_when_person_exists(): void
