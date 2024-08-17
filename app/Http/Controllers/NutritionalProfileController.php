@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Exceptions\ResourceNotFoundException;
 use App\Http\Requests\NutritionalProfileRequest;
 use App\Services\NutritionalProfileService\NutritionalProfileService;
+use Exception;
+use Illuminate\Database\UniqueConstraintViolationException;
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response;
 
 class NutritionalProfileController extends Controller
@@ -22,8 +25,12 @@ class NutritionalProfileController extends Controller
             $this->nutritionalProfileService->create($personId, $nutritionalProfile);
 
             return response()->noContent(Response::HTTP_CREATED);
-        } catch (ResourceNotFoundException $exception) {
-            return response()->noContent(Response::HTTP_NOT_FOUND);
+        } catch (InvalidArgumentException $exception) {
+            return response()->noContent(Response::HTTP_BAD_REQUEST);
+        } catch (UniqueConstraintViolationException $exception) {
+            return response()->noContent(Response::HTTP_CONFLICT);
+        } catch (Exception $exception) {
+            return response()->noContent(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
     }

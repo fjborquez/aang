@@ -22,7 +22,19 @@ class NutritionalProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nutritionalProfile' => ['present', 'array'],
+            'nutritionalProfile' => ['required', 'array'],
+            'nutritionalProfile.*.product_category_id' => ['required', 'numeric', 'gt:0'],
+            'nutritionalProfile.*.product_category_name' => ['string'],
+            'nutritionalProfile.*.consumption_level_id' => ['required', 'exists:App\Models\ConsumptionLevel,id'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'nutritionalProfile.*.product_category_id.required' => 'Product category information is required',
+            'nutritionalProfile.*.consumption_level_id.required' => 'Consumption level information is required',
+            'nutritionalProfile.*.consumption_level_id.exists' => 'Consumption level information is incorrect or does not exist',
         ];
     }
 }
