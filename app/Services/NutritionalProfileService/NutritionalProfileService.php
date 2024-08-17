@@ -10,7 +10,7 @@ use InvalidArgumentException;
 class NutritionalProfileService implements NutritionalProfileServiceInterface
 {
     public function __construct(
-        private readonly PersonServiceInterface $personService,
+        private readonly PersonServiceInterface $personService
     ) {}
 
     public function create(int $personId, array $data = [])
@@ -25,8 +25,6 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
             $nutritionalProfile->person_id = $personId;
             $nutritionalProfile->save();
         }
-
-        return true;
     }
 
     public function get(int $personId): array
