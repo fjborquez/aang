@@ -36,7 +36,7 @@ class UserService implements UserServiceInterface
 
     public function get(int $id): User
     {
-        $user = $this->user->with('person')->with('person.nutritionalProfile')->with('person.houses')
+        $user = $this->user->with('person')->with('person.nutritionalProfile')->with('person.nutritionalProfile.consumptionLevel')->with('person.houses')
             ->with('person.houses.city')->with('person.houses.persons')->find($id);
 
         if ($user == null) {
