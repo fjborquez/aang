@@ -3,10 +3,10 @@
 use App\Models\Person;
 use App\Services\NutritionalProfileService\NutritionalProfileService;
 use App\Services\PersonService\PersonService;
-use function PHPUnit\Framework\assertEquals;
 use Illuminate\Database\Eloquent\Collection;
-
 use Tests\TestCase;
+
+use function PHPUnit\Framework\assertEquals;
 
 class NutritionalProfileServiceTest extends TestCase
 {
