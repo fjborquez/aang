@@ -3,10 +3,10 @@
 use App\Models\Person;
 use App\Services\NutritionalProfileService\NutritionalProfileService;
 use App\Services\PersonService\PersonService;
-use Illuminate\Database\Eloquent\Collection;
-use Tests\TestCase;
-
 use function PHPUnit\Framework\assertEquals;
+use Illuminate\Database\Eloquent\Collection;
+
+use Tests\TestCase;
 
 class NutritionalProfileServiceTest extends TestCase
 {
@@ -123,11 +123,25 @@ class NutritionalProfileServiceTest extends TestCase
         assertEquals([], $profile);
     }
 
-    /*public function test_should_update_when_person_exists(): void
+    public function test_should_update_when_person_exists(): void
     {
-        $this->mockedNutritionalProfileRelationship->shouldReceive('sync')->once()->andReturn(true);
-        $this->mockedPersonService->shouldReceive('get')->once()->andReturn($this->mockedPerson);
-        $this->mockedPerson->shouldReceive('nutritionalProfile')->once()->andReturn($this->mockedNutritionalProfileRelationship);
-        $this->nutritionalProfileService->update(1, []);
-    }*/
+        $data = [
+            [
+                'product_category_id' => 9,
+                'product_category_name' => 'Vegetables',
+                'consumption_level_id' => 3,
+            ],
+            [
+                'product_category_id' => 8,
+                'product_category_name' => 'Fruits',
+                'consumption_level_id' => 2,
+            ],
+        ];
+        $mock = Mockery::mock('overload:App\Models\NutritionalProfile');
+        $mock->shouldReceive('where')->andReturn($mock);
+        $mock->shouldReceive('first')->andReturn($mock);
+        $mock->shouldReceive('save')->once()->andReturn(true);
+
+        $this->nutritionalProfileService->update(1, $data);
+    }
 }
