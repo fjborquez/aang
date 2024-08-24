@@ -32,6 +32,7 @@ class NutritionalProfileRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'nutritionalProfile.required' => 'Fill up the required information',
             'nutritionalProfile.*.product_category_id.required' => 'Product category information is required',
             'nutritionalProfile.*.consumption_level_id.required' => 'Consumption level information is required',
             'nutritionalProfile.*.consumption_level_id.exists' => 'Consumption level information is incorrect or does not exist',

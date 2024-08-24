@@ -26,7 +26,7 @@ class PersonService implements PersonServiceInterface
 
     public function get(int $id): Person
     {
-        $person = $this->person->with('nutritionalProfile')
+        $person = $this->person->with('nutritionalProfile')->with('nutritionalProfile.consumptionLevel')
             ->with('user')->with('houses')->find($id);
 
         if ($person == null) {
