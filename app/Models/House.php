@@ -34,6 +34,6 @@ class House extends BaseModel
 
     public function getRequiredAttributes(): array
     {
-        return [ 'description', 'city_id' ];
+        return ['description', 'city_id'];
     }
 }

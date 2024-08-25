@@ -2,7 +2,6 @@
 
 namespace App\Contracts\Services\HouseService;
 
-use App\Models\House;
 use Illuminate\Database\Eloquent\Collection;
 
 interface HouseServiceInterface

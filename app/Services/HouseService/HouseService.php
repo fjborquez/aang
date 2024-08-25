@@ -6,8 +6,8 @@ use App\Contracts\Services\HouseService\HouseServiceInterface;
 use App\Exceptions\OperationNotAllowedException;
 use App\Models\House;
 use App\Services\BaseService\BaseService;
-use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Collection;
+use InvalidArgumentException;
 
 class HouseService extends BaseService implements HouseServiceInterface
 {

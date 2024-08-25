@@ -69,7 +69,7 @@ class HouseServiceTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("The 'description' attribute is required and cannot be empty.");
-        $this->fakeHouse->description = "";
+        $this->fakeHouse->description = '';
         $this->fakeHouseService = new HouseService($this->fakeHouse);
         $this->fakeHouseService->create($this->fakeHouse);
     }
@@ -79,7 +79,7 @@ class HouseServiceTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("The 'city_id' attribute is required and cannot be null.");
 
-        $this->fakeHouse->description = "description";
+        $this->fakeHouse->description = 'description';
         $this->fakeHouseService->create($this->fakeHouse);
     }
 

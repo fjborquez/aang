@@ -13,8 +13,7 @@ trait BaseModelTrait
      * This method checks if the essential attributes of the model,
      * such as 'name' and 'description', are not null or empty.
      *
-     * @param BaseModel $model The model instance to be validated.
-     * @return void
+     * @param  BaseModel  $model  The model instance to be validated.
      */
     public function validate(BaseModel $model): void
     {
