@@ -7,13 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface HouseServiceInterface
 {
-    public function create(array $data = []): House;
-
     public function getList(): Collection;
 
     public function update(int $houseId, array $data = []): void;
-
-    public function get(int $houseId): House;
 
     public function enable(int $houseId): void;
 
