@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Thiagoprz\CompositeKey\HasCompositeKey;
 
 class NutritionalProfile extends Model
@@ -26,5 +27,10 @@ class NutritionalProfile extends Model
     public function person(): BelongsTo
     {
         return $this->belongsTo(Person::class, 'person_id');
+    }
+
+    public function consumptionLevel(): HasOne
+    {
+        return $this->hasOne(ConsumptionLevel::class, 'id', 'consumption_level_id');
     }
 }

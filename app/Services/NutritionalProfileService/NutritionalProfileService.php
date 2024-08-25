@@ -36,8 +36,23 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
 
     public function update(int $personId, array $data = [])
     {
-        $person = $this->personService->get($personId);
-        $person->nutritionalProfile()->sync($data);
+
+        $this->validate($personId, $data);
+
+        foreach ($data as $profileDetail) {
+            $nutritionalProfile = NutritionalProfile::where('product_category_id',
+                $profileDetail['product_category_id'])->where('person_id', $personId)->first();
+
+            if ($nutritionalProfile == null) {
+                $nutritionalProfile = new NutritionalProfile;
+            }
+
+            $nutritionalProfile->product_category_id = $profileDetail['product_category_id'];
+            $nutritionalProfile->product_category_name = $profileDetail['product_category_name'];
+            $nutritionalProfile->consumption_level_id = $profileDetail['consumption_level_id'];
+            $nutritionalProfile->person_id = $personId;
+            $nutritionalProfile->save();
+        }
     }
 
     private function validate(int $personId, array $data): void
