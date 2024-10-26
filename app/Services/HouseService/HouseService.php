@@ -4,22 +4,25 @@ namespace App\Services\HouseService;
 
 use App\Contracts\Services\HouseService\HouseServiceInterface;
 use App\Exceptions\OperationNotAllowedException;
+use App\Exceptions\ResourceNotFoundException;
 use App\Models\House;
-use App\Services\BaseService\BaseService;
 use Illuminate\Database\Eloquent\Collection;
-use InvalidArgumentException;
 
-class HouseService extends BaseService implements HouseServiceInterface
+class HouseService implements HouseServiceInterface
 {
-    /**
-     * @throws InvalidArgumentException
-     */
+    public function __construct(private readonly House $house) {}
+
+    public function create(array $data = []): House
+    {
+        return $this->house->factory()->create($data);
+    }
+
     public function get(int $id): House
     {
-        $house = $this->getBaseModel()->find($id);
+        $house = $this->house->find($id);
 
         if ($house == null) {
-            throw new InvalidArgumentException('House not found');
+            throw new ResourceNotFoundException('House not found');
         }
 
         return $house;
@@ -27,15 +30,15 @@ class HouseService extends BaseService implements HouseServiceInterface
 
     public function getList(): Collection
     {
-        return $this->getBaseModel()->with('city')->get();
+        return $this->house->with('city')->get();
     }
 
     public function update(int $houseId, array $data = []): void
     {
-        $house = $this->getBaseModel()->find($houseId);
+        $house = $this->house->find($houseId);
 
         if ($house == null) {
-            throw new InvalidArgumentException('House not found');
+            throw new ResourceNotFoundException('House not found');
         }
 
         $house->update($data);
@@ -43,10 +46,10 @@ class HouseService extends BaseService implements HouseServiceInterface
 
     public function enable(int $houseId): void
     {
-        $house = $this->getBaseModel()->find($houseId);
+        $house = $this->house->find($houseId);
 
         if ($house == null) {
-            throw new InvalidArgumentException('House not found');
+            throw new ResourceNotFoundException('House not found');
         }
 
         if ($house->is_active) {
@@ -56,16 +59,12 @@ class HouseService extends BaseService implements HouseServiceInterface
         $house->update(['is_active' => true]);
     }
 
-    /**
-     * @throws InvalidArgumentException
-     * @throws OperationNotAllowedException
-     */
     public function disable(int $houseId): void
     {
-        $house = $this->getBaseModel()->find($houseId);
+        $house = $this->house->find($houseId);
 
         if ($house == null) {
-            throw new InvalidArgumentException('House not found');
+            throw new ResourceNotFoundException('House not found');
         }
 
         if (! $house->is_active) {
