@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use App\HouseRole;
-use App\Models\City;
 use App\Models\House;
 use App\Models\Person;
 use App\Services\HousePersonService\HousePersonService;
