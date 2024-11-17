@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\ConsumptionLevelController;
 use App\Http\Controllers\HouseController;
 use App\Http\Controllers\NutritionalProfileController;
@@ -45,3 +46,5 @@ Route::put('/house/{houseId}/disable', [HouseController::class, 'disable']);
 Route::delete('/house/{houseId}/person/{residentId}', [ResidentController::class, 'delete']);
 
 Route::get('/consumption-level', [ConsumptionLevelController::class, 'list']);
+
+Route::get('/city', [CityController::class, 'list']);
