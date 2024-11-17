@@ -307,9 +307,7 @@ class HousePersonServiceTest extends TestCase
         $pivot = new stdClass;
         $pivot->is_default = true;
 
-        $this->fakeHouse1->shouldReceive('getAttribute')->with('city')->andReturn(new City);
         $this->fakeHouse1->shouldReceive('getAttribute')->with('pivot')->andReturn($pivot);
-        $this->fakeHouse2->shouldReceive('getAttribute')->with('city')->andReturn(new City);
         $this->fakeHouse2->shouldReceive('getAttribute')->with('pivot')->andReturn($pivot);
         $this->mockedPersonService->shouldReceive('get')->once()->andReturn($this->fakePerson);
         $this->mockedHouseService->shouldReceive('get')->andReturn($this->fakeHouse1, $this->fakeHouse1, $this->fakeHouse1, $this->fakeHouse2, $this->fakeHouse3);
