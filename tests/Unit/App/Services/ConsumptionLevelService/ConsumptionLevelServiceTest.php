@@ -58,13 +58,13 @@ class ConsumptionLevelServiceTest extends TestCase
         ]);
     }
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->mockedConsumptionLevel = Mockery::mock(ConsumptionLevel::class);
         $this->consumptionLevelService = new ConsumptionLevelService($this->mockedConsumptionLevel);
     }
 
-    public function testGetListReturnsCorrectConsumptionLevelsList(): void
+    public function test_get_list_returns_correct_consumption_levels_list(): void
     {
         $mockData = $this->generateMockedConsumptionLevel();
 
@@ -74,7 +74,7 @@ class ConsumptionLevelServiceTest extends TestCase
         $this->assertEquals($mockData, $result);
     }
 
-    public function testGetByIdReturnsCorrectConsumptionLevel(): void
+    public function test_get_by_id_returns_correct_consumption_level(): void
     {
         $mockItem = new ConsumptionLevel;
         $mockItem->value = 0;
@@ -89,21 +89,21 @@ class ConsumptionLevelServiceTest extends TestCase
         $this->assertEquals(null, $result->description);
     }
 
-    public function testGetListReturnsEmptyCollectionWhenNoData(): void
+    public function test_get_list_returns_empty_collection_when_no_data(): void
     {
         $this->mockedConsumptionLevel->shouldReceive('all')->andReturn(new Collection);
         $result = $this->consumptionLevelService->getList();
         $this->assertEmpty($result);
     }
 
-    public function testGetByIdReturnsNullForNonExistentId(): void
+    public function test_get_by_id_returns_null_for_non_existent_id(): void
     {
         $this->mockedConsumptionLevel->shouldReceive('find')->with(-1)->andReturn(null);
         $result = $this->consumptionLevelService->get(-1);
         $this->assertNull($result);
     }
 
-    public function testGetListHandlesDatabaseException(): void
+    public function test_get_list_handles_database_exception(): void
     {
         $this->mockedConsumptionLevel->shouldReceive('all')
             ->andThrow(new ConnectException('Database Error Connection', new Request('GET', 'test')));

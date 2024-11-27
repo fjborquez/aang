@@ -26,7 +26,7 @@ class ResidentServiceTest extends TestCase
 
     private int $fakePersonId;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->mockedPerson = Mockery::mock(Person::class);
         $this->mockedHouse = Mockery::mock(House::class);
