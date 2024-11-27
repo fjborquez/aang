@@ -13,13 +13,13 @@ class NutritionalRestrictionServiceTest extends TestCase
 
     private $nutritionalRestrictionService;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->mockedNutritionalRestriction = Mockery::mock(NutritionalRestriction::class);
         $this->nutritionalRestrictionService = new NutritionalRestrictionService($this->mockedNutritionalRestriction);
     }
 
-    public function test_getList(): void
+    public function test_get_list(): void
     {
         $this->mockedNutritionalRestriction->shouldReceive('all')->andReturn(new Collection);
         assertEquals(new Collection, $this->nutritionalRestrictionService->getList());

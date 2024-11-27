@@ -169,13 +169,13 @@ class CityServiceTest extends TestCase
         ]);
     }
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->mockedCity = Mockery::mock('overload:App\Models\City');
         $this->cityService = new CityService($this->mockedCity);
     }
 
-    public function testGetListReturnsCorrectCitiesList(): void
+    public function test_get_list_returns_correct_cities_list(): void
     {
         $mockData = $this->generateMockedCities();
 

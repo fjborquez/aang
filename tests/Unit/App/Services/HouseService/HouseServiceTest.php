@@ -19,7 +19,7 @@ class HouseServiceTest extends TestCase
 
     private $fakeHouse;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->mockedHouse = Mockery::mock(House::class);
         $this->fakeHouseService = new HouseService($this->mockedHouse);

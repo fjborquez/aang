@@ -56,7 +56,8 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
         }
     }
 
-    public function delete(int $personId, int $productCategoryId) {
+    public function delete(int $personId, int $productCategoryId)
+    {
         $nutritionalProfile = NutritionalProfile::where('product_category_id',
             $productCategoryId)->where('person_id', $personId)->first();
 

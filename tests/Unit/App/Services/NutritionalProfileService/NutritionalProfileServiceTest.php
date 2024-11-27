@@ -1,14 +1,13 @@
 <?php
 
 use App\Exceptions\ResourceNotFoundException;
-use App\Models\NutritionalProfile;
 use App\Models\Person;
 use App\Services\NutritionalProfileService\NutritionalProfileService;
 use App\Services\PersonService\PersonService;
-use function PHPUnit\Framework\assertEquals;
 use Illuminate\Database\Eloquent\Collection;
-
 use Tests\TestCase;
+
+use function PHPUnit\Framework\assertEquals;
 
 class NutritionalProfileServiceTest extends TestCase
 {
@@ -18,7 +17,7 @@ class NutritionalProfileServiceTest extends TestCase
 
     private $mockedPerson;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->mockedPerson = Mockery::mock(Person::class);
@@ -147,7 +146,8 @@ class NutritionalProfileServiceTest extends TestCase
         $this->nutritionalProfileService->update(1, $data);
     }
 
-    public function test_should_delete_when_nutritional_profile_exists() {
+    public function test_should_delete_when_nutritional_profile_exists()
+    {
         $mock = Mockery::mock('overload:App\Models\NutritionalProfile');
         $mock->shouldReceive('where')->andReturn($mock);
         $mock->shouldReceive('first')->andReturn($mock);
@@ -155,7 +155,8 @@ class NutritionalProfileServiceTest extends TestCase
         $this->nutritionalProfileService->delete(1, 1);
     }
 
-    public function test_should_not_delete_when_nutritional_profile_does_not_exist() {
+    public function test_should_not_delete_when_nutritional_profile_does_not_exist()
+    {
         $mock = Mockery::mock('overload:App\Models\NutritionalProfile');
         $mock->shouldReceive('where')->andReturn($mock);
         $mock->shouldReceive('first')->andReturn(null);

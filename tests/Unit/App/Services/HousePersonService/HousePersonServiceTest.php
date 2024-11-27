@@ -39,7 +39,7 @@ class HousePersonServiceTest extends TestCase
 
     private $fakeHouse3;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
