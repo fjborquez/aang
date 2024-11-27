@@ -4,6 +4,7 @@ namespace App\Services\NutritionalProfileService;
 
 use App\Contracts\Services\NutritionalProfileService\NutritionalProfileServiceInterface;
 use App\Contracts\Services\PersonService\PersonServiceInterface;
+use App\Exceptions\ResourceNotFoundException;
 use App\Models\NutritionalProfile;
 use InvalidArgumentException;
 
@@ -53,6 +54,17 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
             $nutritionalProfile->person_id = $personId;
             $nutritionalProfile->save();
         }
+    }
+
+    public function delete(int $personId, int $productCategoryId) {
+        $nutritionalProfile = NutritionalProfile::where('product_category_id',
+            $productCategoryId)->where('person_id', $personId)->first();
+
+        if ($nutritionalProfile == null) {
+            throw new ResourceNotFoundException('Nutritional profile not found');
+        }
+
+        $nutritionalProfile->delete();
     }
 
     private function validate(int $personId, array $data): void

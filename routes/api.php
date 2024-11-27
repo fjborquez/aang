@@ -27,6 +27,7 @@ Route::delete('/person/{personId}', [PersonController::class, 'delete']);
 Route::post('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'store']);
 Route::get('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'get']);
 Route::put('/person/{userId}/nutritional-profile', [NutritionalProfileController::class, 'update']);
+Route::delete('/person/{userId}/nutritional-profile/{productCategoryId}', [NutritionalProfileController::class, 'delete']);
 
 Route::post('/person/{userId}/house', [PersonController::class, 'storeHouses']);
 Route::get('/person/{userId}/house', [PersonController::class, 'getHouses']);

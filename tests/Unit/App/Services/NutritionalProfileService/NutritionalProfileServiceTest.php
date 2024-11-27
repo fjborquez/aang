@@ -1,12 +1,14 @@
 <?php
 
+use App\Exceptions\ResourceNotFoundException;
+use App\Models\NutritionalProfile;
 use App\Models\Person;
 use App\Services\NutritionalProfileService\NutritionalProfileService;
 use App\Services\PersonService\PersonService;
-use Illuminate\Database\Eloquent\Collection;
-use Tests\TestCase;
-
 use function PHPUnit\Framework\assertEquals;
+use Illuminate\Database\Eloquent\Collection;
+
+use Tests\TestCase;
 
 class NutritionalProfileServiceTest extends TestCase
 {
@@ -143,5 +145,21 @@ class NutritionalProfileServiceTest extends TestCase
         $mock->shouldReceive('save')->once()->andReturn(true);
 
         $this->nutritionalProfileService->update(1, $data);
+    }
+
+    public function test_should_delete_when_nutritional_profile_exists() {
+        $mock = Mockery::mock('overload:App\Models\NutritionalProfile');
+        $mock->shouldReceive('where')->andReturn($mock);
+        $mock->shouldReceive('first')->andReturn($mock);
+        $mock->shouldReceive('delete')->once()->andReturn(true);
+        $this->nutritionalProfileService->delete(1, 1);
+    }
+
+    public function test_should_not_delete_when_nutritional_profile_does_not_exist() {
+        $mock = Mockery::mock('overload:App\Models\NutritionalProfile');
+        $mock->shouldReceive('where')->andReturn($mock);
+        $mock->shouldReceive('first')->andReturn(null);
+        $this->expectException(ResourceNotFoundException::class);
+        $this->nutritionalProfileService->delete(1, 1);
     }
 }

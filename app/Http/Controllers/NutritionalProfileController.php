@@ -58,4 +58,18 @@ class NutritionalProfileController extends Controller
             return response()->noContent(Response::HTTP_NOT_FOUND);
         }
     }
+
+    public function delete(int $personId, int $productCategoryId)
+    {
+        try {
+            $this->nutritionalProfileService->delete($personId, $productCategoryId);
+
+            return response()->noContent(Response::HTTP_OK);
+        } catch (ResourceNotFoundException $exception) {
+            return response()->noContent(Response::HTTP_NOT_FOUND);
+        } catch (Exception $exception) {
+            return response()->noContent(Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+    }
 }
