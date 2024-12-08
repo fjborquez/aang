@@ -40,20 +40,33 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
 
         $this->validate($personId, $data);
 
-        foreach ($data as $profileDetail) {
-            $nutritionalProfile = NutritionalProfile::where('product_category_id',
-                $profileDetail['product_category_id'])->where('person_id', $personId)->first();
+        $nutritionalProfileComplete = NutritionalProfile::where('person_id', $personId)->get();
 
-            if ($nutritionalProfile == null) {
-                $nutritionalProfile = new NutritionalProfile;
+        foreach ($data as $newProfileDetail) {
+            if (!in_array($newProfileDetail['product_category_id'], $nutritionalProfileComplete->pluck('product_category_id')->all())) {
+                $toBeManipulated = new NutritionalProfile();
+            } else {
+                $toBeManipulated = $nutritionalProfileComplete->where('product_category_id', $newProfileDetail['product_category_id'])
+                    ->where('person_id', $personId)->first();
+
+                if ($toBeManipulated != null) {
+                    $toBeManipulated = new NutritionalProfile();
+                }
             }
 
-            $nutritionalProfile->product_category_id = $profileDetail['product_category_id'];
-            $nutritionalProfile->product_category_name = $profileDetail['product_category_name'];
-            $nutritionalProfile->consumption_level_id = $profileDetail['consumption_level_id'];
-            $nutritionalProfile->person_id = $personId;
-            $nutritionalProfile->save();
+            $toBeManipulated->product_category_id = $newProfileDetail['product_category_id'];
+            $toBeManipulated->product_category_name = $newProfileDetail['product_category_name'];
+            $toBeManipulated->consumption_level_id = $newProfileDetail['consumption_level_id'];
+            $toBeManipulated->person_id = $personId;
+            $toBeManipulated->save();
         }
+
+        foreach ($nutritionalProfileComplete as $nutritionalProfile) {
+            if (!in_array($nutritionalProfile->product_category_id, array_column($data, 'product_category_id'))) {
+                $nutritionalProfile->delete();
+            }
+        }
+
     }
 
     public function delete(int $personId, int $productCategoryId)
