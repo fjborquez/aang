@@ -4,10 +4,10 @@ use App\Exceptions\ResourceNotFoundException;
 use App\Models\Person;
 use App\Services\NutritionalProfileService\NutritionalProfileService;
 use App\Services\PersonService\PersonService;
-use function PHPUnit\Framework\assertEquals;
 use Illuminate\Database\Eloquent\Collection;
-
 use Tests\TestCase;
+
+use function PHPUnit\Framework\assertEquals;
 
 class NutritionalProfileServiceTest extends TestCase
 {
@@ -128,7 +128,7 @@ class NutritionalProfileServiceTest extends TestCase
         $mock->shouldReceive('where')->andReturn($mock);
         $mock->shouldReceive('first')->andReturn($mock);
         $mock->shouldReceive('save')->once()->andReturn(true);
-        $mock->shouldReceive('get')->once()->andReturn(new Collection());
+        $mock->shouldReceive('get')->once()->andReturn(new Collection);
 
         $this->nutritionalProfileService->update(1, $data);
     }

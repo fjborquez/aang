@@ -43,14 +43,14 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
         $nutritionalProfileComplete = NutritionalProfile::where('person_id', $personId)->get();
 
         foreach ($data as $newProfileDetail) {
-            if (!in_array($newProfileDetail['product_category_id'], $nutritionalProfileComplete->pluck('product_category_id')->all())) {
-                $toBeManipulated = new NutritionalProfile();
+            if (! in_array($newProfileDetail['product_category_id'], $nutritionalProfileComplete->pluck('product_category_id')->all())) {
+                $toBeManipulated = new NutritionalProfile;
             } else {
                 $toBeManipulated = $nutritionalProfileComplete->where('product_category_id', $newProfileDetail['product_category_id'])
                     ->where('person_id', $personId)->first();
 
                 if ($toBeManipulated == null) {
-                    $toBeManipulated = new NutritionalProfile();
+                    $toBeManipulated = new NutritionalProfile;
                 }
             }
 
@@ -62,7 +62,7 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
         }
 
         foreach ($nutritionalProfileComplete as $nutritionalProfile) {
-            if (!in_array($nutritionalProfile->product_category_id, array_column($data, 'product_category_id'))) {
+            if (! in_array($nutritionalProfile->product_category_id, array_column($data, 'product_category_id'))) {
                 $nutritionalProfile->delete();
             }
         }
