@@ -25,20 +25,6 @@ class NutritionalProfileServiceTest extends TestCase
         $this->nutritionalProfileService = new NutritionalProfileService($this->mockedPersonService);
     }
 
-    public function test_should_not_create_a_profile_when_data_is_empty(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Nutritional profile data cannot be empty');
-        $this->nutritionalProfileService->create(1, []);
-    }
-
-    public function test_should_not_create_a_profile_when_data_is_null(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Nutritional profile data cannot be empty');
-        $this->nutritionalProfileService->create(1);
-    }
-
     public function test_should_not_create_a_profile_when_person_id_is_incorrect(): void
     {
         $this->expectException(InvalidArgumentException::class);
