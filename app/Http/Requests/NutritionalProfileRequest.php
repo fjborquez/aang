@@ -22,7 +22,7 @@ class NutritionalProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nutritionalProfile' => ['required', 'array'],
+            'nutritionalProfile' => ['present', 'array'],
             'nutritionalProfile.*.product_category_id' => ['required', 'numeric', 'gt:0'],
             'nutritionalProfile.*.product_category_name' => ['string'],
             'nutritionalProfile.*.consumption_level_id' => ['required', 'exists:App\Models\ConsumptionLevel,id'],

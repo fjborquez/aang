@@ -49,7 +49,7 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
                 $toBeManipulated = $nutritionalProfileComplete->where('product_category_id', $newProfileDetail['product_category_id'])
                     ->where('person_id', $personId)->first();
 
-                if ($toBeManipulated != null) {
+                if ($toBeManipulated == null) {
                     $toBeManipulated = new NutritionalProfile();
                 }
             }
@@ -85,10 +85,6 @@ class NutritionalProfileService implements NutritionalProfileServiceInterface
     {
         if ($personId < 1) {
             throw new InvalidArgumentException('Invalid person id');
-        }
-
-        if (empty($data)) {
-            throw new InvalidArgumentException('Nutritional profile data cannot be empty');
         }
 
         if ($this->hasInvalidConsumptionLevel($data)) {
