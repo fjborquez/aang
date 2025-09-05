@@ -6,7 +6,7 @@ steps:
       - decrypt
       - --ciphertext-file=/workspace/envs/.env.prod.enc
       - --plaintext-file=/workspace/.env
-      - --location=us-central1
+      - --location=global
       - --keyring=avatar
       - --key=avatar
       - --verbosity=debug
