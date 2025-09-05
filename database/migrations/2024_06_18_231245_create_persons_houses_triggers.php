@@ -34,7 +34,7 @@ return new class extends Migration
         ");
 
         DB::unprepared("
-            create definer = aang@`%` trigger ensure_single_default_house
+            create definer = avatar@`%` trigger ensure_single_default_house
                 before insert
                 on persons_houses
                 for each row
@@ -58,7 +58,7 @@ return new class extends Migration
         ");
 
         DB::unprepared("
-            create definer = aang@`%` trigger ensure_single_default_house_update
+            create definer = avatar@`%` trigger ensure_single_default_house_update
                 before update
                 on persons_houses
                 for each row
