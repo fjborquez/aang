@@ -11,7 +11,7 @@ return new class extends Migration
     public function up(): void
     {
         DB::unprepared("
-            create definer = aang@`%` trigger check_unique_house_per_city_per_person
+            create definer = avatar@`%` trigger check_unique_house_per_city_per_person
                 before insert
                 on persons_houses
                 for each row
