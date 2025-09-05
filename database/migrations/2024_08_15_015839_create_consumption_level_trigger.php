@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         DB::unprepared("
-             create definer = aang@`%` trigger check_consumption_level_accepted_values
+             create definer = avatar@`%` trigger check_consumption_level_accepted_values
                 BEFORE INSERT ON consumption_levels
                 FOR EACH ROW
                 BEGIN
@@ -23,7 +23,7 @@ return new class extends Migration
         ");
 
         DB::unprepared("
-             create definer = aang@`%` trigger check_consumption_level_accepted_values_update
+             create definer = avatar@`%` trigger check_consumption_level_accepted_values_update
                 BEFORE UPDATE ON consumption_levels
                 FOR EACH ROW
                 BEGIN
