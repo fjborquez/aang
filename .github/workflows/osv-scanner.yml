@@ -13,11 +13,13 @@ name: OSV-Scanner
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
   merge_group:
     branches: [main]
   schedule:
     - cron: '31 11 * * 6'
+  push:
+    branches: [main]
 
 permissions:
   # Required to upload SARIF file to CodeQL. See: https://github.com/github/codeql-action/issues/2117
