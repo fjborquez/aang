@@ -30,7 +30,7 @@ class HouseService implements HouseServiceInterface
 
     public function getList(): Collection
     {
-        return $this->house->with('city')->get();
+        return $this->house->with(['city', 'persons', 'persons.user'])->get();
     }
 
     public function update(int $houseId, array $data = []): void
