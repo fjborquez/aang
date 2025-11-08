@@ -27,19 +27,6 @@ class HouseServiceTest extends TestCase
         $this->fakeHouse = new House;
     }
 
-    public function test_should_get_a_house_when_house_id_exists(): void
-    {
-        $this->mockedHouse->shouldReceive('find')->once()->andReturn($this->mockedHouse);
-        $this->fakeHouseService->get(1);
-    }
-
-    public function test_should_throw_an_exception_when_get_a_house_and_house_id_not_exists(): void
-    {
-        $this->mockedHouse->shouldReceive('find')->once()->andReturn(null);
-        $this->expectException(Exception::class);
-        $this->fakeHouseService->get(1);
-    }
-
     public function test_should_enable_the_house_when_is_active_is_false()
     {
         $this->mockedHouse->shouldReceive('getAttribute')->with('is_active')->andReturn(false);

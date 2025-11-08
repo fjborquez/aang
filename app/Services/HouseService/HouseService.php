@@ -19,7 +19,7 @@ class HouseService implements HouseServiceInterface
 
     public function get(int $id): House
     {
-        $house = $this->house->find($id);
+        $house = $this->house->with(['persons', 'persons.user'])->find($id);
 
         if ($house == null) {
             throw new ResourceNotFoundException('House not found');
@@ -30,7 +30,7 @@ class HouseService implements HouseServiceInterface
 
     public function getList(): Collection
     {
-        return $this->house->with(['city', 'persons', 'persons.user'])->get();
+        return $this->house->with('city')->get();
     }
 
     public function update(int $houseId, array $data = []): void
