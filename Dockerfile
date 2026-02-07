@@ -27,4 +27,5 @@ RUN php artisan db:seed
 RUN php artisan passport:client --password
 RUN php artisan passport:keys --force
 RUN chmod 755 -R /var/www/html/storage/
+RUN chmod 660 /var/www/html/storage/oauth-private.key
 RUN a2enmod rewrite
