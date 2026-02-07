@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94c92bd0d35c1b2dc206171e4d74ae66",
+    "content-hash": "b089dcac69d93174e5f7c0716fff8d09",
     "packages": [
         {
             "name": "brick/math",
@@ -1405,22 +1405,22 @@
         },
         {
             "name": "laravel/passport",
-            "version": "v13.4.3",
+            "version": "v13.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/passport.git",
-                "reference": "b3c549d519dbf50be4eae563a267dd1553736041"
+                "reference": "10423e2c0bd1c9a6b3c4daa89f278e35bdce3bf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/passport/zipball/b3c549d519dbf50be4eae563a267dd1553736041",
-                "reference": "b3c549d519dbf50be4eae563a267dd1553736041",
+                "url": "https://api.github.com/repos/laravel/passport/zipball/10423e2c0bd1c9a6b3c4daa89f278e35bdce3bf8",
+                "reference": "10423e2c0bd1c9a6b3c4daa89f278e35bdce3bf8",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-openssl": "*",
-                "firebase/php-jwt": "^6.4|^7.0",
+                "firebase/php-jwt": "^6.4",
                 "illuminate/auth": "^11.35|^12.0",
                 "illuminate/console": "^11.35|^12.0",
                 "illuminate/container": "^11.35|^12.0",
@@ -1439,8 +1439,10 @@
                 "symfony/psr-http-message-bridge": "^7.1"
             },
             "require-dev": {
-                "orchestra/testbench": "^9.15|^10.8",
-                "phpstan/phpstan": "^2.0"
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^9.9|^10.0",
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^11.5|^12.0"
             },
             "type": "library",
             "extra": {
@@ -1476,7 +1478,7 @@
                 "issues": "https://github.com/laravel/passport/issues",
                 "source": "https://github.com/laravel/passport"
             },
-            "time": "2025-12-22T14:58:04+00:00"
+            "time": "2025-11-02T16:25:54+00:00"
         },
         {
             "name": "laravel/prompts",
