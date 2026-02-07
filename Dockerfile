@@ -25,5 +25,6 @@ RUN php artisan view:cache
 RUN php artisan migrate
 RUN php artisan db:seed
 RUN php artisan passport:client --password
+RUN php artisan passport:keys --force
 RUN chmod 755 -R /var/www/html/storage/
 RUN a2enmod rewrite
