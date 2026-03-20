@@ -26,6 +26,8 @@ RUN php artisan migrate
 RUN php artisan db:seed
 RUN php artisan passport:client --password
 RUN php artisan passport:keys --force
+RUN php artisan permission:create-role admin
+RUN php artisan permission:create-role user
 RUN chmod 755 -R /var/www/html/storage/
 RUN chmod 660 /var/www/html/storage/oauth-private.key
 RUN a2enmod rewrite
