@@ -30,8 +30,8 @@ class UserRequest extends FormRequest
         }
 
         return [
-            'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()->uncompromised()],
-            'email' => ['required', 'email:rfc,dns', 'unique:users,email,'.$user_id],
+            'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()],
+            'email' => ['required', 'email:rfc,dns'],
             'person_id' => ['required', 'numeric', 'exists:persons,id'],
         ];
     }

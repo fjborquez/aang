@@ -13,7 +13,8 @@ class UserService implements UserServiceInterface
 
     public function create(array $data = []): User
     {
-        $user = $this->user->factory()->create($data);
+        $user = User::create($data);
+        $user->assignRole('user');
 
         return $user;
     }
