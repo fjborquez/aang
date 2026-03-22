@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TokenRequest;
 use App\Models\User;
-use Carbon\Carbon;
 use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Firebase\JWT\SignatureInvalidException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use PhpParser\Node\Expr;
 use Symfony\Component\HttpFoundation\Response;
 use UnexpectedValueException;
 
@@ -19,7 +17,8 @@ class AccessTokenController extends Controller
 {
     private $fields = ['password', 'email'];
 
-    public function issueToken(TokenRequest $request) {
+    public function issueToken(TokenRequest $request)
+    {
         $validated = $request->safe()->only($this->fields);
 
         $user = User::where('email', $validated['email'])->first();
@@ -42,10 +41,11 @@ class AccessTokenController extends Controller
         return response()->noContent(Response::HTTP_UNAUTHORIZED);
     }
 
-    public function checkToken(Request $request) {
+    public function checkToken(Request $request)
+    {
         $publicKey = file_get_contents(storage_path('oauth-public.key'));
 
-        if (!$publicKey) {
+        if (! $publicKey) {
             return response()->noContent(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 

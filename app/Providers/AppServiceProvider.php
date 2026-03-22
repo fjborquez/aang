@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
         Passport::ignoreRoutes();
         Passport::tokensCan([
             'admin' => 'Manage site parameters and configurations',
-            'user' => 'Site normal user'
+            'user' => 'Site normal user',
         ]);
     }
 }
