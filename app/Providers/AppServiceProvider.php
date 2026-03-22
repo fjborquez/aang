@@ -22,5 +22,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Passport::enablePasswordGrant();
         Passport::ignoreRoutes();
+        Passport::tokensCan([
+            'admin' => 'Manage site parameters and configurations',
+            'user' => 'Site normal user'
+        ]);
     }
 }
