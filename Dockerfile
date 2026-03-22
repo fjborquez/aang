@@ -22,7 +22,6 @@ RUN php artisan config:cache
 
 RUN php artisan route:cache
 RUN php artisan view:cache
-RUN php artisan passport:install
 RUN php artisan migrate
 RUN php artisan db:seed
 RUN php artisan passport:client --password
