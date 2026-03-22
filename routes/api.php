@@ -9,7 +9,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use Laravel\Passport\Http\Controllers\AccessTokenController;
+use App\Http\Controllers\AccessTokenController;
 
 Route::get('/user', [UserController::class, 'list']);
 Route::get('/user/{userId}', [UserController::class, 'get']);
@@ -51,4 +51,4 @@ Route::get('/consumption-level', [ConsumptionLevelController::class, 'list']);
 
 Route::get('/city', [CityController::class, 'list']);
 
-Route::post('/oauth/token', [AccessTokenController::class, 'issueToken']);
+Route::post('/auth/token', [AccessTokenController::class, 'issueToken']);
