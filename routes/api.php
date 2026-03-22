@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessTokenController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ConsumptionLevelController;
 use App\Http\Controllers\HouseController;
@@ -9,7 +10,6 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccessTokenController;
 
 Route::get('/user', [UserController::class, 'list']);
 Route::get('/user/{userId}', [UserController::class, 'get']);
