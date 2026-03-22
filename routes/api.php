@@ -52,3 +52,4 @@ Route::get('/consumption-level', [ConsumptionLevelController::class, 'list']);
 Route::get('/city', [CityController::class, 'list']);
 
 Route::post('/auth/token', [AccessTokenController::class, 'issueToken']);
+Route::get('/auth/token/check', [AccessTokenController::class, 'checkToken']);
