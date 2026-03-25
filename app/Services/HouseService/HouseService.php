@@ -7,6 +7,8 @@ use App\Exceptions\OperationNotAllowedException;
 use App\Exceptions\ResourceNotFoundException;
 use App\Models\House;
 use Illuminate\Database\Eloquent\Collection;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class HouseService implements HouseServiceInterface
 {
@@ -30,7 +32,9 @@ class HouseService implements HouseServiceInterface
 
     public function getList(): Collection
     {
-        return $this->house->with('city')->get();
+        return QueryBuilder::for(House::class)
+            ->allowedFilters(AllowedFilter::exact('persons.user.id'))
+            ->get();
     }
 
     public function update(int $houseId, array $data = []): void
