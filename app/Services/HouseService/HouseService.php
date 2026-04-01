@@ -34,7 +34,9 @@ class HouseService implements HouseServiceInterface
     {
         return QueryBuilder::for(House::class)
             ->allowedIncludes('city', 'persons.user')
-            ->allowedFilters(AllowedFilter::exact('persons.user.id'))
+            ->allowedFilters(
+                AllowedFilter::exact('persons.user.id'),
+                AllowedFilter::exact('is_active'))
             ->get();
     }
 
