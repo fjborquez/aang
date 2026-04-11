@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Password;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
-use function PHPUnit\Framework\isEmpty;
-
 class UserService implements UserServiceInterface
 {
     public function __construct(private readonly User $user) {}
@@ -115,8 +113,8 @@ class UserService implements UserServiceInterface
             'email' => $data['email'],
             'token' => $data['token'],
             'password' => $data['password'],
-            'password_confirmation' => $data['password']
-        ], function(User $toChange, string $password) {
+            'password_confirmation' => $data['password'],
+        ], function (User $toChange, string $password) {
             $toChange->forceFill([
                 'password' => Hash::make($password),
             ]);

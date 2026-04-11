@@ -6,8 +6,8 @@ use App\Contracts\Services\UserService\UserServiceInterface;
 use App\Exceptions\OperationNotAllowedException;
 use App\Exceptions\ResourceNotFoundException;
 use App\Http\Requests\PasswordTokenRequest;
-use App\Http\Requests\UserRequest;
 use App\Http\Requests\ResetPasswordRequest;
+use App\Http\Requests\UserRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
@@ -84,13 +84,13 @@ class UserController extends Controller
 
         try {
             $token = $this->userService->createPasswordToken([
-                'email' => $validated['email']
+                'email' => $validated['email'],
             ]);
 
             return response()->json([
                 'message' => [
-                    'password_token' => $token
-                ]
+                    'password_token' => $token,
+                ],
             ]);
         } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);
@@ -105,7 +105,7 @@ class UserController extends Controller
             $this->userService->resetPassword($validated);
 
             return response()->noContent(Response::HTTP_OK);
-        } catch(ResourceNotFoundException $exception) {
+        } catch (ResourceNotFoundException $exception) {
             return response()->noContent(Response::HTTP_NOT_FOUND);
         }
     }
