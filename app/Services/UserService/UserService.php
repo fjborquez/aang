@@ -24,7 +24,7 @@ class UserService implements UserServiceInterface
     public function getList()
     {
         return QueryBuilder::for(User::class)
-            ->allowedIncludes('person', 'person.nutritionalProfile', 'person.houses')
+            ->with('person', 'person.nutritionalProfile', 'person.houses')
             ->allowedFilters(
                 AllowedFilter::exact('email')
             )
