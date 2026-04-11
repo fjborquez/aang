@@ -6,6 +6,8 @@ use App\Contracts\Services\UserService\UserServiceInterface;
 use App\Exceptions\OperationNotAllowedException;
 use App\Exceptions\ResourceNotFoundException;
 use App\Models\User;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserService implements UserServiceInterface
 {
@@ -21,7 +23,12 @@ class UserService implements UserServiceInterface
 
     public function getList()
     {
-        return $this->user->with('person')->with('person.nutritionalProfile')->with('person.houses')->get();
+        return QueryBuilder::for(User::class)
+            ->allowedIncludes('person', 'person.nutritionalProfile', 'person.houses')
+            ->allowedFilters(
+                AllowedFilter::exact('email')
+            )
+            ->get();
     }
 
     public function update(int $id, array $data = []): void
