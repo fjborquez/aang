@@ -53,3 +53,6 @@ Route::get('/city', [CityController::class, 'list']);
 
 Route::post('/auth/token', [AccessTokenController::class, 'issueToken']);
 Route::get('/auth/token/check', [AccessTokenController::class, 'checkToken']);
+
+Route::post('/password/token', [UserController::class, 'getPasswordToken']);
+Route::post('/password/reset', [UserController::class, 'resetPassword']);

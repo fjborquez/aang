@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Contracts\Services\UserService\UserServiceInterface;
 use App\Exceptions\OperationNotAllowedException;
 use App\Exceptions\ResourceNotFoundException;
+use App\Http\Requests\PasswordTokenRequest;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
@@ -73,6 +75,38 @@ class UserController extends Controller
             return response()->noContent(Response::HTTP_NOT_FOUND);
         } catch (OperationNotAllowedException $exception) {
             return response()->noContent(Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function getPasswordToken(PasswordTokenRequest $request)
+    {
+        $validated = $request->safe()->only(['email']);
+
+        try {
+            $token = $this->userService->createPasswordToken([
+                'email' => $validated['email']
+            ]);
+
+            return response()->json([
+                'message' => [
+                    'password_token' => $token
+                ]
+            ]);
+        } catch (ResourceNotFoundException $exception) {
+            return response()->noContent(Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function resetPassword(ResetPasswordRequest $request)
+    {
+        $validated = $request->safe()->only(['email', 'password', 'token']);
+
+        try {
+            $this->userService->resetPassword($validated);
+
+            return response()->noContent(Response::HTTP_OK);
+        } catch(ResourceNotFoundException $exception) {
+            return response()->noContent(Response::HTTP_NOT_FOUND);
         }
     }
 }

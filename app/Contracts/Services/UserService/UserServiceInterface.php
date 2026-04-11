@@ -17,4 +17,8 @@ interface UserServiceInterface
     public function enable(int $id): void;
 
     public function disable(int $id): void;
+
+    public function createPasswordToken(array $data = []): string;
+
+    public function resetPassword(array $data = []): void;
 }
