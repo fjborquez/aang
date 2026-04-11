@@ -6,8 +6,12 @@ use App\Contracts\Services\UserService\UserServiceInterface;
 use App\Exceptions\OperationNotAllowedException;
 use App\Exceptions\ResourceNotFoundException;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
+
+use function PHPUnit\Framework\isEmpty;
 
 class UserService implements UserServiceInterface
 {
@@ -86,5 +90,37 @@ class UserService implements UserServiceInterface
         $user->update([
             'is_active' => false,
         ]);
+    }
+
+    public function createPasswordToken(array $data = []): string
+    {
+        $user = User::where('email', $data['email'])->first();
+
+        if ($user == null) {
+            throw new ResourceNotFoundException('User not found');
+        }
+
+        return Password::createToken($user);
+    }
+
+    public function resetPassword(array $data = []): void
+    {
+        $user = User::where('email', $data['email'])->first();
+
+        if ($user == null) {
+            throw new ResourceNotFoundException('User not found');
+        }
+
+        Password::reset([
+            'email' => $data['email'],
+            'token' => $data['token'],
+            'password' => $data['password'],
+            'password_confirmation' => $data['password']
+        ], function(User $toChange, string $password) {
+            $toChange->forceFill([
+                'password' => Hash::make($password),
+            ]);
+            $toChange->save();
+        });
     }
 }
